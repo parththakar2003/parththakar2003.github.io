@@ -1,8 +1,9 @@
 # Dependencies
 node_modules/
 
-# Build artifacts - keep dist for GitHub Pages deployment
+# Build artifacts
 build/
+dist/
 *.min.js
 *.min.css
 

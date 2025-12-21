@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Cybersecurity Blog - CTF Writeups, DFIR Articles, SOC Notes by Parth Thakar">
     <title>Blog - Parth Thakar</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style-new.css">
     <style>
         .filter-buttons {
             display: flex;
@@ -134,30 +134,6 @@
     <section class="section" style="padding-top: 1rem;">
         <div class="container">
             <div class="blog-grid">
-                <!-- CTF Writeup 1 -->
-                <div class="blog-card filterable-item ctf">
-                    <div class="blog-header">
-                        <div class="blog-title">Reverse Engineering ELF Binary - CTF Challenge</div>
-                        <div class="blog-meta">
-                            <span>📅 December 15, 2024</span> • 
-                            <span>⏱️ 8 min read</span>
-                        </div>
-                        <p class="blog-excerpt">
-                            Deep dive into reverse engineering a complex ELF binary from a recent CTF competition. Analyzing the assembly code, identifying anti-debugging techniques, and extracting the hidden flag.
-                        </p>
-                        <div class="skills-list">
-                            <span class="skill-tag">Reverse Engineering</span>
-                            <span class="skill-tag">Ghidra</span>
-                            <span class="skill-tag">Assembly</span>
-                        </div>
-                        <a href="#" class="read-more">Read Full Writeup</a>
-                    </div>
-                    <div class="blog-tags">
-                        <span class="blog-tag">CTF</span>
-                        <span class="blog-tag">Reverse Engineering</span>
-                    </div>
-                </div>
-
                 <!-- DFIR Article 1 -->
                 <div class="blog-card filterable-item dfir">
                     <div class="blog-header">
@@ -167,14 +143,14 @@
                             <span>⏱️ 12 min read</span>
                         </div>
                         <p class="blog-excerpt">
-                            Complete guide to memory forensics investigation using Volatility framework. Examining memory dumps, identifying malicious processes, extracting network connections, and uncovering injected code.
+                            Complete guide to memory forensics investigation using Volatility framework. Examining memory dumps, identifying malicious processes, extracting network connections, and uncovering injected code. Learn how to investigate malware infections through hands-on analysis of real-world scenarios.
                         </p>
                         <div class="skills-list">
                             <span class="skill-tag">Volatility</span>
                             <span class="skill-tag">Memory Forensics</span>
                             <span class="skill-tag">Malware Analysis</span>
                         </div>
-                        <a href="#" class="read-more">Read Full Article</a>
+                        <a href="blog-memory-forensics.html" class="read-more">Read Full Article</a>
                     </div>
                     <div class="blog-tags">
                         <span class="blog-tag">DFIR</span>
@@ -191,90 +167,18 @@
                             <span>⏱️ 10 min read</span>
                         </div>
                         <p class="blog-excerpt">
-                            Best practices for creating SIEM correlation rules that detect advanced threats while minimizing false positives. Examples using Splunk and Sigma rule format.
+                            Best practices for creating SIEM correlation rules that detect advanced threats while minimizing false positives. Includes practical examples using Splunk SPL and Sigma rule format, plus real-world detection use cases from SOC operations.
                         </p>
                         <div class="skills-list">
                             <span class="skill-tag">SIEM</span>
                             <span class="skill-tag">Splunk</span>
                             <span class="skill-tag">Sigma Rules</span>
                         </div>
-                        <a href="#" class="read-more">Read Full Article</a>
+                        <a href="blog-siem-rules.html" class="read-more">Read Full Article</a>
                     </div>
                     <div class="blog-tags">
                         <span class="blog-tag">SOC</span>
                         <span class="blog-tag">Blue Team</span>
-                    </div>
-                </div>
-
-                <!-- Red Team Article 1 -->
-                <div class="blog-card filterable-item red-team">
-                    <div class="blog-header">
-                        <div class="blog-title">Active Directory Exploitation: From User to Domain Admin</div>
-                        <div class="blog-meta">
-                            <span>📅 November 28, 2024</span> • 
-                            <span>⏱️ 15 min read</span>
-                        </div>
-                        <p class="blog-excerpt">
-                            Comprehensive guide to Active Directory privilege escalation techniques. Covers Kerberoasting, Golden Tickets, Pass-the-Hash, and lateral movement strategies in Windows environments.
-                        </p>
-                        <div class="skills-list">
-                            <span class="skill-tag">Active Directory</span>
-                            <span class="skill-tag">Privilege Escalation</span>
-                            <span class="skill-tag">Red Team</span>
-                        </div>
-                        <a href="#" class="read-more">Read Full Article</a>
-                    </div>
-                    <div class="blog-tags">
-                        <span class="blog-tag">Red Team</span>
-                        <span class="blog-tag">Penetration Testing</span>
-                    </div>
-                </div>
-
-                <!-- CTF Writeup 2 -->
-                <div class="blog-card filterable-item ctf">
-                    <div class="blog-header">
-                        <div class="blog-title">Web Exploitation: SQL Injection to Remote Code Execution</div>
-                        <div class="blog-meta">
-                            <span>📅 November 20, 2024</span> • 
-                            <span>⏱️ 10 min read</span>
-                        </div>
-                        <p class="blog-excerpt">
-                            CTF challenge walkthrough demonstrating advanced SQL injection techniques leading to RCE. Includes filter bypasses, union-based injection, and file upload exploitation.
-                        </p>
-                        <div class="skills-list">
-                            <span class="skill-tag">Web Security</span>
-                            <span class="skill-tag">SQL Injection</span>
-                            <span class="skill-tag">RCE</span>
-                        </div>
-                        <a href="#" class="read-more">Read Full Writeup</a>
-                    </div>
-                    <div class="blog-tags">
-                        <span class="blog-tag">CTF</span>
-                        <span class="blog-tag">Web Exploitation</span>
-                    </div>
-                </div>
-
-                <!-- DFIR Article 2 -->
-                <div class="blog-card filterable-item dfir">
-                    <div class="blog-header">
-                        <div class="blog-title">Timeline Analysis: Reconstructing Attack Chain from Artifacts</div>
-                        <div class="blog-meta">
-                            <span>📅 November 15, 2024</span> • 
-                            <span>⏱️ 14 min read</span>
-                        </div>
-                        <p class="blog-excerpt">
-                            Detailed forensic investigation case study. Building comprehensive timeline using Windows artifacts, registry analysis, and log correlation to reconstruct attacker activities.
-                        </p>
-                        <div class="skills-list">
-                            <span class="skill-tag">Timeline Analysis</span>
-                            <span class="skill-tag">Windows Forensics</span>
-                            <span class="skill-tag">Incident Response</span>
-                        </div>
-                        <a href="#" class="read-more">Read Full Article</a>
-                    </div>
-                    <div class="blog-tags">
-                        <span class="blog-tag">DFIR</span>
-                        <span class="blog-tag">Incident Response</span>
                     </div>
                 </div>
 
@@ -452,6 +356,6 @@
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
+    <script src="js/main-new.js"></script>
 </body>
 </html>

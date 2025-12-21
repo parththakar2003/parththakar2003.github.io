@@ -394,3 +394,17 @@ window.addEventListener('beforeunload', function() {
         clearTimeout(typewriterTimeout);
     }
 });
+
+// Resume Download Functionality
+function downloadResume() {
+    // Download ATS-friendly resume PDF
+    const link = document.createElement('a');
+    link.href = 'Parth_Thakar_Resume.pdf';
+    link.download = 'Parth_Thakar_Resume_ATS_Friendly.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
+
+// Make downloadResume available globally
+window.downloadResume = downloadResume;

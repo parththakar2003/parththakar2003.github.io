@@ -85,7 +85,7 @@ export default function Navbar() {
     }`}>
       <div className="flex justify-between items-center max-w-6xl mx-auto p-4">
         <Link href="/" className="text-xl text-white font-bold relative group">
-          <span className="relative z-10">Nirmal Patel</span>
+          <span className="relative z-10">Parth Thakar</span>
           <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300"></span>
         </Link>
         

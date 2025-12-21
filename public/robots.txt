@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://nirmal.social/sitemap.xml
+Sitemap: https://parththakar2003.github.io/sitemap.xml
 
 # Host
-Host: https://nirmal.social
+Host: https://parththakar2003.github.io

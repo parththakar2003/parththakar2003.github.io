@@ -7,31 +7,31 @@
 	xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
 	xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
     <url>
-		<loc>https://nirmal.social</loc>
+		<loc>https://parththakar2003.github.io</loc>
 		<lastmod>2025-04-11T06:06:04.243Z</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>1.0</priority>
 	</url>
 	<url>
-		<loc>https://nirmal.social/journey</loc>
+		<loc>https://parththakar2003.github.io/journey</loc>
 		<lastmod>2025-04-11T06:06:04.243Z</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.7</priority>
 	</url>
     <url>
-		<loc>https://nirmal.social/projects</loc>
+		<loc>https://parththakar2003.github.io/projects</loc>
 		<lastmod>2025-04-11T06:06:04.243Z</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.7</priority>
 	</url>
 	<url>
-		<loc>https://nirmal.social/skills</loc>
+		<loc>https://parththakar2003.github.io/skills</loc>
 		<lastmod>2025-04-11T06:06:04.243Z</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.7</priority>
 	</url>
     <url>
-		<loc>https://nirmal.social/contact</loc>
+		<loc>https://parththakar2003.github.io/contact</loc>
 		<lastmod>2025-04-11T06:06:04.242Z</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>0.8</priority>

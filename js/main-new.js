@@ -239,6 +239,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Initialize scroll animations
     initScrollAnimations();
     
+    // Initialize music player
+    initMusicPlayer();
+    
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
@@ -253,6 +256,128 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+
+// Music Player Functionality
+function initMusicPlayer() {
+    const audio = document.getElementById('musicPlayer');
+    const playBtn = document.getElementById('musicPlayBtn');
+    const playIcon = document.getElementById('playIcon');
+    const pauseIcon = document.getElementById('pauseIcon');
+    const skipBack = document.getElementById('musicSkipBack');
+    const skipForward = document.getElementById('musicSkipForward');
+    const progressBar = document.getElementById('musicProgressBar');
+    const progressFill = document.getElementById('musicProgressFill');
+    const currentTimeEl = document.getElementById('musicCurrentTime');
+    const durationEl = document.getElementById('musicDuration');
+    const volumeBtn = document.getElementById('musicVolumeBtn');
+    const volumeSlider = document.getElementById('musicVolumeSlider');
+    const volumeValue = document.getElementById('musicVolumeValue');
+    const volumeSliderWrapper = document.getElementById('volumeSliderWrapper');
+    const volumeOnIcon = document.getElementById('volumeOnIcon');
+    const volumeOffIcon = document.getElementById('volumeOffIcon');
+    const musicStatus = document.getElementById('musicStatus');
+    const soundWaveBars = document.querySelectorAll('.sound-wave-bar');
+    const musicIcon = document.querySelector('.music-icon');
+    
+    if (!audio) return; // Exit if no audio element
+    
+    let isPlaying = false;
+    
+    // Set initial volume
+    audio.volume = 0.25;
+    
+    // Format time helper
+    function formatTime(seconds) {
+        if (isNaN(seconds)) return '0:00';
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    }
+    
+    // Toggle play/pause
+    playBtn.addEventListener('click', function() {
+        if (isPlaying) {
+            audio.pause();
+            isPlaying = false;
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
+            playBtn.classList.remove('playing');
+            musicStatus.textContent = 'PAUSED';
+            musicStatus.classList.remove('playing');
+            soundWaveBars.forEach(bar => bar.classList.remove('playing'));
+            musicIcon.classList.remove('playing');
+        } else {
+            audio.play().catch(err => {
+                console.error('Error playing audio:', err);
+            });
+            isPlaying = true;
+            playIcon.style.display = 'none';
+            pauseIcon.style.display = 'block';
+            playBtn.classList.add('playing');
+            musicStatus.textContent = 'PLAYING';
+            musicStatus.classList.add('playing');
+            soundWaveBars.forEach(bar => bar.classList.add('playing'));
+            musicIcon.classList.add('playing');
+        }
+    });
+    
+    // Update progress bar
+    audio.addEventListener('timeupdate', function() {
+        const progress = (audio.currentTime / audio.duration) * 100;
+        progressFill.style.width = progress + '%';
+        currentTimeEl.textContent = formatTime(audio.currentTime);
+    });
+    
+    // Update duration when metadata loads
+    audio.addEventListener('loadedmetadata', function() {
+        durationEl.textContent = formatTime(audio.duration);
+    });
+    
+    // Seek functionality
+    progressBar.addEventListener('click', function(e) {
+        const rect = progressBar.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const percentage = clickX / rect.width;
+        audio.currentTime = percentage * audio.duration;
+    });
+    
+    // Skip back 10 seconds
+    skipBack.addEventListener('click', function() {
+        audio.currentTime = Math.max(0, audio.currentTime - 10);
+    });
+    
+    // Skip forward 10 seconds
+    skipForward.addEventListener('click', function() {
+        audio.currentTime = Math.min(audio.duration, audio.currentTime + 10);
+    });
+    
+    // Volume button toggle
+    volumeBtn.addEventListener('click', function() {
+        volumeSliderWrapper.classList.toggle('active');
+    });
+    
+    // Volume slider
+    volumeSlider.addEventListener('input', function() {
+        const volume = this.value / 100;
+        audio.volume = volume;
+        volumeValue.textContent = this.value + '%';
+        
+        if (volume === 0) {
+            volumeOnIcon.style.display = 'none';
+            volumeOffIcon.style.display = 'block';
+        } else {
+            volumeOnIcon.style.display = 'block';
+            volumeOffIcon.style.display = 'none';
+        }
+    });
+    
+    // Close volume slider when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!volumeBtn.contains(e.target) && !volumeSliderWrapper.contains(e.target)) {
+            volumeSliderWrapper.classList.remove('active');
+        }
+    });
+}
 
 // Add loading screen fade out
 window.addEventListener('load', function() {

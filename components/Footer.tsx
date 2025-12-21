@@ -49,7 +49,7 @@ export default function Footer() {
           <div className={`text-center ${
             darkMode ? 'text-gray-500' : 'text-gray-400'
           } text-sm`}>
-            <p>©2025 Nirmal Patel. All rights reserved.</p>
+            <p>©2025 Parth Thakar. All rights reserved.</p>
           </div>
         </div>
       </footer>
@@ -67,9 +67,9 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center md:items-start mb-6">
           {/* Left side - Site information */}
           <div className="mb-6 md:mb-0 text-center md:text-left">
-            <h3 className="text-xl font-bold mb-2">Nirmal Patel</h3>
-            <p className={`${darkMode ? 'text-gray-300' : 'text-gray-300'} text-sm mb-4`}>Full-Stack Developer | IoT Enthusiast</p>
-            <p className={`${darkMode ? 'text-gray-400' : 'text-gray-400'} text-sm`}>Creating innovative solutions<br />with passion and precision</p>
+            <h3 className="text-xl font-bold mb-2">Parth Thakar</h3>
+            <p className={`${darkMode ? 'text-gray-300' : 'text-gray-300'} text-sm mb-4`}>Cybersecurity Professional | Digital Forensics Specialist</p>
+            <p className={`${darkMode ? 'text-gray-400' : 'text-gray-400'} text-sm`}>Securing digital infrastructure<br />with expertise and dedication</p>
           </div>
           
           {/* Right side - Social links */}

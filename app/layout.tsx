@@ -16,7 +16,6 @@ export const viewport = {
 export const metadata = {
   title: "Parth Thakar - Cybersecurity Professional | Digital Forensics & InfoSec",
   description: "Explore Parth Thakar's portfolio showcasing expertise in Digital Forensics, Information Security, Cybersecurity, SOC Operations, and DFIR.",
-  image: "https://parththakar2003.github.io/images/parth_profile_pic.webp",
   color: "#000001",
   icons: {
     icon: "/favicon.ico",
@@ -29,14 +28,6 @@ export const metadata = {
     description: "Master's student in Digital Forensics and Information Security with expertise in SOC, DFIR, and CTF competitions.",
     url: "https://parththakar2003.github.io",
     siteName: "Parth Thakar Portfolio",
-    images: [
-      {
-        url: "https://parththakar2003.github.io/images/parth_profile_pic.webp",
-        width: 1200,
-        height: 630,
-        alt: "Parth Thakar - Cybersecurity Professional",
-      },
-    ],
     locale: "en-IN",
     type: "website",
   },
@@ -44,7 +35,6 @@ export const metadata = {
     card: "summary_large_image",
     title: "Parth Thakar - Cybersecurity Professional",
     description: "Master's student in Digital Forensics and Information Security with expertise in SOC, DFIR, and CTF competitions.",
-    images: ["https://parththakar2003.github.io/images/parth_profile_pic.webp"],
     creator: "@parththakar",
   },
   robots: {
@@ -90,7 +80,6 @@ export default function RootLayout({
             alternateName: ["parththakar2003"],
             jobTitle: "Cybersecurity Professional & Digital Forensics Specialist",
             url: "https://parththakar2003.github.io",
-            image: "https://parththakar2003.github.io/images/parth_profile_pic.webp",
             sameAs: [
               "https://github.com/parththakar2003",
             ],

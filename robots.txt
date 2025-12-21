@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+# Disallow admin panel
+Disallow: /admin/
+
+# Disallow data files
+Disallow: /data/
+
+# Allow all other content
+Allow: /*.html$
+Allow: /*.css$
+Allow: /*.js$
+
+Sitemap: https://parththakar2003.github.io/sitemap.xml

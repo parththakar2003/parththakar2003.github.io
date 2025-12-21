@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - Portfolio CMS</title>
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/theme-cyber.css">
+  <link rel="stylesheet" href="/admin/assets/css/admin.css">
+</head>
+<body>
+  <div class="admin-container">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="admin-logo">
+        <h2>🎯 Portfolio CMS</h2>
+      </div>
+      
+      <nav>
+        <ul class="admin-nav">
+          <li>
+            <a href="/admin/dashboard.html" class="active">
+              <span class="admin-nav-icon">📊</span>
+              Dashboard
+            </a>
+          </li>
+          <li>
+            <a href="/admin/profile/edit-profile.html">
+              <span class="admin-nav-icon">👤</span>
+              Profile
+            </a>
+          </li>
+          <li>
+            <a href="/admin/skills/edit-skills.html">
+              <span class="admin-nav-icon">⚡</span>
+              Skills
+            </a>
+          </li>
+          <li>
+            <a href="/admin/projects/edit-projects.html">
+              <span class="admin-nav-icon">💼</span>
+              Projects
+            </a>
+          </li>
+          <li>
+            <a href="/admin/blogs/edit-blogs.html">
+              <span class="admin-nav-icon">📝</span>
+              Blog Posts
+            </a>
+          </li>
+          <li>
+            <a href="/admin/media/upload.html">
+              <span class="admin-nav-icon">🖼️</span>
+              Media
+            </a>
+          </li>
+          <li>
+            <a href="/admin/settings/general.html">
+              <span class="admin-nav-icon">⚙️</span>
+              Settings
+            </a>
+          </li>
+          <li>
+            <a href="/" target="_blank">
+              <span class="admin-nav-icon">🌐</span>
+              View Website
+            </a>
+          </li>
+          <li>
+            <a href="#" onclick="window.adminAuth.logout(); return false;">
+              <span class="admin-nav-icon">🚪</span>
+              Logout
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+    
+    <!-- Main Content -->
+    <main class="admin-main">
+      <header class="admin-header">
+        <h1>Dashboard</h1>
+        <div class="admin-user">
+          <span class="admin-user-name" id="admin-username">Admin</span>
+        </div>
+      </header>
+      
+      <!-- Stats -->
+      <section class="admin-grid admin-grid-4 admin-mb-2">
+        <div class="admin-stat">
+          <span class="admin-stat-value" id="stat-projects">2</span>
+          <span class="admin-stat-label">Projects</span>
+        </div>
+        
+        <div class="admin-stat">
+          <span class="admin-stat-value" id="stat-blogs">0</span>
+          <span class="admin-stat-label">Blog Posts</span>
+        </div>
+        
+        <div class="admin-stat">
+          <span class="admin-stat-value" id="stat-certs">14</span>
+          <span class="admin-stat-label">Certifications</span>
+        </div>
+        
+        <div class="admin-stat">
+          <span class="admin-stat-value" id="stat-skills">6</span>
+          <span class="admin-stat-label">Skills</span>
+        </div>
+      </section>
+      
+      <!-- Quick Actions -->
+      <section class="admin-card">
+        <div class="admin-card-header">
+          <h2 class="admin-card-title">Quick Actions</h2>
+        </div>
+        <div class="admin-card-body">
+          <div class="admin-grid admin-grid-3">
+            <a href="/admin/projects/add-project.html" class="admin-btn">
+              ➕ Add Project
+            </a>
+            <a href="/admin/blogs/add-blog.html" class="admin-btn">
+              ➕ Add Blog Post
+            </a>
+            <a href="/admin/profile/edit-profile.html" class="admin-btn">
+              ✏️ Edit Profile
+            </a>
+            <a href="/admin/skills/edit-skills.html" class="admin-btn admin-btn-secondary">
+              ⚡ Manage Skills
+            </a>
+            <a href="/admin/media/upload.html" class="admin-btn admin-btn-secondary">
+              🖼️ Upload Media
+            </a>
+            <a href="/admin/settings/general.html" class="admin-btn admin-btn-secondary">
+              ⚙️ Settings
+            </a>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Data Management -->
+      <section class="admin-grid admin-grid-2">
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h2 class="admin-card-title">💾 Data Management</h2>
+          </div>
+          <div class="admin-card-body">
+            <p class="admin-mb-1">Manage your portfolio data stored in localStorage.</p>
+            <div class="admin-flex admin-gap-1">
+              <button class="admin-btn admin-btn-small" onclick="exportAllData()">
+                Export All Data
+              </button>
+              <button class="admin-btn admin-btn-small admin-btn-danger" onclick="clearLocalData()">
+                Clear Local Changes
+              </button>
+            </div>
+            <div class="admin-alert admin-alert-warning admin-mt-1">
+              <strong>Note:</strong> Changes are stored in your browser's localStorage. To make them permanent, export the data and update the JSON files in the repository.
+            </div>
+          </div>
+        </div>
+        
+        <div class="admin-card">
+          <div class="admin-card-header">
+            <h2 class="admin-card-title">ℹ️ System Info</h2>
+          </div>
+          <div class="admin-card-body">
+            <p><strong>CMS Version:</strong> 1.0.0</p>
+            <p><strong>Storage:</strong> LocalStorage</p>
+            <p><strong>Last Login:</strong> <span id="last-login">-</span></p>
+            <p><strong>Session Expires:</strong> <span id="session-expires">-</span></p>
+            
+            <div class="admin-mt-2">
+              <a href="https://github.com/parththakar2003/parththakar2003.github.io" target="_blank" class="admin-btn admin-btn-secondary admin-btn-small">
+                View on GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Instructions -->
+      <section class="admin-card admin-mt-2">
+        <div class="admin-card-header">
+          <h2 class="admin-card-title">📚 How to Use This CMS</h2>
+        </div>
+        <div class="admin-card-body">
+          <ol style="padding-left: 1.5rem; color: var(--admin-text);">
+            <li><strong>Edit Content:</strong> Use the sidebar to navigate to different sections and edit your portfolio content.</li>
+            <li><strong>Save Changes:</strong> Click "Save" buttons to store changes in localStorage.</li>
+            <li><strong>Export Data:</strong> Use the "Export All Data" button to download your changes as JSON files.</li>
+            <li><strong>Update Repository:</strong> Replace the JSON files in the <code>/data</code> directory with your exported files.</li>
+            <li><strong>Deploy:</strong> Commit and push changes to GitHub to see them live on your website.</li>
+          </ol>
+          
+          <div class="admin-alert admin-alert-warning admin-mt-1">
+            <strong>⚠️ Important:</strong> This is a static CMS that uses localStorage. Changes are only visible to you until you export and commit them to the repository.
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  
+  <script src="/admin/assets/js/auth.js"></script>
+  <script src="/admin/assets/js/guard.js"></script>
+  <script src="/admin/assets/js/storage.js"></script>
+  <script>
+    // Load dashboard data
+    async function loadDashboard() {
+      const session = window.adminAuth.getSession();
+      if (session) {
+        document.getElementById('admin-username').textContent = session.username;
+        
+        const loginDate = new Date(session.loginTime);
+        document.getElementById('last-login').textContent = loginDate.toLocaleString();
+        
+        const expiresDate = new Date(session.expiresAt);
+        document.getElementById('session-expires').textContent = expiresDate.toLocaleString();
+      }
+      
+      // Load stats
+      try {
+        const projects = await window.adminStorage.loadData('projects.json');
+        const blogs = await window.adminStorage.loadData('blogs.json');
+        const certs = await window.adminStorage.loadData('certifications.json');
+        const skills = await window.adminStorage.loadData('skills.json');
+        
+        if (projects) document.getElementById('stat-projects').textContent = projects.projects?.length || 0;
+        if (blogs) document.getElementById('stat-blogs').textContent = blogs.blogs?.length || 0;
+        if (certs) document.getElementById('stat-certs').textContent = certs.certifications?.length || 0;
+        if (skills) document.getElementById('stat-skills').textContent = skills.computerSkills?.length || 0;
+      } catch (error) {
+        console.error('Error loading stats:', error);
+      }
+    }
+    
+    async function exportAllData() {
+      const exports = await window.adminStorage.syncToFiles();
+      
+      for (const item of exports) {
+        window.adminStorage.exportData(item.filename, item.data);
+      }
+      
+      alert('All data exported! Check your downloads folder.');
+    }
+    
+    function clearLocalData() {
+      if (confirm('This will clear all local changes. Are you sure?')) {
+        window.adminStorage.clearAllData();
+        alert('Local changes cleared. Refresh to see original data.');
+        window.location.reload();
+      }
+    }
+    
+    // Load on page load
+    loadDashboard();
+  </script>
+</body>
+</html>

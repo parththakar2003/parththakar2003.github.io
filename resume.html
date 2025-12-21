@@ -17,24 +17,30 @@
                 <span></span>
                 <span></span>
             </div>
-            <ul class="nav-menu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="resume.html">Resume</a></li>
-                <li><a href="certifications.html">Certifications</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="blog.html">Blog</a></li>
-            </ul>
+            <div class="nav-right">
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="resume.html">Resume</a></li>
+                    <li><a href="certifications.html">Certifications</a></li>
+                    <li><a href="portfolio.html">Portfolio</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                </ul>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <span id="themeIcon">☀️</span>
+                </button>
+            </div>
         </div>
     </nav>
 
     <!-- Resume Header -->
     <section class="hero" style="min-height: 40vh;">
+        <div class="scanline"></div>
         <div class="hero-content">
-            <h1>Resume</h1>
-            <p class="subtitle">Professional Experience & Education</p>
+            <h1>&gt; Resume</h1>
+            <p class="subtitle">[ Professional Experience & Education ]</p>
             <div class="btn-group">
-                <a href="#" class="btn btn-primary" onclick="window.print(); return false;">Download PDF</a>
+                <button class="btn btn-primary" onclick="downloadResume()">./download_resume.sh</button>
             </div>
         </div>
     </section>

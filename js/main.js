@@ -1,7 +1,40 @@
 // Professional Cybersecurity Portfolio - Main JavaScript
 
+// Theme Toggle Functionality
+const initThemeToggle = () => {
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const body = document.body;
+
+    // Check for saved theme preference or default to dark mode
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    
+    if (currentTheme === 'light') {
+        body.classList.add('light-mode');
+        if (themeIcon) themeIcon.textContent = '🌙';
+    }
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            body.classList.toggle('light-mode');
+            
+            // Update icon and save preference
+            if (body.classList.contains('light-mode')) {
+                if (themeIcon) themeIcon.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                if (themeIcon) themeIcon.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    }
+};
+
 // Navigation functionality
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize theme toggle
+    initThemeToggle();
+
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('.nav-menu');
     const navLinks = document.querySelectorAll('.nav-menu a');
@@ -219,3 +252,16 @@ if (contactForm) {
         alert('Thank you for your message! This is a demo form.');
     });
 }
+
+// Resume Download Functionality
+function downloadResume() {
+    // Use browser's print-to-PDF functionality
+    window.print();
+    
+    // Note: To link to an actual PDF file, create a PDF of your resume
+    // and place it in the root directory or a 'files' folder, then use:
+    // window.location.href = 'files/Parth_Thakar_Resume.pdf';
+}
+
+// Make downloadResume available globally
+window.downloadResume = downloadResume;

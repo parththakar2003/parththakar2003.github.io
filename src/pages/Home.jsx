@@ -136,6 +136,7 @@ function Home() {
           <div className="terminal-code">
             <div id="typewriter-container">
               {typewriterLines.map((line, index) => (
+                // Safe use of dangerouslySetInnerHTML: content is from hardcoded codeLines array (no user input)
                 <div key={index} className="code-line" dangerouslySetInnerHTML={{ __html: line }}></div>
               ))}
             </div>

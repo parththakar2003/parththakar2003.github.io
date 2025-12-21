@@ -21,7 +21,7 @@ export default defineConfig({
             resolve(__dirname, 'dist/404.html')
           )
         } catch (error) {
-          console.error('Failed to copy 404.html:', error)
+          console.error('Failed to copy 404.html for GitHub Pages SPA support:', error)
         }
       }
     }

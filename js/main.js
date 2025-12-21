@@ -78,6 +78,8 @@ function initThemeToggle() {
 let typewriterTimeout;
 let currentLineIndex = 0;
 let currentCharIndex = 0;
+// SECURITY NOTE: codeLines contains only hardcoded content with no user input
+// The HTML tags are safe and intentional for syntax highlighting
 const codeLines = [
     "class <span class='code-class'>CyberSecurityExpert</span> {",
     "  <span class='code-method'>constructor</span>() {",
@@ -99,6 +101,7 @@ function typewriterEffect() {
     }
 
     const currentLine = codeLines[currentLineIndex];
+    // Safe: codeLines is hardcoded and contains no user input
     const plainText = currentLine.replace(/<[^>]*>/g, ''); // Remove HTML tags for character counting
     
     if (currentCharIndex < plainText.length) {

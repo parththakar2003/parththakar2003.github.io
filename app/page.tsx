@@ -374,7 +374,7 @@ export default function Home() {
 
                 <div className="flex items-center gap-4 relative z-10">
                   <div className="relative">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full overflow-hidden border-2 border-cyan-500 bg-gradient-to-br from-cyan-500 to-indigo-500 flex items-center justify-center">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full border-2 border-cyan-500 bg-gradient-to-br from-cyan-500 to-indigo-500 flex items-center justify-center">
                       <FaShieldAlt className="text-2xl sm:text-3xl md:text-4xl text-white" />
                     </div>
                     <div className="absolute -bottom-1 -right-1 w-5 h-5 md:w-6 md:h-6 rounded-full bg-green-500 border-2 border-white flex items-center justify-center">

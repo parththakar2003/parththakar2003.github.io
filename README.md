@@ -1,106 +1,36 @@
-# Parth Thakar - Cybersecurity Portfolio
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-A responsive multi-page cybersecurity portfolio website built with HTML, CSS, and JavaScript.
+## Getting Started
 
-## Features
-
-- **Multi-Page Architecture**: Separate pages for Home, About, Resume, Certifications, Portfolio, and Blog
-- **Fully Responsive Design**: Optimized for desktop, tablet, and mobile devices
-- **Dark/Light Theme Toggle**: User preference with localStorage persistence
-- **Interactive Elements**:
-  - Terminal-style welcome section with typewriter animation
-  - Real-time age calculator
-  - Music player with audio controls
-  - Mobile hamburger menu
-  - Smooth navigation between pages
-- **Cybersecurity Focus**: Showcases skills in SOC Operations, DFIR, and Red Team Operations
-
-## Structure
-
-```
-├── index.html              # Home page with terminal and profile cards
-├── about.html             # About page with personal information
-├── resume.html            # Resume page with education and experience
-├── certifications.html    # Certifications showcase
-├── portfolio.html         # Projects and portfolio
-├── blog.html              # Blog page (coming soon)
-├── css/
-│   └── style.css          # Responsive styles with media queries
-├── js/
-│   └── main.js            # Interactive functionality
-├── audio/
-│   └── ambient-cybersecurity.wav  # Background music
-└── Parth_Thakar_Resume.pdf       # Resume file
-```
-
-## Pages
-
-### Home (index.html)
-- Terminal-style introduction
-- Profile card with social links
-- Security skills showcase
-- Music player
-- Professional highlights
-- Core competencies
-
-### About (about.html)
-- Personal information and contact details
-- Objective statement
-- Computer skills and tools
-- Professional skills
-- Languages and hobbies
-
-### Resume (resume.html)
-- Education qualification
-- Project work
-- Internship experience
-- Webinars & conferences attended
-- Extra achievements and CTF rankings
-
-### Certifications (certifications.html)
-- 14+ professional certifications
-- Digital forensics credentials
-- Security analyst certificates
-- CTF and simulation completions
-
-### Portfolio (portfolio.html)
-- Major projects (Billing System with QR)
-- Minor projects (Cryptography & Steganography Tool)
-- CTF competition achievements
-
-### Blog (blog.html)
-- Coming soon section
-- Planned topics in cybersecurity and DFIR
-
-## Responsive Breakpoints
-
-- **Mobile**: 375px - 767px
-- **Tablet**: 768px - 1024px
-- **Desktop**: 1025px and above
-
-## Deployment
-
-The site is deployed via GitHub Pages using GitHub Actions. On push to the main branch, the site is automatically deployed.
-
-## Local Development
-
-Simply open `index.html` in a web browser, or use a local server:
+First, run the development server:
 
 ```bash
-python -m http.server 8000
+npm run dev
 # or
-npx http-server
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
 ```
 
-Then navigate to `http://localhost:8000`
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Technologies
+You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-- HTML5
-- CSS3 (with CSS Variables and Flexbox/Grid)
-- Vanilla JavaScript (ES6+)
-- No frameworks or build tools required
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## License
+## Learn More
 
-© 2024 Parth Thakar. All rights reserved.
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

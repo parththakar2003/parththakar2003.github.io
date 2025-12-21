@@ -1,0 +1,426 @@
+/* ===================================
+   CYBER THEME SPECIFIC STYLES
+   =================================== */
+
+/* Glitch Effect */
+@keyframes glitch {
+  0% {
+    text-shadow: 0.05em 0 0 var(--accent-color),
+                 -0.05em -0.025em 0 var(--primary-color),
+                 -0.025em 0.05em 0 var(--primary-color);
+  }
+  14% {
+    text-shadow: 0.05em 0 0 var(--accent-color),
+                 -0.05em -0.025em 0 var(--primary-color),
+                 -0.025em 0.05em 0 var(--primary-color);
+  }
+  15% {
+    text-shadow: -0.05em -0.025em 0 var(--accent-color),
+                 0.025em 0.025em 0 var(--primary-color),
+                 -0.05em -0.05em 0 var(--primary-color);
+  }
+  49% {
+    text-shadow: -0.05em -0.025em 0 var(--accent-color),
+                 0.025em 0.025em 0 var(--primary-color),
+                 -0.05em -0.05em 0 var(--primary-color);
+  }
+  50% {
+    text-shadow: 0.025em 0.05em 0 var(--accent-color),
+                 0.05em 0 0 var(--primary-color),
+                 0 -0.05em 0 var(--primary-color);
+  }
+  99% {
+    text-shadow: 0.025em 0.05em 0 var(--accent-color),
+                 0.05em 0 0 var(--primary-color),
+                 0 -0.05em 0 var(--primary-color);
+  }
+  100% {
+    text-shadow: -0.025em 0 0 var(--accent-color),
+                 -0.025em -0.025em 0 var(--primary-color),
+                 -0.025em -0.05em 0 var(--primary-color);
+  }
+}
+
+.glitch {
+  animation: glitch 3s infinite;
+}
+
+/* Terminal Style */
+.terminal {
+  background: #000;
+  color: var(--primary-color);
+  font-family: var(--font-mono);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  border: 2px solid var(--primary-color);
+  box-shadow: 0 0 20px var(--shadow),
+              inset 0 0 50px rgba(0, 255, 65, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.terminal::before {
+  content: '● ● ●';
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  letter-spacing: 5px;
+}
+
+.terminal-header {
+  padding: var(--spacing-sm);
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: var(--spacing-sm);
+  padding-top: calc(var(--spacing-sm) + 20px);
+}
+
+.terminal-body {
+  padding: var(--spacing-sm);
+}
+
+.terminal-prompt::before {
+  content: '> ';
+  color: var(--primary-color);
+  margin-right: 0.5rem;
+}
+
+.typing-effect {
+  overflow: hidden;
+  border-right: 0.15em solid var(--primary-color);
+  white-space: nowrap;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent; }
+  50% { border-color: var(--primary-color); }
+}
+
+/* Scan Line Effect */
+.scanline {
+  position: relative;
+  overflow: hidden;
+}
+
+.scanline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--primary-color);
+  opacity: 0.3;
+  animation: scan 4s linear infinite;
+  z-index: 10;
+  box-shadow: 0 0 10px var(--primary-color);
+}
+
+@keyframes scan {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(100vh); }
+}
+
+/* Neon Glow */
+.neon-text {
+  color: var(--primary-color);
+  text-shadow: 
+    0 0 5px var(--primary-color),
+    0 0 10px var(--primary-color),
+    0 0 20px var(--primary-color),
+    0 0 40px var(--primary-color);
+  animation: neon-flicker 1.5s infinite alternate;
+}
+
+@keyframes neon-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    text-shadow:
+      0 0 5px var(--primary-color),
+      0 0 10px var(--primary-color),
+      0 0 20px var(--primary-color),
+      0 0 40px var(--primary-color);
+  }
+  20%, 24%, 55% {
+    text-shadow: none;
+  }
+}
+
+.neon-border {
+  border: 2px solid var(--primary-color);
+  box-shadow: 
+    0 0 5px var(--primary-color),
+    0 0 10px var(--primary-color),
+    inset 0 0 5px var(--primary-color),
+    inset 0 0 10px var(--primary-color);
+  animation: neon-border-flicker 1.5s infinite alternate;
+}
+
+@keyframes neon-border-flicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    box-shadow:
+      0 0 5px var(--primary-color),
+      0 0 10px var(--primary-color),
+      inset 0 0 5px var(--primary-color),
+      inset 0 0 10px var(--primary-color);
+  }
+  20%, 24%, 55% {
+    box-shadow: none;
+  }
+}
+
+/* Matrix Rain Background */
+.matrix-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.05;
+}
+
+/* Cyber Grid */
+.cyber-grid {
+  background-image: 
+    linear-gradient(var(--border-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+  background-size: 50px 50px;
+  position: relative;
+}
+
+.cyber-grid::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, transparent 0%, var(--bg-primary) 100%);
+  pointer-events: none;
+}
+
+/* Hologram Effect */
+.hologram {
+  position: relative;
+  animation: hologram-flicker 0.1s infinite;
+}
+
+@keyframes hologram-flicker {
+  0% { opacity: 0.95; }
+  50% { opacity: 1; }
+  100% { opacity: 0.95; }
+}
+
+.hologram::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 255, 65, 0.03) 2px,
+      rgba(0, 255, 65, 0.03) 4px
+    );
+  pointer-events: none;
+}
+
+/* Cyber Button */
+.btn-cyber {
+  position: relative;
+  padding: 0.8rem 2rem;
+  background: transparent;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  font-family: var(--font-mono);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  overflow: hidden;
+  clip-path: polygon(
+    0 0,
+    calc(100% - 15px) 0,
+    100% 15px,
+    100% 100%,
+    15px 100%,
+    0 calc(100% - 15px)
+  );
+}
+
+.btn-cyber::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--primary-color);
+  transition: var(--transition-normal);
+  z-index: -1;
+}
+
+.btn-cyber:hover {
+  color: var(--bg-primary);
+  box-shadow: 0 0 20px var(--shadow);
+}
+
+.btn-cyber:hover::before {
+  left: 0;
+}
+
+/* Cyber Card */
+.cyber-card {
+  position: relative;
+  background: var(--bg-secondary);
+  border: 2px solid var(--border-color);
+  padding: var(--spacing-md);
+  clip-path: polygon(
+    0 0,
+    calc(100% - 20px) 0,
+    100% 20px,
+    100% 100%,
+    20px 100%,
+    0 calc(100% - 20px)
+  );
+  transition: var(--transition-normal);
+}
+
+.cyber-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--primary-color), var(--accent-color));
+  z-index: -1;
+  opacity: 0;
+  transition: var(--transition-normal);
+  clip-path: polygon(
+    0 0,
+    calc(100% - 20px) 0,
+    100% 20px,
+    100% 100%,
+    20px 100%,
+    0 calc(100% - 20px)
+  );
+}
+
+.cyber-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 40px var(--shadow);
+}
+
+.cyber-card:hover::before {
+  opacity: 1;
+}
+
+/* Hexagon Background Pattern */
+.hex-pattern {
+  background-image: 
+    radial-gradient(circle at 50% 50%, var(--border-color) 1px, transparent 1px);
+  background-size: 30px 30px;
+  position: relative;
+}
+
+/* Cyber Divider */
+.cyber-divider {
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--primary-color),
+    transparent
+  );
+  margin: var(--spacing-md) 0;
+  position: relative;
+}
+
+.cyber-divider::before {
+  content: '◆';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--bg-primary);
+  padding: 0 1rem;
+  color: var(--primary-color);
+}
+
+/* Progress Bar Cyber Style */
+.progress-cyber {
+  width: 100%;
+  height: 30px;
+  background: var(--bg-tertiary);
+  border: 2px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  position: relative;
+}
+
+.progress-cyber-bar {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    var(--primary-color),
+    var(--accent-color)
+  );
+  transition: width 0.5s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-cyber-bar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Floating Animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.pulse {
+  animation: pulse 2s ease-in-out infinite;
+}

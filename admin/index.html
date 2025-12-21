@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - Portfolio CMS</title>
+  <link rel="stylesheet" href="/assets/css/main.css">
+  <link rel="stylesheet" href="/assets/css/theme-cyber.css">
+  <link rel="stylesheet" href="/admin/assets/css/admin.css">
+  <style>
+    .login-container {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--admin-bg) 0%, var(--admin-bg-secondary) 100%);
+    }
+    .login-card {
+      max-width: 450px;
+      width: 100%;
+      padding: 3rem;
+      background: var(--admin-bg-secondary);
+      border: 2px solid var(--admin-border);
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+    .login-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .login-title {
+      font-size: 2rem;
+      color: var(--admin-primary);
+      text-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+      margin-bottom: 0.5rem;
+    }
+    .login-subtitle {
+      color: var(--admin-text-secondary);
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-card">
+      <div class="login-header">
+        <h1 class="login-title">🔐 Admin Portal</h1>
+        <p class="login-subtitle">Portfolio Content Management System</p>
+      </div>
+      
+      <form id="login-form">
+        <div class="admin-form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required autocomplete="username">
+        </div>
+        
+        <div class="admin-form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required autocomplete="current-password">
+        </div>
+        
+        <div id="login-message" style="display: none; margin-bottom: 1rem;"></div>
+        
+        <button type="submit" class="admin-btn" style="width: 100%;">
+          Login
+        </button>
+      </form>
+      
+      <div class="admin-alert admin-alert-warning admin-mt-2">
+        <strong>⚠️ First Time Setup:</strong><br>
+        Default credentials: <code>admin</code> / <code>changeme123</code><br>
+        <small>Please change these in Settings after logging in!</small>
+      </div>
+      
+      <div class="admin-mt-2 admin-text-center">
+        <a href="/" style="color: var(--admin-primary);">← Back to Website</a>
+      </div>
+    </div>
+  </div>
+  
+  <script src="/admin/assets/js/auth.js"></script>
+  <script>
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      const messageEl = document.getElementById('login-message');
+      
+      const result = window.adminAuth.login(username, password);
+      
+      if (result.success) {
+        messageEl.className = 'admin-alert admin-alert-success';
+        messageEl.textContent = result.message + ' Redirecting...';
+        messageEl.style.display = 'block';
+        
+        // Get redirect URL or default to dashboard
+        const urlParams = new URLSearchParams(window.location.search);
+        const redirect = urlParams.get('redirect') || '/admin/dashboard.html';
+        
+        setTimeout(() => {
+          window.location.href = redirect;
+        }, 1000);
+      } else {
+        messageEl.className = 'admin-alert admin-alert-error';
+        messageEl.textContent = result.message;
+        messageEl.style.display = 'block';
+      }
+    });
+  </script>
+</body>
+</html>

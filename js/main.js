@@ -1,7 +1,51 @@
-// Professional Cybersecurity Portfolio - Main JavaScript
+// Modern Cybersecurity Portfolio - Main JavaScript
+
+// Calculate age based on birth date
+function calculateAge() {
+    const birthDate = new Date(Date.UTC(2003, 7, 7)); // August 7, 2003 (month is 0-indexed)
+    const now = new Date();
+
+    let years = now.getUTCFullYear() - birthDate.getUTCFullYear();
+    const currentMonth = now.getUTCMonth();
+    const birthMonth = birthDate.getUTCMonth();
+
+    if (currentMonth < birthMonth ||
+        (currentMonth === birthMonth && now.getUTCDate() < birthDate.getUTCDate())) {
+        years--;
+    }
+
+    // Calculate days since last birthday
+    const birthDateThisYear = new Date(Date.UTC(now.getUTCFullYear(), birthMonth, birthDate.getUTCDate()));
+    if (now < birthDateThisYear) {
+        birthDateThisYear.setUTCFullYear(now.getUTCFullYear() - 1);
+    }
+
+    const millisecondsInDay = 1000 * 60 * 60 * 24;
+    const days = Math.floor((now.getTime() - birthDateThisYear.getTime()) / millisecondsInDay);
+
+    return { years, days };
+}
+
+// Update age display
+function updateAge() {
+    const age = calculateAge();
+    const yearsElement = document.getElementById('years-value');
+    const daysElement = document.getElementById('days-value');
+    
+    if (yearsElement) yearsElement.textContent = age.years;
+    if (daysElement) daysElement.textContent = age.days;
+}
+
+// Update current time display
+function updateTime() {
+    const timeElement = document.getElementById('current-time');
+    if (timeElement) {
+        timeElement.textContent = new Date().toLocaleTimeString();
+    }
+}
 
 // Theme Toggle Functionality
-const initThemeToggle = () => {
+function initThemeToggle() {
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = document.getElementById('themeIcon');
     const body = document.body;
@@ -28,58 +72,111 @@ const initThemeToggle = () => {
             }
         });
     }
-};
+}
 
-// Navigation functionality
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize theme toggle
-    initThemeToggle();
+// Typewriter effect for terminal code
+let typewriterTimeout;
+let currentLineIndex = 0;
+let currentCharIndex = 0;
+const codeLines = [
+    "class <span class='code-class'>CyberSecurityExpert</span> {",
+    "  <span class='code-method'>constructor</span>() {",
+    "    this.<span class='code-property'>name</span> = <span class='code-string'>'Parth Thakar'</span>;",
+    "    this.<span class='code-property'>role</span> = <span class='code-string'>'Cybersecurity Student'</span>;",
+    "    this.<span class='code-property'>specialties</span> = [<span class='code-string'>'DFIR'</span>, <span class='code-string'>'SOC Operations'</span>, <span class='code-string'>'Red Team'</span>, <span class='code-string'>'Blue Team'</span>, <span class='code-string'>'CTF Player'</span>];",
+    "  }",
+    "}"
+];
 
+function typewriterEffect() {
+    if (currentLineIndex >= codeLines.length) {
+        // Typewriter complete
+        const cursor = document.getElementById('typewriter-cursor');
+        const completionMsg = document.getElementById('completion-msg');
+        if (cursor) cursor.style.display = 'none';
+        if (completionMsg) completionMsg.style.display = 'block';
+        return;
+    }
+
+    const currentLine = codeLines[currentLineIndex];
+    const plainText = currentLine.replace(/<[^>]*>/g, ''); // Remove HTML tags for character counting
+    
+    if (currentCharIndex < plainText.length) {
+        // Continue typing current line
+        let htmlIndex = 0;
+        let plainIndex = 0;
+        
+        // Find the HTML position that corresponds to the current plain text position
+        while (plainIndex <= currentCharIndex && htmlIndex < currentLine.length) {
+            if (currentLine[htmlIndex] === '<') {
+                // Skip HTML tag
+                while (htmlIndex < currentLine.length && currentLine[htmlIndex] !== '>') {
+                    htmlIndex++;
+                }
+                htmlIndex++;
+            } else {
+                plainIndex++;
+                htmlIndex++;
+            }
+        }
+        
+        // Update the display
+        const container = document.getElementById('typewriter-container');
+        if (container) {
+            const lineElements = container.querySelectorAll('.code-line');
+            if (lineElements[currentLineIndex]) {
+                lineElements[currentLineIndex].innerHTML = currentLine.substring(0, htmlIndex);
+            }
+        }
+        
+        currentCharIndex++;
+        typewriterTimeout = setTimeout(typewriterEffect, Math.random() * 50 + 30);
+    } else {
+        // Move to next line
+        currentLineIndex++;
+        currentCharIndex = 0;
+        typewriterTimeout = setTimeout(typewriterEffect, 100);
+    }
+}
+
+// Initialize typewriter when page loads
+function initTypewriter() {
+    // Show cursor initially
+    const cursor = document.getElementById('typewriter-cursor');
+    if (cursor) {
+        cursor.style.display = 'inline-block';
+    }
+    
+    // Start typewriter after a short delay
+    setTimeout(() => {
+        typewriterEffect();
+    }, 1000);
+}
+
+// Mobile menu toggle
+function initMobileMenu() {
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('.nav-menu');
     const navLinks = document.querySelectorAll('.nav-menu a');
 
-    // Mobile menu toggle
-    if (menuToggle) {
+    if (menuToggle && navMenu) {
         menuToggle.addEventListener('click', function() {
             menuToggle.classList.toggle('active');
             navMenu.classList.toggle('active');
         });
-    }
 
-    // Close mobile menu when clicking a link
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            if (menuToggle) {
+        // Close mobile menu when clicking a link
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
                 menuToggle.classList.remove('active');
                 navMenu.classList.remove('active');
-            }
+            });
         });
-    });
+    }
+}
 
-    // Set active navigation link based on current page
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    navLinks.forEach(link => {
-        if (link.getAttribute('href') === currentPage) {
-            link.classList.add('active');
-        }
-    });
-
-    // Smooth scroll for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    });
-
-    // Add scroll animation to cards
+// Scroll animations for cards
+function initScrollAnimations() {
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -100,133 +197,187 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
 
-    // Observe cards and sections
-    document.querySelectorAll('.card, .timeline-item, .blog-card').forEach(el => {
-        observer.observe(el);
+    // Observe cards
+    document.querySelectorAll('.card').forEach(card => {
+        observer.observe(card);
     });
-
-    // Dynamic typing effect for hero subtitle (if element exists)
-    const typingElement = document.querySelector('.typing-effect');
-    if (typingElement) {
-        const text = typingElement.textContent;
-        typingElement.textContent = '';
-        let i = 0;
-        
-        function typeWriter() {
-            if (i < text.length) {
-                typingElement.textContent += text.charAt(i);
-                i++;
-                setTimeout(typeWriter, 100);
-            }
-        }
-        
-        setTimeout(typeWriter, 500);
-    }
-
-    // Add particle background effect
-    createParticles();
-});
-
-// Particle background effect
-function createParticles() {
-    const hero = document.querySelector('.hero');
-    if (!hero) return;
-
-    const particlesContainer = document.createElement('div');
-    particlesContainer.className = 'particles';
-    particlesContainer.style.position = 'absolute';
-    particlesContainer.style.top = '0';
-    particlesContainer.style.left = '0';
-    particlesContainer.style.width = '100%';
-    particlesContainer.style.height = '100%';
-    particlesContainer.style.overflow = 'hidden';
-    particlesContainer.style.pointerEvents = 'none';
-    
-    hero.insertBefore(particlesContainer, hero.firstChild);
-
-    // Create particles
-    for (let i = 0; i < 50; i++) {
-        const particle = document.createElement('div');
-        particle.style.position = 'absolute';
-        particle.style.width = '2px';
-        particle.style.height = '2px';
-        particle.style.background = i % 2 === 0 ? '#00d9ff' : '#ff0055';
-        particle.style.borderRadius = '50%';
-        particle.style.opacity = Math.random() * 0.5 + 0.2;
-        
-        const startX = Math.random() * 100;
-        const startY = Math.random() * 100;
-        const duration = Math.random() * 20 + 10;
-        const delay = Math.random() * 5;
-        
-        particle.style.left = startX + '%';
-        particle.style.top = startY + '%';
-        particle.style.animation = `float ${duration}s ${delay}s infinite ease-in-out`;
-        
-        particlesContainer.appendChild(particle);
-    }
-
-    // Add keyframes for floating animation
-    if (!document.getElementById('particle-animations')) {
-        const style = document.createElement('style');
-        style.id = 'particle-animations';
-        style.textContent = `
-            @keyframes float {
-                0%, 100% {
-                    transform: translate(0, 0);
-                }
-                25% {
-                    transform: translate(20px, -20px);
-                }
-                50% {
-                    transform: translate(-20px, 20px);
-                }
-                75% {
-                    transform: translate(20px, 20px);
-                }
-            }
-        `;
-        document.head.appendChild(style);
-    }
 }
 
-// Filter functionality for portfolio/blog pages
-function initializeFilters() {
-    const filterButtons = document.querySelectorAll('.filter-btn');
-    const items = document.querySelectorAll('.filterable-item');
+// Set active navigation link
+function setActiveNavLink() {
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    const navLinks = document.querySelectorAll('.nav-menu a');
+    
+    navLinks.forEach(link => {
+        if (link.getAttribute('href') === currentPage) {
+            link.classList.add('active');
+        }
+    });
+}
 
-    if (filterButtons.length === 0) return;
-
-    filterButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            // Update active button
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            this.classList.add('active');
-
-            const filter = this.getAttribute('data-filter');
-
-            // Filter items
-            items.forEach(item => {
-                if (filter === 'all' || item.classList.contains(filter)) {
-                    item.style.display = 'block';
-                    setTimeout(() => {
-                        item.style.opacity = '1';
-                        item.style.transform = 'scale(1)';
-                    }, 10);
-                } else {
-                    item.style.opacity = '0';
-                    item.style.transform = 'scale(0.8)';
-                    setTimeout(() => {
-                        item.style.display = 'none';
-                    }, 300);
-                }
-            });
+// Initialize everything when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize theme toggle
+    initThemeToggle();
+    
+    // Initialize mobile menu
+    initMobileMenu();
+    
+    // Set active nav link
+    setActiveNavLink();
+    
+    // Update age and time
+    updateAge();
+    updateTime();
+    
+    // Update time every second
+    setInterval(updateTime, 1000);
+    
+    // Initialize typewriter effect
+    initTypewriter();
+    
+    // Initialize scroll animations
+    initScrollAnimations();
+    
+    // Initialize music player
+    initMusicPlayer();
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
         });
     });
-}
+});
 
-// Initialize filters when DOM is loaded
-document.addEventListener('DOMContentLoaded', initializeFilters);
+// Music Player Functionality
+function initMusicPlayer() {
+    const audio = document.getElementById('musicPlayer');
+    const playBtn = document.getElementById('musicPlayBtn');
+    const playIcon = document.getElementById('playIcon');
+    const pauseIcon = document.getElementById('pauseIcon');
+    const skipBack = document.getElementById('musicSkipBack');
+    const skipForward = document.getElementById('musicSkipForward');
+    const progressBar = document.getElementById('musicProgressBar');
+    const progressFill = document.getElementById('musicProgressFill');
+    const currentTimeEl = document.getElementById('musicCurrentTime');
+    const durationEl = document.getElementById('musicDuration');
+    const volumeBtn = document.getElementById('musicVolumeBtn');
+    const volumeSlider = document.getElementById('musicVolumeSlider');
+    const volumeValue = document.getElementById('musicVolumeValue');
+    const volumeSliderWrapper = document.getElementById('volumeSliderWrapper');
+    const volumeOnIcon = document.getElementById('volumeOnIcon');
+    const volumeOffIcon = document.getElementById('volumeOffIcon');
+    const musicStatus = document.getElementById('musicStatus');
+    const soundWaveBars = document.querySelectorAll('.sound-wave-bar');
+    const musicIcon = document.querySelector('.music-icon');
+    
+    if (!audio) return; // Exit if no audio element
+    
+    let isPlaying = false;
+    
+    // Set initial volume
+    audio.volume = 0.25;
+    
+    // Format time helper
+    function formatTime(seconds) {
+        if (isNaN(seconds)) return '0:00';
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60);
+        return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+    }
+    
+    // Toggle play/pause
+    playBtn.addEventListener('click', function() {
+        if (isPlaying) {
+            audio.pause();
+            isPlaying = false;
+            playIcon.style.display = 'block';
+            pauseIcon.style.display = 'none';
+            playBtn.classList.remove('playing');
+            musicStatus.textContent = 'PAUSED';
+            musicStatus.classList.remove('playing');
+            soundWaveBars.forEach(bar => bar.classList.remove('playing'));
+            musicIcon.classList.remove('playing');
+        } else {
+            audio.play().catch(err => {
+                console.error('Error playing audio:', err);
+            });
+            isPlaying = true;
+            playIcon.style.display = 'none';
+            pauseIcon.style.display = 'block';
+            playBtn.classList.add('playing');
+            musicStatus.textContent = 'PLAYING';
+            musicStatus.classList.add('playing');
+            soundWaveBars.forEach(bar => bar.classList.add('playing'));
+            musicIcon.classList.add('playing');
+        }
+    });
+    
+    // Update progress bar
+    audio.addEventListener('timeupdate', function() {
+        const progress = (audio.currentTime / audio.duration) * 100;
+        progressFill.style.width = progress + '%';
+        currentTimeEl.textContent = formatTime(audio.currentTime);
+    });
+    
+    // Update duration when metadata loads
+    audio.addEventListener('loadedmetadata', function() {
+        durationEl.textContent = formatTime(audio.duration);
+    });
+    
+    // Seek functionality
+    progressBar.addEventListener('click', function(e) {
+        const rect = progressBar.getBoundingClientRect();
+        const clickX = e.clientX - rect.left;
+        const percentage = clickX / rect.width;
+        audio.currentTime = percentage * audio.duration;
+    });
+    
+    // Skip back 10 seconds
+    skipBack.addEventListener('click', function() {
+        audio.currentTime = Math.max(0, audio.currentTime - 10);
+    });
+    
+    // Skip forward 10 seconds
+    skipForward.addEventListener('click', function() {
+        audio.currentTime = Math.min(audio.duration, audio.currentTime + 10);
+    });
+    
+    // Volume button toggle
+    volumeBtn.addEventListener('click', function() {
+        volumeSliderWrapper.classList.toggle('active');
+    });
+    
+    // Volume slider
+    volumeSlider.addEventListener('input', function() {
+        const volume = this.value / 100;
+        audio.volume = volume;
+        volumeValue.textContent = this.value + '%';
+        
+        if (volume === 0) {
+            volumeOnIcon.style.display = 'none';
+            volumeOffIcon.style.display = 'block';
+        } else {
+            volumeOnIcon.style.display = 'block';
+            volumeOffIcon.style.display = 'none';
+        }
+    });
+    
+    // Close volume slider when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!volumeBtn.contains(e.target) && !volumeSliderWrapper.contains(e.target)) {
+            volumeSliderWrapper.classList.remove('active');
+        }
+    });
+}
 
 // Add loading screen fade out
 window.addEventListener('load', function() {
@@ -237,30 +388,22 @@ window.addEventListener('load', function() {
     }, 100);
 });
 
-// Copy email to clipboard functionality
-function copyEmail(email) {
-    navigator.clipboard.writeText(email).then(() => {
-        alert('Email copied to clipboard!');
-    });
-}
-
-// Contact form handling (if exists)
-const contactForm = document.getElementById('contact-form');
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Thank you for your message! This is a demo form.');
-    });
-}
+// Cleanup timeouts when leaving page
+window.addEventListener('beforeunload', function() {
+    if (typewriterTimeout) {
+        clearTimeout(typewriterTimeout);
+    }
+});
 
 // Resume Download Functionality
 function downloadResume() {
-    // Use browser's print-to-PDF functionality
-    window.print();
-    
-    // Note: To link to an actual PDF file, create a PDF of your resume
-    // and place it in the root directory or a 'files' folder, then use:
-    // window.location.href = 'files/Parth_Thakar_Resume.pdf';
+    // Download ATS-friendly resume PDF
+    const link = document.createElement('a');
+    link.href = 'Parth_Thakar_Resume.pdf';
+    link.download = 'Parth_Thakar_Resume_ATS_Friendly.pdf';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 }
 
 // Make downloadResume available globally

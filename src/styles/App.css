@@ -21,20 +21,22 @@
 }
 
 body.light-mode {
-    --primary-bg: #f5f5f5;
-    --secondary-bg: #e8e8e8;
-    --card-bg: rgba(255, 255, 255, 0.8);
-    --terminal-bg: #1a1a1a;
-    --terminal-header-bg: #2a2a2a;
-    --accent-primary: #06b6d4; /* cyan-600 */
+    --primary-bg: #f8f9fa;
+    --secondary-bg: #e9ecef;
+    --card-bg: rgba(255, 255, 255, 0.95);
+    --terminal-bg: #2c3e50;
+    --terminal-header-bg: #34495e;
+    --accent-primary: #0891b2; /* cyan-700 - deeper, less bright */
     --accent-secondary: #6366f1; /* indigo-500 */
-    --accent-cyan: #0891b2; /* cyan-700 */
+    --accent-cyan: #0e7490; /* cyan-800 - darker for better contrast */
     --accent-indigo: #4f46e5; /* indigo-600 */
-    --accent-green: #00a86b;
-    --text-primary: #1a1a1a;
-    --text-secondary: #4a4a4a;
-    --text-muted: #888;
-    --border-color: #d0d0d0;
+    --accent-green: #059669; /* emerald-600 - softer green */
+    --text-primary: #1f2937; /* gray-800 - softer than pure black */
+    --text-secondary: #4b5563; /* gray-600 - easier on eyes */
+    --text-muted: #9ca3af; /* gray-400 - softer muted */
+    --border-color: #d1d5db; /* gray-300 - subtle borders */
+    --glow-primary: rgba(8, 145, 178, 0.15);
+    --glow-secondary: rgba(99, 102, 241, 0.15);
 }
 
 * {
@@ -1101,6 +1103,52 @@ footer {
     font-size: 0.75rem;
     color: var(--text-muted);
     font-family: 'Courier New', monospace;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    overflow: hidden;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 1;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--accent-primary);
+}
+
+.hero .subtitle {
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+}
+
+.scanline {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        transparent 50%,
+        rgba(0, 0, 0, 0.02) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+}
+
+/* Section Styles */
+.section {
+    margin-top: 2rem;
 }
 
 /* Responsive Design */

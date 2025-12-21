@@ -67,6 +67,7 @@ export default function Navbar() {
     { name: "Journey", path: "/journey" },
     { name: "Projects", path: "/projects" },
     { name: "Skills", path: "/skills" },
+    { name: "Blog", path: "/blog" },
     { name: "Contact", path: "/contact" }
   ];
 

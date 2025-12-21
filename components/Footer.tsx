@@ -13,11 +13,8 @@ export default function Footer() {
   }, []);
 
   const socialLinks = [
-    { name: "LinkedIn", url: "https://www.linkedin.com/in/nirmal-patel-3995b0251", icon: <FaLinkedin /> },
-    { name: "GitHub", url: "https://github.com/nirmal1090", icon: <FaGithub /> },
-    { name: "Gmail", url: "mailto:nirmalmpatel1090@gmail.com", icon: <FaEnvelope /> },
-    { name: "Discord", url: "https://discord.gg/KEFGnHV3gy", icon: <FaDiscord /> },
-    { name: "YouTube", url: "https://www.youtube.com/@DrakenorGaming", icon: <FaYoutube /> },
+    { name: "GitHub", url: "https://github.com/parththakar2003", icon: <FaGithub /> },
+    { name: "Gmail", url: "mailto:Parththakar39@gmail.com", icon: <FaEnvelope /> },
   ];
 
   // Use conditional rendering to avoid hydration mismatches
@@ -32,9 +29,9 @@ export default function Footer() {
         <div className="max-w-6xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center md:items-start mb-6">
             <div className="mb-6 md:mb-0 text-center md:text-left">
-              <h3 className="text-xl font-bold mb-2">Nirmal Patel</h3>
-              <p className={`${darkMode ? 'text-gray-300' : 'text-gray-300'} text-sm mb-4`}>Full-Stack Developer | IoT Enthusiast</p>
-              <p className={`${darkMode ? 'text-gray-400' : 'text-gray-400'} text-sm`}>Creating innovative solutions<br />with passion and precision</p>
+              <h3 className="text-xl font-bold mb-2">Parth Thakar</h3>
+              <p className={`${darkMode ? 'text-gray-300' : 'text-gray-300'} text-sm mb-4`}>Cybersecurity Professional | Digital Forensics Specialist</p>
+              <p className={`${darkMode ? 'text-gray-400' : 'text-gray-400'} text-sm`}>Securing digital infrastructure<br />with expertise and dedication</p>
             </div>
             <div className="flex flex-col items-center md:items-end">
               <h3 className="text-lg font-semibold mb-3">Connect With Me</h3>
@@ -109,7 +106,7 @@ export default function Footer() {
         <div className={`text-center ${
           darkMode ? 'text-gray-500' : 'text-gray-400'
         } text-sm`}>
-          <p>©2025 Nirmal Patel. All rights reserved.</p>
+          <p>©2025 Parth Thakar. All rights reserved.</p>
         </div>
       </div>
     </footer>

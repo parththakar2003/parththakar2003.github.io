@@ -2,52 +2,64 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useTheme } from "@/context/ThemeContext";
-import { FaLinkedin, FaGithub, FaEnvelope, FaDiscord, FaYoutube, FaPaperPlane, FaExternalLinkAlt } from "react-icons/fa";
+import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaGithub, FaPaperPlane } from "react-icons/fa";
 
 export default function Contact() {
   const { darkMode } = useTheme();
-  // Add loading state
   const [isLoaded, setIsLoaded] = useState(false);
-  
+
   useEffect(() => {
     setIsLoaded(true);
   }, []);
-  
-  // Enhanced animations
-  const titleAnimation = {
-    hidden: { opacity: 0, y: -20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
-  };
-  
-  const cardAnimation = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } }
-  };
-  
-  const itemAnimation = (index: number) => ({
-    hidden: { opacity: 0, y: 10 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { 
-        duration: 0.5, 
-        delay: 0.2 + (index * 0.1),
-        ease: "easeOut" 
-      } 
-    }
-  });
 
-  // Form state and validation
+  // Form state
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    subject: "",
     message: "",
   });
 
-
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
-  const [isLoading, setIsLoading] = useState(false);
-  const [showSuccess, setShowSuccess] = useState(false);
+
+  // Theme styles
+  const theme = {
+    bg: darkMode ? 'bg-gray-900' : 'bg-slate-50',
+    text: darkMode ? 'text-gray-100' : 'text-gray-800',
+    muted: darkMode ? 'text-gray-400' : 'text-gray-600',
+    accent: darkMode ? 'text-cyan-400' : 'text-cyan-600',
+    card: darkMode ? 'bg-gray-800/70' : 'bg-white/80',
+    border: darkMode ? 'border-gray-700' : 'border-gray-200',
+    input: darkMode ? 'bg-gray-900 border-gray-700' : 'bg-white border-gray-300',
+  };
+
+  // Contact information
+  const contactInfo = [
+    {
+      icon: <FaEnvelope />,
+      label: "Email",
+      value: "Parththakar39@gmail.com",
+      link: "mailto:Parththakar39@gmail.com"
+    },
+    {
+      icon: <FaPhone />,
+      label: "Phone",
+      value: "+91 9313525322",
+      link: "tel:+919313525322"
+    },
+    {
+      icon: <FaMapMarkerAlt />,
+      label: "Address",
+      value: "D-903, Vir Savarkar Heights-1, Vasant Nagar, Gota-Ognaj Road, Ahmedabad - 380060, Gujarat, India",
+      link: null
+    },
+    {
+      icon: <FaGithub />,
+      label: "GitHub",
+      value: "github.com/parththakar2003",
+      link: "https://github.com/parththakar2003"
+    }
+  ];
 
   // Handle input changes
   const handleChange = (
@@ -55,7 +67,6 @@ export default function Contact() {
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
@@ -70,282 +81,215 @@ export default function Contact() {
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
       newErrors.email = "Email is invalid";
     }
+    if (!formData.subject.trim()) newErrors.subject = "Subject is required";
     if (!formData.message.trim()) newErrors.message = "Message is required";
     return newErrors;
   };
 
-  // Handle form submission for Formspree
-const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  const validationErrors = validateForm();
-  if (Object.keys(validationErrors).length === 0) {
-    setIsLoading(true);
-    setErrors({});
-    try {
-      const response = await fetch("https://formspree.io/f/mdkepaey", { // Replace with your Formspree endpoint
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
-      });
-      if (response.ok) {
-        setShowSuccess(true);
-        setFormData({ name: "", email: "", message: "" });
-        setTimeout(() => setShowSuccess(false), 5000);
-      } else {
-        const errorData = await response.json();
-        setErrors({ submit: errorData.detail || "Failed to send message. Please try again." });
-      }
-    } catch (error) {
-      setErrors({ submit: "An error occurred. Please try again later." });
-      console.error("Submission error:", error);
-    } finally {
-      setIsLoading(false);
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const validationErrors = validateForm();
+    
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
     }
-  } else {
-    setErrors(validationErrors);
-  }
-};
 
-  // Social media links with icons
-  const socialLinks = [
-    { name: "LinkedIn", url: "https://www.linkedin.com/in/nirmal-patel-3995b0251", icon: <FaLinkedin className="text-xl" />, color: "bg-blue-600", text: "Nirmal Patel" },
-    { name: "GitHub", url: "https://github.com/nirmal1090", icon: <FaGithub className="text-xl" />, color: "bg-gray-800", text: "nirmal1090" },
-    { name: "Email", url: "mailto:nirmalmpatel1090@gmail.com", icon: <FaEnvelope className="text-xl" />, color: "bg-red-600", text: "nirmalmpatel1090@gmail.com" },
-    { name: "Discord", url: "https://discord.gg/KEFGnHV3gy", icon: <FaDiscord className="text-xl" />, color: "bg-indigo-600", text: "patelnirmal" },
-    { name: "YouTube", url: "https://youtube.com/@DrakenorGaming", icon: <FaYoutube className="text-xl" />, color: "bg-red-700", text: "Drakenor Gaming" },
-  ];
+    // For now, open email client
+    const mailtoLink = `mailto:Parththakar39@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
+    window.location.href = mailtoLink;
+    
+    // Reset form
+    setFormData({ name: "", email: "", subject: "", message: "" });
+  };
+
+  if (!isLoaded) {
+    return (
+      <div className={`h-screen ${theme.bg} flex justify-center items-center`}>
+        <div className={`h-8 w-8 rounded-full border-2 border-t-transparent ${darkMode ? 'border-cyan-400' : 'border-cyan-600'} animate-spin`}></div>
+      </div>
+    );
+  }
 
   return (
-    <div className={`min-h-screen flex flex-col pt-22 ${
-      darkMode 
-        ? 'bg-gradient-to-b from-gray-900 via-slate-900 to-gray-900' 
-        : 'bg-gradient-to-b from-indigo-50 via-blue-50 to-purple-50'
-    }`}>
-      <main className="flex-grow pt-4 pb-8 px-3 md:px-4 max-w-6xl mx-auto w-full">
-        {!isLoaded ? (
-          <div className="flex justify-center items-center h-64">
-            <div className={`animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 ${
-              darkMode ? 'border-blue-400' : 'border-blue-500'
-            }`}></div>
-          </div>
-        ) : (
-          <>
-            <motion.h1
-              initial="hidden"
-              animate="visible"
-              variants={titleAnimation}
-              className={`text-3xl md:text-5xl font-bold ${
-                darkMode ? 'text-gray-100' : 'text-gray-800'
-              } text-center mb-10 md:mb-14`}
-            >
-              GET IN TOUCH
-            </motion.h1>
+    <div className={`min-h-screen ${theme.bg} ${theme.text} pt-20`}>
+      <main className="max-w-6xl mx-auto px-4 py-8">
+        {/* Page Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="mb-12 text-center"
+        >
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+            Get in <span className={theme.accent}>Touch</span>
+          </h1>
+          <p className={`${theme.muted} text-base sm:text-lg max-w-2xl mx-auto`}>
+            Interested in collaboration or have questions about cybersecurity? Feel free to reach out!
+          </p>
+        </motion.div>
 
-            <div className="grid md:grid-cols-2 gap-10 md:gap-16">
-              {/* Contact Form */}
-              <motion.div
-                initial="hidden"
-                animate="visible"
-                variants={cardAnimation}
-                className="relative"
-              >
-                <h2 className={`text-2xl font-bold ${
-                  darkMode ? 'text-gray-100' : 'text-gray-800'
-                } mb-8 flex items-center`}>
-                  <FaPaperPlane className={`${darkMode ? 'text-blue-400' : 'text-blue-600'} mr-3`} />
-                  Send Me a Message
-                </h2>
-                
-                {showSuccess ? (
-                <motion.div 
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.8 }}
-                  className={`${
-                    darkMode ? 'bg-green-900/30 border-green-700 text-green-400' : 'bg-green-50 border-green-200 text-green-600'
-                  } border rounded-lg p-6 text-center shadow-md`}
-                >
-                  <div className={`${darkMode ? 'text-green-400' : 'text-green-600'} text-xl mb-2`}>✓</div>
-                  <h3 className={`text-xl font-semibold ${darkMode ? 'text-green-300' : 'text-green-700'} mb-2`}>Message Sent!</h3>
-                  <p className={darkMode ? 'text-green-400' : 'text-green-600'}>Thank you for reaching out. I&apos;ll get back to you soon.</p>
-                  <button
-                    onClick={() => setShowSuccess(false)}
-                    className={`mt-4 ${darkMode ? 'text-blue-400 hover:text-blue-300' : 'text-blue-600 hover:text-blue-800'} underline`}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Contact Information */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className="space-y-6"
+          >
+            <div className={`${theme.card} rounded-lg p-6 border ${theme.border} backdrop-blur-sm`}>
+              <h2 className="text-2xl font-bold mb-6">Contact Information</h2>
+              <div className="space-y-4">
+                {contactInfo.map((info, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                    className="flex items-start gap-4"
                   >
-                    Dismiss
-                  </button>
-                </motion.div>
-              ) : (
-                <form
-                  onSubmit={handleSubmit}
-                  className="space-y-5"
-                >
-                  <input type="hidden" name="form-name" value="contact" />
-                  <motion.div variants={itemAnimation(0)}>
-                    <label htmlFor="name" className={`block ${
-                      darkMode ? 'text-gray-300' : 'text-gray-700'
-                    } font-medium mb-1`}>
-                      Name
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      className={`w-full p-3 border ${
-                        darkMode 
-                          ? 'bg-gray-800/50 border-gray-600 text-gray-200 focus:ring-blue-400' 
-                          : 'border-gray-300 focus:ring-blue-500'
-                      } rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all`}
-                      placeholder="Your name"
-                      disabled={isLoading}
-                    />
-                    {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+                    <div className={`w-10 h-10 rounded-lg flex items-center justify-center ${darkMode ? 'bg-cyan-500/20 text-cyan-400' : 'bg-cyan-100 text-cyan-600'}`}>
+                      <span className="text-xl">{info.icon}</span>
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm font-semibold mb-1">{info.label}</p>
+                      {info.link ? (
+                        <a
+                          href={info.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`text-sm ${theme.muted} hover:${theme.accent} transition-colors break-all`}
+                        >
+                          {info.value}
+                        </a>
+                      ) : (
+                        <p className={`text-sm ${theme.muted}`}>{info.value}</p>
+                      )}
+                    </div>
                   </motion.div>
-
-                  <motion.div variants={itemAnimation(1)}>
-                    <label htmlFor="email" className={`block ${
-                      darkMode ? 'text-gray-300' : 'text-gray-700'
-                    } font-medium mb-1`}>
-                      Email
-                    </label>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      className={`w-full p-3 border ${
-                        darkMode 
-                          ? 'bg-gray-800/50 border-gray-600 text-gray-200 focus:ring-blue-400' 
-                          : 'border-gray-300 focus:ring-blue-500'
-                      } rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all`}
-                      placeholder="your.email@example.com"
-                      disabled={isLoading}
-                    />
-                    {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
-                  </motion.div>
-
-                  <motion.div variants={itemAnimation(2)}>
-                    <label htmlFor="message" className={`block ${
-                      darkMode ? 'text-gray-300' : 'text-gray-700'
-                    } font-medium mb-1`}>
-                      Message
-                    </label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      rows={4}
-                      className={`w-full p-3 border ${
-                        darkMode 
-                          ? 'bg-gray-800/50 border-gray-600 text-gray-200 focus:ring-blue-400' 
-                          : 'border-gray-300 focus:ring-blue-500'
-                      } rounded-lg focus:outline-none focus:ring-2 focus:border-transparent transition-all`}
-                      placeholder="What would you like to discuss?"
-                      disabled={isLoading}
-                    />
-                    {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
-                  </motion.div>
-
-                  {errors.submit && <p className="text-red-500 text-sm mt-1">{errors.submit}</p>}
-
-                  <motion.button
-                    variants={itemAnimation(3)}
-                    whileHover={{ scale: 1.03 }}
-                    whileTap={{ scale: 0.98 }}
-                    className={`w-full ${
-                      darkMode ? 'bg-blue-700 hover:bg-blue-800' : 'bg-blue-600 hover:bg-blue-700'
-                    } text-white p-3 rounded-lg transition-colors font-medium flex items-center justify-center ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
-                    type="submit"
-                    disabled={isLoading}
-                  >
-                    {isLoading ? (
-                      <div className="animate-spin h-5 w-5 border-t-2 border-b-2 border-white rounded-full"></div>
-                    ) : (
-                      <>
-                        <FaPaperPlane className={`${darkMode ? 'text-blue-300' : 'text-white'} mr-2`} />
-                        Send Message
-                      </>
-                    )}
-                  </motion.button>
-                </form>
-              )}
-              </motion.div>
-
-              {/* Social Links with dark mode support */}
-              <motion.div
-                initial="hidden"
-                animate="visible"
-                variants={cardAnimation}
-                className="relative"
-              >
-                <h2 className={`text-2xl font-bold ${
-                  darkMode ? 'text-gray-100' : 'text-gray-800'
-                } mb-8`}>Connect With Me</h2>
-                
-                <div className="space-y-4">
-                  {socialLinks.map((link, index) => (
-                    <motion.a
-                      key={link.name}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      variants={itemAnimation(index)}
-                      whileHover={{ scale: 1.01, x: 2 }}
-                      className={`flex items-center justify-between p-3 rounded-lg transition-colors group relative overflow-hidden ${
-                        darkMode ? 'hover:bg-gray-800/50' : ''
-                      }`}
-                    >
-                      {/* Dynamic background fill on hover */}
-                      <div 
-                        className={`absolute inset-0 w-0 group-hover:w-full ${link.color.replace('bg-', 'bg-')} opacity-10 transition-all duration-300 ease-out`}
-                        style={{ transitionProperty: 'width' }}
-                      ></div>
-                      
-                      <div className="flex items-center relative z-10">
-                        <div className={`${link.color} text-white p-2 rounded-full mr-4 shadow-sm`}>
-                          {link.icon}
-                        </div>
-                        <div>
-                          <span className={`font-medium ${
-                            darkMode ? 'text-gray-200' : 'text-gray-800'
-                          }`}>{link.name}</span>
-                          {link.text && (
-                            <div className={`text-sm ${
-                              darkMode ? 'text-gray-400' : 'text-gray-600'
-                            }`}>{link.text}</div>
-                          )}
-                        </div>
-                      </div>
-                      <FaExternalLinkAlt className={`${
-                        darkMode ? 'text-gray-500 group-hover:text-gray-300' : 'text-gray-400 group-hover:text-gray-600'
-                      } transition-colors ml-2 relative z-10`} />
-                    </motion.a>
-                  ))}
-                </div>
-                
-                <motion.div 
-                  variants={itemAnimation(socialLinks.length)}
-                  className={`mt-8 p-4 ${
-                    darkMode 
-                      ? 'bg-blue-950/30 border-blue-900/60 shadow-inner' 
-                      : 'bg-blue-50 border-blue-100'
-                  } rounded-lg border shadow-sm`}
-                >
-                  <h3 className={`font-semibold ${
-                    darkMode ? 'text-blue-300' : 'text-blue-800'
-                  } mb-2`}>Response Time</h3>
-                  <p className={`${
-                    darkMode ? 'text-blue-300/80' : 'text-blue-700'
-                  } text-sm`}>I typically respond to messages within 2-3 days. For urgent inquiries, please contact me directly via email.</p>
-                </motion.div>
-              </motion.div>
+                ))}
+              </div>
             </div>
-          </>
-        )}
+
+            {/* Objective */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className={`${theme.card} rounded-lg p-6 border ${theme.border} backdrop-blur-sm`}
+            >
+              <h3 className="text-lg font-bold mb-3">Objective</h3>
+              <p className={theme.muted}>
+                Want to succeed in a stimulating and challenging environment that will provide advancement opportunities in the field of cybersecurity and digital forensics.
+              </p>
+            </motion.div>
+
+            {/* Availability */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className={`${theme.card} rounded-lg p-6 border ${theme.border} backdrop-blur-sm`}
+            >
+              <h3 className="text-lg font-bold mb-3">Currently</h3>
+              <p className={theme.muted}>
+                Pursuing Master of Digital Forensic and Information Security (DFIS) - Semester III at Narnarayan Shastri Institute of Technology, Ahmedabad.
+              </p>
+              <p className={`${theme.muted} mt-2`}>
+                Open to internships, collaborations, and cybersecurity research opportunities.
+              </p>
+            </motion.div>
+          </motion.div>
+
+          {/* Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5 }}
+            className={`${theme.card} rounded-lg p-6 border ${theme.border} backdrop-blur-sm`}
+          >
+            <h2 className="text-2xl font-bold mb-6">Send a Message</h2>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Name Input */}
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium mb-2">
+                  Name *
+                </label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  className={`w-full px-4 py-3 rounded-lg border ${theme.input} focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all`}
+                  placeholder="Your name"
+                />
+                {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+              </div>
+
+              {/* Email Input */}
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium mb-2">
+                  Email *
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  className={`w-full px-4 py-3 rounded-lg border ${theme.input} focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all`}
+                  placeholder="your.email@example.com"
+                />
+                {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+              </div>
+
+              {/* Subject Input */}
+              <div>
+                <label htmlFor="subject" className="block text-sm font-medium mb-2">
+                  Subject *
+                </label>
+                <input
+                  type="text"
+                  id="subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  className={`w-full px-4 py-3 rounded-lg border ${theme.input} focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all`}
+                  placeholder="What's this about?"
+                />
+                {errors.subject && <p className="text-red-500 text-xs mt-1">{errors.subject}</p>}
+              </div>
+
+              {/* Message Textarea */}
+              <div>
+                <label htmlFor="message" className="block text-sm font-medium mb-2">
+                  Message *
+                </label>
+                <textarea
+                  id="message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows={6}
+                  className={`w-full px-4 py-3 rounded-lg border ${theme.input} focus:outline-none focus:ring-2 focus:ring-cyan-500 transition-all resize-none`}
+                  placeholder="Your message..."
+                />
+                {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message}</p>}
+              </div>
+
+              {/* Submit Button */}
+              <button
+                type="submit"
+                className={`w-full px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-medium flex items-center justify-center gap-2 hover:from-cyan-500 hover:to-blue-500 transition-all`}
+              >
+                <FaPaperPlane className="text-sm" />
+                <span>Send Message</span>
+              </button>
+            </form>
+          </motion.div>
+        </div>
       </main>
     </div>
   );

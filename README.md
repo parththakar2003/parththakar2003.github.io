@@ -1,9 +1,10 @@
 # Parth Thakar - Cybersecurity Portfolio
 
-A responsive cybersecurity portfolio website built with HTML, CSS, and JavaScript.
+A responsive multi-page cybersecurity portfolio website built with HTML, CSS, and JavaScript.
 
 ## Features
 
+- **Multi-Page Architecture**: Separate pages for Home, About, Resume, Certifications, Portfolio, and Blog
 - **Fully Responsive Design**: Optimized for desktop, tablet, and mobile devices
 - **Dark/Light Theme Toggle**: User preference with localStorage persistence
 - **Interactive Elements**:
@@ -11,13 +12,18 @@ A responsive cybersecurity portfolio website built with HTML, CSS, and JavaScrip
   - Real-time age calculator
   - Music player with audio controls
   - Mobile hamburger menu
-  - Smooth scroll navigation
+  - Smooth navigation between pages
 - **Cybersecurity Focus**: Showcases skills in SOC Operations, DFIR, and Red Team Operations
 
 ## Structure
 
 ```
-├── index.html              # Main HTML file
+├── index.html              # Home page with terminal and profile cards
+├── about.html             # About page with personal information
+├── resume.html            # Resume page with education and experience
+├── certifications.html    # Certifications showcase
+├── portfolio.html         # Projects and portfolio
+├── blog.html              # Blog page (coming soon)
 ├── css/
 │   └── style.css          # Responsive styles with media queries
 ├── js/
@@ -26,6 +32,45 @@ A responsive cybersecurity portfolio website built with HTML, CSS, and JavaScrip
 │   └── ambient-cybersecurity.wav  # Background music
 └── Parth_Thakar_Resume.pdf       # Resume file
 ```
+
+## Pages
+
+### Home (index.html)
+- Terminal-style introduction
+- Profile card with social links
+- Security skills showcase
+- Music player
+- Professional highlights
+- Core competencies
+
+### About (about.html)
+- Personal information and contact details
+- Objective statement
+- Computer skills and tools
+- Professional skills
+- Languages and hobbies
+
+### Resume (resume.html)
+- Education qualification
+- Project work
+- Internship experience
+- Webinars & conferences attended
+- Extra achievements and CTF rankings
+
+### Certifications (certifications.html)
+- 14+ professional certifications
+- Digital forensics credentials
+- Security analyst certificates
+- CTF and simulation completions
+
+### Portfolio (portfolio.html)
+- Major projects (Billing System with QR)
+- Minor projects (Cryptography & Steganography Tool)
+- CTF competition achievements
+
+### Blog (blog.html)
+- Coming soon section
+- Planned topics in cybersecurity and DFIR
 
 ## Responsive Breakpoints
 

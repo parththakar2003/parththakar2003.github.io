@@ -1,9 +1,7 @@
 # Dependencies
 node_modules/
-package-lock.json
 
-# Build artifacts
-dist/
+# Build artifacts - keep dist for GitHub Pages deployment
 build/
 *.min.js
 *.min.css
@@ -29,4 +27,9 @@ npm-debug.log*
 # Environment files
 .env
 .env.local
-index-old.html
+
+# Old site backup
+old-site/
+css/
+js/
+.gitignore-react

@@ -1,0 +1,73 @@
+{
+  "computerSkills": [
+    {
+      "name": "Burp Suite",
+      "category": "Security Testing",
+      "level": "Advanced",
+      "icon": "🔒"
+    },
+    {
+      "name": "Nessus",
+      "category": "Vulnerability Assessment",
+      "level": "Advanced",
+      "icon": "🔍"
+    },
+    {
+      "name": "FTK Imager",
+      "category": "Digital Forensics",
+      "level": "Advanced",
+      "icon": "💾"
+    },
+    {
+      "name": "OS Forensic",
+      "category": "Digital Forensics",
+      "level": "Advanced",
+      "icon": "🖥️"
+    },
+    {
+      "name": "OSINT",
+      "category": "Intelligence Gathering",
+      "level": "Advanced",
+      "icon": "🕵️"
+    },
+    {
+      "name": "Autopsy",
+      "category": "Digital Forensics",
+      "level": "Advanced",
+      "icon": "🔬"
+    }
+  ],
+  "softSkills": [
+    {
+      "name": "Communication",
+      "icon": "💬"
+    },
+    {
+      "name": "Teamwork",
+      "icon": "🤝"
+    },
+    {
+      "name": "Time Management",
+      "icon": "⏰"
+    }
+  ],
+  "languages": [
+    {
+      "name": "English",
+      "proficiency": "Fluent"
+    },
+    {
+      "name": "Hindi",
+      "proficiency": "Native"
+    },
+    {
+      "name": "Gujarati",
+      "proficiency": "Native"
+    }
+  ],
+  "hobbies": [
+    "Skating",
+    "Cricket",
+    "Listening Music"
+  ]
+}

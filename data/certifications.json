@@ -1,0 +1,114 @@
+{
+  "certifications": [
+    {
+      "name": "SysTools Digital Forensic Essentials (SDFE)",
+      "issuer": "SysTools",
+      "date": "",
+      "image": ""
+    },
+    {
+      "name": "SysTools Incident Responses Essentials (SIRE)",
+      "issuer": "SysTools",
+      "date": "",
+      "image": ""
+    },
+    {
+      "name": "Digital Forensics Masterclass: Computer Forensics DFMC + DIFR",
+      "issuer": "Udemy",
+      "date": "",
+      "image": ""
+    },
+    {
+      "name": "Completion of Windows Forensics with Belkasoft",
+      "issuer": "Belkasoft",
+      "date": "",
+      "image": ""
+    },
+    {
+      "name": "Completion OS Forensics Triage Certification (OSFT)",
+      "issuer": "OS Forensics",
+      "date": "",
+      "image": ""
+    },
+    {
+      "name": "Introduction to Digital Forensics",
+      "issuer": "Security Blue Team",
+      "date": "",
+      "image": ""
+    },
+    {
+      "name": "Introduction to OSINT",
+      "issuer": "Security Blue Team",
+      "date": "",
+      "image": ""
+    },
+    {
+      "name": "Student SOC Program Foundation Training",
+      "issuer": "Microsoft",
+      "date": "",
+      "image": ""
+    },
+    {
+      "name": "Security Analyst Certificate",
+      "issuer": "Skill India & Reliance Foundation",
+      "date": "",
+      "image": ""
+    },
+    {
+      "name": "CS50's Introduction to Cybersecurity",
+      "issuer": "Harvard Online",
+      "date": "",
+      "image": ""
+    },
+    {
+      "name": "Cyber Security Analyst Job Simulation",
+      "issuer": "Tata Group",
+      "date": "",
+      "image": ""
+    },
+    {
+      "name": "Cyber Security Job Simulation",
+      "issuer": "Mastercard",
+      "date": "",
+      "image": ""
+    },
+    {
+      "name": "Certified Network Security Practitioner (CNSP)",
+      "issuer": "SecOps",
+      "date": "",
+      "image": ""
+    },
+    {
+      "name": "BelkaGPT: Effective Artificial Intelligence in DFIR",
+      "issuer": "Belkasoft",
+      "date": "",
+      "image": ""
+    }
+  ],
+  "achievements": [
+    {
+      "title": "IIT-Roorkee CTF Competition",
+      "description": "Secured 16th position out of 100 teams in team participation",
+      "date": "",
+      "icon": "🏆"
+    },
+    {
+      "title": "Bugcrowd CTF",
+      "description": "Secured 144th rank in the competition",
+      "date": "",
+      "icon": "🎯"
+    },
+    {
+      "title": "TryHackme Hackfinity Battle CTF",
+      "description": "Participated in CTF hosted by TryHackme",
+      "date": "",
+      "icon": "⚔️"
+    },
+    {
+      "title": "AWS × SANS Capture The Flag",
+      "description": "Secured 200th rank in the competition",
+      "date": "",
+      "icon": "🎖️"
+    }
+  ]
+}

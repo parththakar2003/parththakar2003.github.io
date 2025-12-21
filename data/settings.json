@@ -1,0 +1,12 @@
+{
+  "siteName": "Parth Thakar Portfolio",
+  "siteDescription": "Digital Forensics & Cybersecurity Specialist - Portfolio and Blog",
+  "siteUrl": "https://parththakar2003.github.io",
+  "seoKeywords": "Digital Forensics, Cybersecurity, Information Security, CTF, DFIR, Portfolio",
+  "theme": "cyber",
+  "darkMode": true,
+  "analytics": {
+    "enabled": false,
+    "googleAnalyticsId": ""
+  }
+}

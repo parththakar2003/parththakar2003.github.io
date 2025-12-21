@@ -23,7 +23,7 @@
       // Store the path for redirect handling
       (function() {
         var l = window.location;
-        if (l.search[1] === '/' ) {
+        if (l.search.length > 1 && l.search[1] === '/' ) {
           var decoded = l.search.slice(1).split('&').map(function(s) { 
             return s.replace(/~and~/g, '&')
           }).join('?');

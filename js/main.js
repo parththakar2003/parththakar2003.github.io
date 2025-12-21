@@ -144,6 +144,17 @@ function typewriterEffect() {
 
 // Initialize typewriter when page loads
 function initTypewriter() {
+    const container = document.getElementById('typewriter-container');
+    if (!container) return;
+    
+    // Create code-line divs for each line
+    container.innerHTML = '';
+    codeLines.forEach(() => {
+        const lineDiv = document.createElement('div');
+        lineDiv.className = 'code-line';
+        container.appendChild(lineDiv);
+    });
+    
     // Show cursor initially
     const cursor = document.getElementById('typewriter-cursor');
     if (cursor) {

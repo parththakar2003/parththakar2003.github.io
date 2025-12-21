@@ -29,3 +29,4 @@ npm-debug.log*
 # Environment files
 .env
 .env.local
+index-old.html

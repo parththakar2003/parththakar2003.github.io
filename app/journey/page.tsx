@@ -228,7 +228,7 @@ export default function Journey() {
           <div className={`${theme.card} rounded-lg p-6 sm:p-8 border ${theme.border} backdrop-blur-sm`}>
             <h2 className="text-xl sm:text-2xl font-bold mb-3">Interested in collaboration?</h2>
             <p className={`${theme.muted} mb-6 text-sm sm:text-base`}>
-              I'm always open to discussing cybersecurity projects, forensic investigations, or security research opportunities.
+              I&apos;m always open to discussing cybersecurity projects, forensic investigations, or security research opportunities.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a

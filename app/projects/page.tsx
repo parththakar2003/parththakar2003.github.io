@@ -2,8 +2,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useTheme } from "@/context/ThemeContext";
-import { FaCode, FaLock, FaShieldAlt, FaGithub, FaExternalLinkAlt, FaPython, FaDatabase } from "react-icons/fa";
-import { SiPython } from "react-icons/si";
+import { FaCode, FaLock, FaShieldAlt, FaExternalLinkAlt, FaDatabase } from "react-icons/fa";
 
 export default function Projects() {
   const { darkMode } = useTheme();
@@ -302,7 +301,7 @@ export default function Projects() {
           <div className={`${theme.card} rounded-lg p-6 sm:p-8 border ${theme.border} backdrop-blur-sm`}>
             <h2 className="text-xl sm:text-2xl font-bold mb-3">Interested in my work?</h2>
             <p className={`${theme.muted} mb-6 text-sm sm:text-base`}>
-              Let's discuss collaboration opportunities or cybersecurity projects.
+              Let&apos;s discuss collaboration opportunities or cybersecurity projects.
             </p>
             <a
               href="/contact"

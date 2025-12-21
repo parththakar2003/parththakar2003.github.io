@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useTheme } from "@/context/ThemeContext";
-import { FaShieldAlt, FaPython, FaLinux, FaCertificate, FaTrophy, FaAward, FaChevronRight } from "react-icons/fa";
+import { FaShieldAlt, FaPython, FaCertificate, FaTrophy, FaAward, FaChevronRight } from "react-icons/fa";
 import { SiKalilinux, SiWireshark } from "react-icons/si";
 
 export default function Skills() {
@@ -378,7 +378,7 @@ export default function Skills() {
           <div className={`${theme.card} rounded-lg p-6 sm:p-8 border ${theme.border} backdrop-blur-sm`}>
             <h2 className="text-xl sm:text-2xl font-bold mb-3">Want to collaborate?</h2>
             <p className={`${theme.muted} mb-6 text-sm sm:text-base`}>
-              Let's work together on cybersecurity projects or forensic investigations.
+              Let&apos;s work together on cybersecurity projects or forensic investigations.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a

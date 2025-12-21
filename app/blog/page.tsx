@@ -2,8 +2,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useTheme } from "@/context/ThemeContext";
-import { FaClock, FaTag, FaUser, FaShieldAlt, FaSearch, FaChevronRight } from "react-icons/fa";
-import Image from 'next/image';
+import { FaClock, FaUser, FaShieldAlt, FaSearch, FaChevronRight } from "react-icons/fa";
 
 export default function Blog() {
   const { darkMode } = useTheme();
@@ -154,7 +153,7 @@ export default function Blog() {
     }
   ];
 
-  const getColorClasses = (color: string) => {
+  const getColorClasses = () => {
     return darkMode 
       ? 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30' 
       : 'bg-cyan-100 text-cyan-700 border-cyan-300';
@@ -205,7 +204,7 @@ export default function Blog() {
                       <span className="px-3 py-1 rounded-full bg-gradient-to-r from-cyan-600 to-blue-600 text-white text-xs font-semibold">
                         Featured Post
                       </span>
-                      <span className={`px-3 py-1 rounded-full text-xs ${getColorClasses('blue')}`}>
+                      <span className={`px-3 py-1 rounded-full text-xs ${getColorClasses()}`}>
                         {post.category}
                       </span>
                     </div>
@@ -268,7 +267,7 @@ export default function Blog() {
                   </button>
                   
                   <div className="flex flex-wrap gap-2 mb-4">
-                    <span className={`px-3 py-1 rounded-full text-xs ${getColorClasses('blue')}`}>
+                    <span className={`px-3 py-1 rounded-full text-xs ${getColorClasses()}`}>
                       {post.category}
                     </span>
                     {post.tags.map((tag, index) => (

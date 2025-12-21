@@ -2,8 +2,8 @@
 import { motion } from "framer-motion";
 import { useState, useEffect, useMemo, useRef } from "react";
 import { useTheme } from "@/context/ThemeContext";
-import { FaArrowRight, FaGithub, FaLinkedin, FaCode, FaServer, FaDatabase, FaDiscord, FaShieldAlt } from "react-icons/fa";
-import { SiReact, SiNextdotjs, SiNodedotjs, SiTypescript, SiJavascript, SiPython, SiKalilinux, SiWireshark } from "react-icons/si";
+import { FaArrowRight, FaGithub, FaCode, FaServer, FaDatabase, FaShieldAlt } from "react-icons/fa";
+import { SiReact, SiNextdotjs, SiTypescript, SiJavascript, SiPython, SiKalilinux, SiWireshark } from "react-icons/si";
 import { LuBraces } from "react-icons/lu";
 import { TbTerminal2 } from "react-icons/tb";
 import { FiVolume2, FiVolumeX, FiPlay, FiPause } from 'react-icons/fi';

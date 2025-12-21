@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { FaLinkedin, FaGithub, FaEnvelope, FaDiscord, FaYoutube } from "react-icons/fa";
+import { FaGithub, FaEnvelope } from "react-icons/fa";
 import { useTheme } from "@/context/ThemeContext";
 
 export default function Footer() {

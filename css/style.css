@@ -64,6 +64,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1rem;
 }
 
 .logo {
@@ -679,16 +680,6 @@ footer {
     color: #000;
     transform: rotate(180deg);
     box-shadow: 0 0 20px rgba(255, 0, 85, 0.5);
-}
-
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
 }
 
 .nav-right {

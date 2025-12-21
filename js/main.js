@@ -255,7 +255,7 @@ if (contactForm) {
 
 // Resume Download Functionality
 function downloadResume() {
-    // Option 1: Use browser's print-to-PDF functionality
+    // Use browser's print-to-PDF functionality
     window.print();
     
     // Note: To link to an actual PDF file, create a PDF of your resume

@@ -2,15 +2,387 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Parth Thakar - Cybersecurity Professional specializing in SOC, DFIR, Red Team, Blue Team, and CTF competitions" />
     <meta name="keywords" content="cybersecurity, SOC, DFIR, red team, blue team, CTF, security analyst" />
     <meta name="author" content="Parth Thakar" />
     <title>Parth Thakar - Cybersecurity Professional</title>
+    <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+    <!-- Navigation -->
+    <nav>
+      <div class="nav-container">
+        <a href="index.html" class="logo">Parth Thakar</a>
+        <div class="menu-toggle" id="menuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="nav-right">
+          <ul class="nav-menu">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#resume">Resume</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="#portfolio">Portfolio</a></li>
+            <li><a href="#blog">Blog</a></li>
+          </ul>
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+            <span id="themeIcon">☀️</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+      <h3 class="status-line">
+        <span class="status-dot"></span>
+        Parth Thakar - Cybersecurity Portfolio
+      </h3>
+
+      <!-- Terminal Header Section -->
+      <div class="terminal-section">
+        <div class="terminal-header">
+          <div class="terminal-buttons">
+            <span class="terminal-btn red"></span>
+            <span class="terminal-btn yellow"></span>
+            <span class="terminal-btn green"></span>
+          </div>
+          <div class="terminal-title">terminal@parth-security</div>
+        </div>
+        <div class="terminal-body">
+          <div class="terminal-line">
+            <span class="prompt">$</span>
+            <span class="command">cat welcome.txt</span>
+          </div>
+          <div class="terminal-output">
+            <p>👋 Hello! I'm <span class="highlight-name">Parth Mehulkumar Thakar</span>, a Cybersecurity Student from Ahmedabad, India</p>
+            <p>Securing digital assets with expertise in DFIR, SOC Operations, and Penetration Testing.</p>
+          </div>
+
+          <div class="terminal-line">
+            <span class="prompt">$</span>
+            <span class="command">python3 about_me.py</span>
+          </div>
+          <div class="terminal-code">
+            <div id="typewriter-container"></div>
+            <div id="typewriter-cursor" class="cursor-blink">|</div>
+            <div id="completion-msg" class="completion-msg" style="display: none;">
+              ✓ Security expert profile initialized successfully
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid Container for Cards -->
+      <div class="cards-container">
+        <!-- Left Column -->
+        <div class="left-column">
+          <!-- Profile Card -->
+          <div class="card profile-card">
+            <div class="glow-effect glow-top-left"></div>
+            <div class="glow-effect glow-bottom-right"></div>
+            
+            <div class="profile-header">
+              <div class="profile-image-wrapper">
+                <div class="profile-image">
+                  <div class="profile-placeholder">PT</div>
+                </div>
+                <div class="status-badge">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
+                  </svg>
+                </div>
+              </div>
+              <div class="profile-info">
+                <h2>Parth Thakar</h2>
+                <p class="role-title">Cybersecurity Student</p>
+                <div class="social-links">
+                  <a href="https://github.com/parththakar2003" target="_blank" rel="noopener noreferrer" aria-label="GitHub" class="social-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33c.85 0 1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
+                    </svg>
+                  </a>
+                  <a href="https://www.linkedin.com/in/parthmehulkumarthakar/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" class="social-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                    </svg>
+                  </a>
+                  <a href="mailto:parththakar39@gmail.com" aria-label="Email" class="social-icon">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                    </svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <div class="profile-stats">
+              <div class="stat-item">
+                <div class="stat-value" id="years-value">21</div>
+                <div class="stat-label">Years</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-value" id="days-value">0</div>
+                <div class="stat-label">Days</div>
+              </div>
+            </div>
+            <div class="execution-time">
+              Execution time: <span id="current-time">00:00:00</span>
+            </div>
+          </div>
+
+          <!-- Skills Card -->
+          <div class="card skills-card">
+            <div class="card-header">
+              <svg class="card-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"/>
+              </svg>
+              <h3>Security Arsenal</h3>
+            </div>
+            <div class="skills-grid">
+              <div class="skill-item">
+                <div class="skill-icon" style="color: #00d9ff;">🛡️</div>
+                <div class="skill-name">SIEM</div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-icon" style="color: #ff0055;">🔍</div>
+                <div class="skill-name">DFIR</div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-icon" style="color: #00ff88;">⚔️</div>
+                <div class="skill-name">Pentesting</div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-icon" style="color: #ffbd2e;">🔐</div>
+                <div class="skill-name">Volatility</div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-icon" style="color: #9b59b6;">📊</div>
+                <div class="skill-name">Wireshark</div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-icon" style="color: #e74c3c;">💻</div>
+                <div class="skill-name">Python</div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-icon" style="color: #3498db;">🐧</div>
+                <div class="skill-name">Linux</div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-icon" style="color: #00d9ff;">🔧</div>
+                <div class="skill-name">IDS/IPS</div>
+              </div>
+              <div class="skill-item">
+                <div class="skill-icon" style="color: #ff0055;">🎯</div>
+                <div class="skill-name">CTF</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Music Player Card -->
+          <div class="card music-player-card">
+            <div class="music-player-glow glow-top"></div>
+            <div class="music-player-glow glow-bottom"></div>
+            
+            <!-- Sound wave visualizer (decorative) -->
+            <div class="sound-wave-container">
+              <div class="sound-wave-bar"></div>
+              <div class="sound-wave-bar"></div>
+              <div class="sound-wave-bar"></div>
+              <div class="sound-wave-bar"></div>
+              <div class="sound-wave-bar"></div>
+              <div class="sound-wave-bar"></div>
+              <div class="sound-wave-bar"></div>
+              <div class="sound-wave-bar"></div>
+            </div>
+
+            <div class="music-player-content">
+              <div class="music-info">
+                <div class="music-icon-wrapper">
+                  <div class="music-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M9 18V5l12-2v13M9 13l12-2"/>
+                      <circle cx="6" cy="18" r="3"/>
+                      <circle cx="18" cy="16" r="3"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="music-details">
+                  <h3>Cybersecurity Ambient</h3>
+                  <p>Background Music</p>
+                </div>
+                <div class="music-status" id="musicStatus">PAUSED</div>
+              </div>
+
+              <!-- Progress bar -->
+              <div class="music-progress-section">
+                <div class="music-progress-bar" id="musicProgressBar">
+                  <div class="music-progress-fill" id="musicProgressFill"></div>
+                  <div class="music-progress-hover"></div>
+                </div>
+                <div class="music-time">
+                  <span id="musicCurrentTime">0:00</span>
+                  <span id="musicDuration">0:00</span>
+                </div>
+              </div>
+
+              <!-- Controls -->
+              <div class="music-controls">
+                <button class="music-control-btn" id="musicSkipBack" title="Skip back 10s">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M11 18V6l-8.5 6 8.5 6zm.5-6l8.5 6V6l-8.5 6z"/>
+                  </svg>
+                </button>
+                
+                <button class="music-play-btn" id="musicPlayBtn" title="Play/Pause">
+                  <svg id="playIcon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5v14l11-7z"/>
+                  </svg>
+                  <svg id="pauseIcon" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                    <path d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"/>
+                  </svg>
+                </button>
+                
+                <button class="music-control-btn" id="musicSkipForward" title="Skip forward 10s">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M4 18l8.5-6L4 6v12zm9-12v12l8.5-6L13 6z"/>
+                  </svg>
+                </button>
+              </div>
+
+              <!-- Volume control -->
+              <div class="music-volume">
+                <button class="music-volume-btn" id="musicVolumeBtn" title="Toggle volume">
+                  <svg id="volumeOnIcon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/>
+                  </svg>
+                  <svg id="volumeOffIcon" viewBox="0 0 24 24" fill="currentColor" style="display: none;">
+                    <path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/>
+                  </svg>
+                </button>
+                
+                <div class="music-volume-slider-wrapper" id="volumeSliderWrapper">
+                  <input type="range" min="0" max="100" value="25" class="music-volume-slider" id="musicVolumeSlider" />
+                  <span class="music-volume-value" id="musicVolumeValue">25%</span>
+                </div>
+                
+                <div class="music-quality">WAV · 44.1kHz</div>
+              </div>
+            </div>
+
+            <!-- Hidden audio element -->
+            <audio id="musicPlayer" loop>
+              <source src="audio/ambient-cybersecurity.wav" type="audio/wav" />
+              Your browser does not support the audio element.
+            </audio>
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="right-column">
+          <!-- Quick Stats -->
+          <div class="card stats-card">
+            <h3 class="stats-title">// Professional Highlights</h3>
+            <div class="highlights-grid">
+              <div class="highlight-item">
+                <div class="highlight-icon">⚡</div>
+                <div class="highlight-value">5+</div>
+                <div class="highlight-label">Internships</div>
+                <p>Cyber Security & DFIR</p>
+              </div>
+              <div class="highlight-item">
+                <div class="highlight-icon">🎯</div>
+                <div class="highlight-value">15+</div>
+                <div class="highlight-label">Certifications</div>
+                <p>Professional credentials</p>
+              </div>
+              <div class="highlight-item">
+                <div class="highlight-icon">🏅</div>
+                <div class="highlight-value">16th</div>
+                <div class="highlight-label">CTF Rank</div>
+                <p>IIT Roorkee CTF (Team)</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Key Expertise -->
+          <div class="card expertise-card">
+            <h3 class="expertise-title">// Core Competencies</h3>
+            <div class="expertise-list">
+              <div class="expertise-item">
+                <div class="expertise-icon">🛡️</div>
+                <div class="expertise-content">
+                  <h4>SOC Operations</h4>
+                  <p>Security monitoring, incident detection, SIEM platforms</p>
+                  <div class="expertise-tags">
+                    <span>Splunk</span>
+                    <span>QRadar</span>
+                    <span>ELK</span>
+                  </div>
+                </div>
+              </div>
+              <div class="expertise-item">
+                <div class="expertise-icon">🔍</div>
+                <div class="expertise-content">
+                  <h4>Digital Forensics</h4>
+                  <p>Investigation, malware analysis, evidence collection</p>
+                  <div class="expertise-tags">
+                    <span>Volatility</span>
+                    <span>Autopsy</span>
+                    <span>FTK</span>
+                  </div>
+                </div>
+              </div>
+              <div class="expertise-item">
+                <div class="expertise-icon">⚔️</div>
+                <div class="expertise-content">
+                  <h4>Red Team Operations</h4>
+                  <p>Penetration testing, exploitation, adversary emulation</p>
+                  <div class="expertise-tags">
+                    <span>Metasploit</span>
+                    <span>Burp Suite</span>
+                    <span>PowerShell</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- CTA Card -->
+          <div class="card cta-card">
+            <h3>Ready to Collaborate?</h3>
+            <p>Let's discuss how we can work together on security projects and initiatives.</p>
+            <div class="cta-buttons">
+              <a href="#portfolio" class="btn btn-primary">
+                <span>View Portfolio</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </a>
+              <a href="#resume" class="btn btn-secondary">
+                <span>View Resume</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-content">
+        <p>&copy; 2024 Parth Thakar. All rights reserved. Built with HTML, CSS, and JavaScript.</p>
+        <div class="footer-links">
+          <a href="#about">About</a>
+          <a href="#certifications">Certifications</a>
+          <a href="#blog">Blog</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="js/main.js"></script>
   </body>
 </html>

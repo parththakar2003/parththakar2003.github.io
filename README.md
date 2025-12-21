@@ -1,16 +1,61 @@
-# React + Vite
+# Parth Thakar - Cybersecurity Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A responsive cybersecurity portfolio website built with HTML, CSS, and JavaScript.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Fully Responsive Design**: Optimized for desktop, tablet, and mobile devices
+- **Dark/Light Theme Toggle**: User preference with localStorage persistence
+- **Interactive Elements**:
+  - Terminal-style welcome section with typewriter animation
+  - Real-time age calculator
+  - Music player with audio controls
+  - Mobile hamburger menu
+  - Smooth scroll navigation
+- **Cybersecurity Focus**: Showcases skills in SOC Operations, DFIR, and Red Team Operations
 
-## React Compiler
+## Structure
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```
+├── index.html              # Main HTML file
+├── css/
+│   └── style.css          # Responsive styles with media queries
+├── js/
+│   └── main.js            # Interactive functionality
+├── audio/
+│   └── ambient-cybersecurity.wav  # Background music
+└── Parth_Thakar_Resume.pdf       # Resume file
+```
 
-## Expanding the ESLint configuration
+## Responsive Breakpoints
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Mobile**: 375px - 767px
+- **Tablet**: 768px - 1024px
+- **Desktop**: 1025px and above
+
+## Deployment
+
+The site is deployed via GitHub Pages using GitHub Actions. On push to the main branch, the site is automatically deployed.
+
+## Local Development
+
+Simply open `index.html` in a web browser, or use a local server:
+
+```bash
+python -m http.server 8000
+# or
+npx http-server
+```
+
+Then navigate to `http://localhost:8000`
+
+## Technologies
+
+- HTML5
+- CSS3 (with CSS Variables and Flexbox/Grid)
+- Vanilla JavaScript (ES6+)
+- No frameworks or build tools required
+
+## License
+
+© 2024 Parth Thakar. All rights reserved.

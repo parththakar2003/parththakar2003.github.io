@@ -1,11 +1,9 @@
 # Dependencies
 node_modules/
 
-# Build artifacts
-build/
-dist/
-*.min.js
-*.min.css
+# Build artifacts (not needed for plain HTML/CSS/JS)
+# build/
+# dist/
 
 # OS files
 .DS_Store
@@ -28,9 +26,3 @@ npm-debug.log*
 # Environment files
 .env
 .env.local
-
-# Old site backup
-old-site/
-css/
-js/
-.gitignore-react

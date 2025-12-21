@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecting...</title>
+  <script>
+    // GitHub Pages SPA redirect solution
+    // This script captures the current path and redirects to index.html
+    // with the path stored in the query string, which will be handled by
+    // the React app
+    (function() {
+      var pathSegmentsToKeep = 0;
+      var l = window.location;
+      var repo = l.pathname.split('/')[1];
+      
+      // For user/org GitHub Pages sites (e.g., username.github.io),
+      // we don't need to keep any path segments
+      // For project pages, we would need to keep the repo name
+      l.replace(
+        l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+        l.pathname.split('/').slice(0, 1 + pathSegmentsToKeep).join('/') + 
+        '/?/' + 
+        l.pathname.slice(1).split('/').slice(pathSegmentsToKeep).join('/').replace(/&/g, '~and~') +
+        (l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '') +
+        l.hash
+      );
+    })();
+  </script>
+</head>
+<body>
+  <noscript>
+    <p>This site requires JavaScript to be enabled. Please enable JavaScript in your browser settings.</p>
+  </noscript>
+</body>
+</html>

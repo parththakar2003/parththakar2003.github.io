@@ -121,8 +121,8 @@ npx http-server
 ## 📞 Contact Information
 
 - **Email**: Parththakar39@gmail.com
-- **Phone**: +91 9313525322
 - **Location**: Ahmedabad, Gujarat, India
+- **LinkedIn**: [linkedin.com/in/parthmehulkumarthakar](https://www.linkedin.com/in/parthmehulkumarthakar/)
 - **GitHub**: [github.com/parththakar2003](https://github.com/parththakar2003)
 
 ## 🏆 Achievements

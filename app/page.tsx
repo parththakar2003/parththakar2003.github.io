@@ -169,7 +169,7 @@ export default function Home() {
       audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
       document.removeEventListener('touchstart', unlockAudio);
     };
-  }, []);
+  }, [isPlaying]);
 
   // Add a separate effect to ensure the duration is retrieved on component mount
   useEffect(() => {

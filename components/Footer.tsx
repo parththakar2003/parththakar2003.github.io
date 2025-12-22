@@ -81,8 +81,7 @@ export default function Footer() {
                 <a
                   key={link.name}
                   href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  {...(link.url.startsWith('mailto:') ? {} : { target: "_blank", rel: "noopener noreferrer" })}
                   className={`${
                     darkMode ? 'text-gray-400 hover:text-white' : 'text-gray-300 hover:text-white'
                   } transition-colors`}

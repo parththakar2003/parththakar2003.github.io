@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect, useMemo, useRef } from "react";
 import { useTheme } from "@/context/ThemeContext";
-import { FaArrowRight, FaGithub, FaCode, FaServer, FaDatabase, FaShieldAlt } from "react-icons/fa";
+import { FaArrowRight, FaGithub, FaLinkedin, FaEnvelope, FaCode, FaServer, FaDatabase, FaShieldAlt } from "react-icons/fa";
 import { SiReact, SiNextdotjs, SiTypescript, SiJavascript, SiPython, SiKalilinux, SiWireshark } from "react-icons/si";
 import { LuBraces } from "react-icons/lu";
 import { TbTerminal2 } from "react-icons/tb";
@@ -405,13 +405,20 @@ export default function Home() {
                         <FaGithub />
                       </a>
                       <a
-                        href="mailto:Parththakar39@gmail.com"
+                        href="https://www.linkedin.com/in/parthmehulkumarthakar/"
                         target="_blank"
                         rel="noopener noreferrer"
                         className={`p-1.5 rounded text-sm ${darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-200 hover:bg-gray-300'} transition-colors`}
+                        aria-label="LinkedIn Profile"
+                      >
+                        <FaLinkedin />
+                      </a>
+                      <a
+                        href="mailto:Parththakar39@gmail.com"
+                        className={`p-1.5 rounded text-sm ${darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-200 hover:bg-gray-300'} transition-colors`}
                         aria-label="Email"
                       >
-                        📧
+                        <FaEnvelope />
                       </a>
                     </div>
                   </div>

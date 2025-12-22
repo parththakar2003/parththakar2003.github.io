@@ -98,8 +98,10 @@ export default function Contact() {
     const mailtoLink = `mailto:Parththakar39@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
     window.location.href = mailtoLink;
     
-    // Reset form
-    setFormData({ name: "", email: "", subject: "", message: "" });
+    // Reset form after a short delay to ensure email client opens
+    setTimeout(() => {
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    }, 100);
   };
 
   if (!isLoaded) {

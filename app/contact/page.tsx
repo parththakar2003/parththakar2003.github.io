@@ -81,6 +81,10 @@ export default function Contact() {
   };
 
   // Handle form submission
+  // NOTE: Contact form data is NOT stored anywhere. When submitted, it opens the user's
+  // default email client (mailto link) with pre-filled recipient, subject, and message.
+  // The data only goes to the recipient (Parththakar39@gmail.com) when the user sends the email.
+  // No backend server or database is involved - this is a client-side only form.
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const validationErrors = validateForm();
@@ -90,7 +94,7 @@ export default function Contact() {
       return;
     }
 
-    // For now, open email client
+    // Open email client with pre-filled data - no data is sent to any server
     const mailtoLink = `mailto:Parththakar39@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
     window.location.href = mailtoLink;
     

@@ -431,6 +431,26 @@ export default function Home() {
                   <p className={`text-xs ${theme.muted} text-center mt-2`}>
                     Execution time: {new Date().toLocaleTimeString()}
                   </p>
+                  
+                  {/* TryHackMe Badge */}
+                  <div className="mt-4 pt-4 border-t border-dashed border-gray-600 flex justify-center">
+                    <a
+                      href="https://tryhackme.com/p/parth2003"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:opacity-80 transition-opacity"
+                      aria-label="TryHackMe Profile"
+                    >
+                      <iframe 
+                        src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=4110160" 
+                        style={{ border: 'none' }}
+                        className="w-full max-w-[280px] h-[60px]"
+                        title="TryHackMe Badge"
+                        loading="lazy"
+                        sandbox="allow-scripts allow-same-origin"
+                      />
+                    </a>
+                  </div>
                 </div>
               </section>
 

@@ -24,6 +24,7 @@ export default function Home() {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isVolumeVisible, setIsVolumeVisible] = useState(false);
+  const [showProfileModal, setShowProfileModal] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const progressRef = useRef<HTMLDivElement | null>(null);
 
@@ -374,7 +375,14 @@ export default function Home() {
 
                 <div className="flex items-center gap-4 relative z-10">
                   <div className="relative">
-                    <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full border-2 border-cyan-500 bg-gradient-to-br from-cyan-500 to-indigo-500 flex items-center justify-center">
+                    <div 
+                      className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full border-2 border-cyan-500 bg-gradient-to-br from-cyan-500 to-indigo-500 flex items-center justify-center cursor-pointer hover:scale-105 transition-transform" 
+                      onClick={() => setShowProfileModal(true)}
+                      onKeyDown={(e) => e.key === 'Enter' && setShowProfileModal(true)}
+                      role="button"
+                      tabIndex={0}
+                      aria-label="View profile picture"
+                    >
                       <FaShieldAlt className="text-2xl sm:text-3xl md:text-4xl text-white" />
                     </div>
                     <div className="absolute -bottom-1 -right-1 w-5 h-5 md:w-6 md:h-6 rounded-full bg-green-500 border-2 border-white flex items-center justify-center">
@@ -869,6 +877,48 @@ export default function Home() {
           </div>
         </motion.div>
       </main>
+
+      {/* Profile Picture Modal */}
+      {showProfileModal && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+          onClick={() => setShowProfileModal(false)}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="profile-modal-title"
+        >
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            transition={{ type: "spring", damping: 25 }}
+            className={`relative max-w-md w-full rounded-xl overflow-hidden shadow-2xl ${darkMode ? 'bg-gray-800' : 'bg-white'}`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="relative">
+              <div className="w-full h-96 bg-gradient-to-br from-cyan-500 to-indigo-500 flex items-center justify-center">
+                <FaShieldAlt className="text-9xl text-white opacity-90" />
+              </div>
+              <button
+                className="absolute top-3 right-3 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+                onClick={() => setShowProfileModal(false)}
+                aria-label="Close profile modal"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clipRule="evenodd" />
+                </svg>
+              </button>
+            </div>
+            <div className={`px-4 py-3 ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-800'}`}>
+              <h3 id="profile-modal-title" className="font-bold text-lg">Parth Thakar</h3>
+              <p className={`text-sm ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>Cybersecurity Professional & Digital Forensics Specialist</p>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
     </div>
   );
 }

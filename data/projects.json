@@ -18,9 +18,10 @@
       "type": "Minor Project",
       "technologies": ["Python", "Cryptography", "Steganography"],
       "image": "/assets/images/projects/crypto-tool.jpg",
-      "github": "",
+      "github": "https://github.com/parththakar2003/Secure-CipherStegno-Tool",
       "demo": "",
-      "featured": true
+      "featured": true,
+      "completionDate": "2025"
     }
   ]
 }

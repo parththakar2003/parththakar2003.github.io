@@ -415,8 +415,6 @@ export default function Home() {
                       </a>
                       <a
                         href="mailto:Parththakar39@gmail.com"
-                        target="_blank"
-                        rel="noopener noreferrer"
                         className={`p-1.5 rounded text-sm ${darkMode ? 'bg-gray-700 hover:bg-gray-600' : 'bg-gray-200 hover:bg-gray-300'} transition-colors`}
                         aria-label="Email"
                       >

@@ -433,21 +433,25 @@ export default function Home() {
                   </p>
                   
                   {/* TryHackMe Badge */}
-                  <div className="mt-4 pt-4 border-t border-dashed border-gray-600 flex justify-center">
+                  <div className="mt-4 pt-4 border-t border-dashed border-cyan-500/40 flex justify-center">
                     <a
                       href="https://tryhackme.com/p/parth2003"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="hover:opacity-80 transition-opacity"
                       aria-label="TryHackMe Profile"
+                      className="hover:opacity-90 transition-opacity"
                     >
-                      <iframe 
-                        src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=4110160" 
-                        style={{ border: 'none' }}
-                        className="w-full max-w-[280px] h-[60px]"
+                      <iframe
+                        src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=4110160"
                         title="TryHackMe Badge"
                         loading="lazy"
                         sandbox="allow-scripts allow-same-origin"
+                        style={{
+                          width: '300px',
+                          height: '70px',
+                          border: 'none',
+                          overflow: 'hidden',
+                        }}
                       />
                     </a>
                   </div>

@@ -58,7 +58,7 @@ export default function Projects() {
       icon: <FaLock />,
       color: "purple",
       status: "Completed",
-      year: "2023"
+      year: "2025"
     }
   ];
 

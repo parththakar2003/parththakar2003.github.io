@@ -453,6 +453,7 @@ export default function Home() {
                         src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=4110160"
                         title="TryHackMe Badge"
                         loading="lazy"
+                        scrolling="no"
                         sandbox="allow-scripts allow-same-origin"
                         style={{
                           width: '300px',

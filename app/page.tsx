@@ -446,6 +446,8 @@ export default function Home() {
                         style={{ border: 'none' }}
                         className="w-full max-w-[280px] h-[60px]"
                         title="TryHackMe Badge"
+                        loading="lazy"
+                        sandbox="allow-scripts allow-same-origin"
                       />
                     </a>
                   </div>

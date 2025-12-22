@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useTheme } from "@/context/ThemeContext";
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaGithub, FaPaperPlane } from "react-icons/fa";
+import { FaEnvelope, FaLinkedin, FaGithub, FaPaperPlane } from "react-icons/fa";
 
 export default function Contact() {
   const { darkMode } = useTheme();
@@ -42,16 +42,10 @@ export default function Contact() {
       link: "mailto:Parththakar39@gmail.com"
     },
     {
-      icon: <FaPhone />,
-      label: "Phone",
-      value: "+91 9313525322",
-      link: "tel:+919313525322"
-    },
-    {
-      icon: <FaMapMarkerAlt />,
-      label: "Address",
-      value: "D-903, Vir Savarkar Heights-1, Vasant Nagar, Gota-Ognaj Road, Ahmedabad - 380060, Gujarat, India",
-      link: null
+      icon: <FaLinkedin />,
+      label: "LinkedIn",
+      value: "linkedin.com/in/parthmehulkumarthakar",
+      link: "https://www.linkedin.com/in/parthmehulkumarthakar/"
     },
     {
       icon: <FaGithub />,

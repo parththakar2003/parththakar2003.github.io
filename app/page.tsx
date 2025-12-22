@@ -633,7 +633,7 @@ export default function Home() {
                       description: "Security tool for encryption and data hiding using Python.",
                       tags: ["Python", "Cryptography", "Steganography", "Security"],
                       status: "Completed",
-                      link: "#"
+                      link: "https://github.com/parththakar2003/Secure-CipherStegno-Tool"
                     }
                   ].map((project, i) => (
                     <a

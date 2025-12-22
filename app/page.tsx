@@ -441,6 +441,14 @@ export default function Home() {
                       aria-label="TryHackMe Profile"
                       className="hover:opacity-90 transition-opacity"
                     >
+                       {/* 🔥 WRAPPER (this is the missing part) */}
+                        <div
+                         style={{
+                          width: '260px',
+                          height: '60px',
+                          overflow: 'hidden',
+                        }}
+                     >
                       <iframe
                         src="https://tryhackme.com/api/v2/badges/public-profile?userPublicId=4110160"
                         title="TryHackMe Badge"
@@ -451,8 +459,11 @@ export default function Home() {
                           height: '70px',
                           border: 'none',
                           overflow: 'hidden',
+                          transform: 'scale(0.85)',
+                          transformOrigin: 'top left',
                         }}
                       />
+                    </div>
                     </a>
                   </div>
                 </div>

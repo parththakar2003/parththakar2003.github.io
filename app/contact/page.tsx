@@ -96,12 +96,9 @@ export default function Contact() {
 
     // Open email client with pre-filled data - no data is sent to any server
     const mailtoLink = `mailto:Parththakar39@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
+    window.location.href = mailtoLink;
     
-    // Use window.open to avoid page navigation issues
-    window.open(mailtoLink, '_self');
-    
-    // Reset form only if the mailto link was processed
-    // Small delay to ensure the email client has time to open
+    // Reset form after a short delay to ensure email client opens
     setTimeout(() => {
       setFormData({ name: "", email: "", subject: "", message: "" });
     }, 100);

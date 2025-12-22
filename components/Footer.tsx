@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { FaGithub, FaEnvelope } from "react-icons/fa";
+import { FaGithub, FaEnvelope, FaLinkedin } from "react-icons/fa";
 import { useTheme } from "@/context/ThemeContext";
 
 export default function Footer() {
@@ -14,6 +14,7 @@ export default function Footer() {
 
   const socialLinks = [
     { name: "GitHub", url: "https://github.com/parththakar2003", icon: <FaGithub /> },
+    { name: "LinkedIn", url: "https://www.linkedin.com/in/parthmehulkumarthakar/", icon: <FaLinkedin /> },
     { name: "Gmail", url: "mailto:Parththakar39@gmail.com", icon: <FaEnvelope /> },
   ];
 
@@ -37,7 +38,7 @@ export default function Footer() {
               <h3 className="text-lg font-semibold mb-3">Connect With Me</h3>
               <div className="flex space-x-4">
                 {/* Empty placeholder space for icons */}
-                <div className="h-[1.25rem] w-28"></div>
+                <div className="h-[1.25rem] w-40"></div>
               </div>
             </div>
           </div>

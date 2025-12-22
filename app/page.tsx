@@ -32,8 +32,8 @@ export default function Home() {
     "class <span class='text-purple-400'>CybersecurityProfessional</span> {",
     "  <span class='text-blue-400'>constructor</span>() {",
     "    this.<span class='text-green-400'>name</span> = <span class='text-yellow-400'>'Parth Thakar'</span>;",
-    "    this.<span class='text-green-400'>role</span> = <span class='text-yellow-400'>'Digital Forensics & InfoSec Specialist'</span>;",
-    "    this.<span class='text-green-400'>specializations</span> = [<span class='text-yellow-400'>'SOC Operations'</span>, <span class='text-yellow-400'>'DFIR'</span>, <span class='text-yellow-400'>'CTF Competitions'</span>, <span class='text-yellow-400'>'Incident Response'</span>, <span class='text-yellow-400'>'Digital Forensics'</span>];",
+    "    this.<span class='text-green-400'>role</span> = <span class='text-yellow-400'>'Digital Forensics & InfoSec Specialist | VAPT | Red Teaming'</span>;",
+    "    this.<span class='text-green-400'>specializations</span> = [<span class='text-yellow-400'>'SOC Operations'</span>, <span class='text-yellow-400'>'DFIR'</span>, <span class='text-yellow-400'>'CTF Competitions'</span>, <span class='text-yellow-400'>'Incident Response'</span>, <span class='text-yellow-400'>'Digital Forensics'</span>, <span class='text-yellow-400'>'VAPT'</span>, <span class='text-yellow-400'>'Red Teaming'</span>];",
     "  }",
     "}",
   ], []);
@@ -689,7 +689,11 @@ export default function Home() {
                       <br />
                       &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-orange-300">&apos;SOC Operations&apos;</span>,
                       <br />
-                      &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-orange-300">&apos;Threat Intelligence&apos;</span>
+                      &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-orange-300">&apos;Threat Intelligence&apos;</span>,
+                      <br />
+                      &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-orange-300">&apos;VAPT&apos;</span>,
+                      <br />
+                      &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-orange-300">&apos;Red Teaming&apos;</span>
                       <br />
                       &nbsp;&nbsp;];
                       <br />

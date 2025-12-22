@@ -40,7 +40,7 @@ export default function Journey() {
       subtitle: "April-June 2024",
       icon: <FaGraduationCap />,
       color: "purple",
-      content: "Graduated with B.Sc. IT from Ganpat University, Ahmedabad with 7.20 CGPA. Developed strong foundation in IT concepts and programming. Completed major project on 'Advanced Billing System with QR using Full Stack with Python' and minor project on 'Cryptography & Steganography Tool Using Python'.",
+      content: "Graduated with B.Sc. IT from Ganpat University, Ahmedabad with 7.20 CGPA. Developed strong foundation in IT concepts and programming.",
       achievement: "Graduated with 7.20 CGPA",
       featured: true
     },
@@ -106,7 +106,7 @@ export default function Journey() {
       subtitle: "Pursuing Semester III - 2024-25",
       icon: <FaGraduationCap />,
       color: "blue",
-      content: "Currently pursuing Master of Digital Forensic and Information Security (DFIS) at Narnarayan Shastri Institute of Technology, Jetalpur, Ahmedabad (affiliated with NSFU National Forensic Science University, Gandhinagar). Deepening expertise in forensic analysis, incident response, and information security.",
+      content: "Currently pursuing Master of Digital Forensic and Information Security (DFIS) at Narnarayan Shastri Institute of Technology, Jetalpur, Ahmedabad (affiliated with NSFU National Forensic Science University, Gandhinagar). Deepening expertise in forensic analysis, incident response, and information security. Completed major project on 'Advanced Billing System with QR using Full Stack with Python' and minor project on 'Cryptography & Steganography Tool Using Python'.",
       achievement: "Advanced forensics education in progress",
       featured: true
     },

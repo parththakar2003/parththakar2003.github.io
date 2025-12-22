@@ -1,17 +1,12 @@
 {
   "name": "Parth Thakar",
-  "title": "Digital Forensics & Cybersecurity Specialist",
+  "title": "Digital Forensics & Cybersecurity Specialist | VAPT | Red Teaming",
   "tagline": "Master's Student in Digital Forensics and Information Security",
   "dob": "2nd August 2003",
-  "contact": "+91 9313525322",
   "email": "Parththakar39@gmail.com",
-  "address": {
-    "line1": "D-903, Vir Savarkar Heights-1",
-    "line2": "Vasant Nagar, Gota-Ognaj Road",
-    "city": "Ahmedabad",
-    "state": "Gujarat",
-    "pincode": "380060"
-  },
+  "linkedin": "https://www.linkedin.com/in/parthmehulkumarthakar/",
+  "github": "https://github.com/parththakar2003",
+  "location": "Ahmedabad, Gujarat, India",
   "bio": "Want to succeed in a stimulating and challenging environment that will provide advancement opportunities.",
   "resume": "/assets/documents/Parth_Thakar_Resume.pdf"
 }

@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect, useMemo, useRef } from "react";
 import { useTheme } from "@/context/ThemeContext";
-import { FaArrowRight, FaGithub, FaLinkedin, FaEnvelope, FaCode, FaServer, FaDatabase, FaShieldAlt } from "react-icons/fa";
+import { FaArrowRight, FaGithub, FaLinkedin, FaEnvelope, FaCode, FaServer, FaDatabase, FaShieldAlt, FaExternalLinkAlt, FaGlobe } from "react-icons/fa";
 import { SiReact, SiNextdotjs, SiTypescript, SiJavascript, SiPython, SiKalilinux, SiWireshark } from "react-icons/si";
 import { LuBraces } from "react-icons/lu";
 import { TbTerminal2 } from "react-icons/tb";
@@ -357,7 +357,7 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {/* Kaspersky Cybermap Widget */}
+        {/* Global Cyber Threat Map - Interactive Card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -365,20 +365,64 @@ export default function Home() {
           className="mb-8"
         >
           <div className={`${theme.card} rounded-lg p-4 sm:p-6 border ${theme.border} backdrop-blur-sm overflow-hidden`}>
-            <div className="flex items-center gap-2 mb-4">
-              <FaShieldAlt className={`${theme.accent} text-lg`} />
-              <h3 className="font-semibold text-base md:text-lg">Global Cyber Threat Map</h3>
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <FaShieldAlt className={`${theme.accent} text-lg`} />
+                <h3 className="font-semibold text-base md:text-lg">Global Cyber Threat Map</h3>
+              </div>
+              <FaGlobe className={`${theme.accent} text-lg animate-pulse`} />
             </div>
-            <div className="relative w-full" style={{ paddingBottom: '50%', minHeight: '450px' }}>
-              <iframe 
-                width="100%" 
-                height="450" 
-                src="https://cybermap.kaspersky.com/en/widget/dynamic/dark" 
-                frameBorder="0"
-                className="absolute top-0 left-0 w-full h-full rounded"
-                title="Kaspersky Cybermap Widget"
-                loading="lazy"
-              />
+            <div className="space-y-4">
+              <p className={`${theme.muted} text-sm`}>
+                View real-time cyber threats and attacks happening around the world. Click below to explore interactive threat intelligence maps.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* CheckPoint ThreatCloud Map */}
+                <a
+                  href="https://threatmap.checkpoint.com/ThreatPortal/livemap.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${theme.card} border ${theme.border} rounded-lg p-4 hover:scale-105 transition-all duration-300 cursor-pointer group`}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="font-semibold text-sm md:text-base">CheckPoint ThreatCloud</h4>
+                    <FaExternalLinkAlt className={`${theme.accent} text-sm group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform`} />
+                  </div>
+                  <p className={`${theme.muted} text-xs md:text-sm`}>
+                    Live visualization of global cyber attacks detected by CheckPoint
+                  </p>
+                  <div className="mt-3 flex items-center gap-2">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    </span>
+                    <span className="text-xs text-green-400">Live</span>
+                  </div>
+                </a>
+
+                {/* Fortinet Threat Map */}
+                <a
+                  href="https://threatmap.fortiguard.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${theme.card} border ${theme.border} rounded-lg p-4 hover:scale-105 transition-all duration-300 cursor-pointer group`}
+                >
+                  <div className="flex items-center justify-between mb-2">
+                    <h4 className="font-semibold text-sm md:text-base">Fortinet Threat Map</h4>
+                    <FaExternalLinkAlt className={`${theme.accent} text-sm group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform`} />
+                  </div>
+                  <p className={`${theme.muted} text-xs md:text-sm`}>
+                    Real-time threat intelligence from Fortinet FortiGuard Labs
+                  </p>
+                  <div className="mt-3 flex items-center gap-2">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                    </span>
+                    <span className="text-xs text-green-400">Live</span>
+                  </div>
+                </a>
+              </div>
             </div>
           </div>
         </motion.div>

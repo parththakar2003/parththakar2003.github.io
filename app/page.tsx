@@ -9,7 +9,6 @@ import { TbTerminal2 } from "react-icons/tb";
 import { FiVolume2, FiVolumeX, FiPlay, FiPause } from 'react-icons/fi';
 import { IoMdSkipBackward, IoMdSkipForward } from 'react-icons/io';
 import { RiEqualizerLine } from 'react-icons/ri';
-import DynamicCyberMap from "@/components/DynamicCyberMap";
 
 export default function Home() {
   const { darkMode } = useTheme();
@@ -354,33 +353,6 @@ export default function Home() {
                   ✓ Cybersecurity Professional initialized successfully
                 </p>
               )}
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Global Cyber Threat Map - Live Visualization */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className="mb-8"
-        >
-          <div className={`${theme.card} rounded-lg p-4 sm:p-6 border ${theme.border} backdrop-blur-sm overflow-hidden`}>
-            <div className="flex items-center justify-between mb-4">
-              <div className="flex items-center gap-2">
-                <FaShieldAlt className={`${theme.accent} text-lg`} />
-                <h3 className="font-semibold text-base md:text-lg">Global Cyber Threat Map</h3>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
-                </span>
-                <span className="text-xs text-green-400">Live</span>
-              </div>
-            </div>
-            <div className="relative w-full rounded-lg overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900/20 to-gray-900">
-              <DynamicCyberMap />
             </div>
           </div>
         </motion.div>

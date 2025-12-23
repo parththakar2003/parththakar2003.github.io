@@ -96,7 +96,7 @@ export default function Journey() {
       subtitle: "Multiple Platforms",
       icon: <FaTrophy />,
       color: "purple",
-      content: "Participated in IIT-Roorkee CTF securing 16th position out of 100 teams. Secured 144th rank in Bugcrowd CTF. Participated in TryHackme Hackfinity Battle and AWS × SANS CTF gaining 200th rank. These competitions sharpened penetration testing and problem-solving skills.",
+      content: "Participated in IIT-Roorkee CTF securing 16th position out of 100 teams. Secured 144th rank in Bugcrowd CTF. Participated in TryHackme Hackfinity Battle and AWS × SANS CTF gaining 200th rank. Competed in University CTF 2025: Tinsel Trouble achieving 417th rank out of 1050 universities with team NFSU. These competitions sharpened penetration testing and problem-solving skills.",
       achievement: "Multiple CTF achievements",
       featured: true
     },

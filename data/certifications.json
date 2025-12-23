@@ -83,6 +83,72 @@
       "issuer": "Belkasoft",
       "date": "",
       "image": ""
+    },
+    {
+      "name": "Getting Started with Belkasoft",
+      "issuer": "Belkasoft",
+      "date": "",
+      "image": ""
+    },
+    {
+      "name": "Certified AI/ML PENTESTER",
+      "issuer": "SecOps Group",
+      "date": "",
+      "image": ""
+    },
+    {
+      "name": "Certified APPSEC PRACTITIONER",
+      "issuer": "SecOps Group",
+      "date": "",
+      "image": ""
+    },
+    {
+      "name": "Google Cloud Fundamentals Core Infrastructure",
+      "issuer": "Coursera/Google",
+      "date": "",
+      "image": ""
+    },
+    {
+      "name": "Google SOAR Fundamentals",
+      "issuer": "Google",
+      "date": "",
+      "image": ""
+    },
+    {
+      "name": "Google Security Practice with Google Security operations-SIEM",
+      "issuer": "Google",
+      "date": "",
+      "image": ""
+    },
+    {
+      "name": "CAPIE Certified API Hacking Expert",
+      "issuer": "CAPIE",
+      "date": "",
+      "image": ""
+    },
+    {
+      "name": "Fortinet Certified Associate Cybersecurity",
+      "issuer": "Fortinet",
+      "date": "",
+      "image": ""
+    },
+    {
+      "name": "Ethical Hacker Certificate",
+      "issuer": "CISCO",
+      "date": "",
+      "image": ""
+    },
+    {
+      "name": "Online Course 210W-09 Attack Methodologies IT & ICS",
+      "issuer": "CISA",
+      "date": "",
+      "image": ""
+    },
+    {
+      "name": "Introduction to IoT",
+      "issuer": "CISCO",
+      "date": "",
+      "image": ""
     }
   ],
   "achievements": [

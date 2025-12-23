@@ -1,4 +1,3 @@
-"use client"
 import React from "react";
 import { FaArrowRight, FaShieldAlt, FaGlobe } from "react-icons/fa";
 
@@ -12,7 +11,7 @@ const KasperskyCyberMap = () => {
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-20">
         <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-cyan-500/30 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-blue-500/30 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-blue-500/30 rounded-full blur-3xl animate-pulse [animation-delay:1s]"></div>
       </div>
 
       <div className="relative z-10 space-y-6 max-w-md">

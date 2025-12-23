@@ -358,8 +358,30 @@ export default function Home() {
         </motion.div>
 
         {/* Kaspersky Cybermap Widget */}
-        <!-- Insert this tag where you want the widget to render -->
-<iframe width="900" height="450" src="https://cybermap.kaspersky.com/en/widget/dynamic/dark" frameborder="0">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          className="mb-8"
+        >
+          <div className={`${theme.card} rounded-lg p-4 sm:p-6 border ${theme.border} backdrop-blur-sm overflow-hidden`}>
+            <div className="flex items-center gap-2 mb-4">
+              <FaShieldAlt className={`${theme.accent} text-lg`} />
+              <h3 className="font-semibold text-base md:text-lg">Global Cyber Threat Map</h3>
+            </div>
+            <div className="relative w-full" style={{ paddingBottom: '50%', minHeight: '450px' }}>
+              <iframe 
+                width="100%" 
+                height="450" 
+                src="https://cybermap.kaspersky.com/en/widget/dynamic/dark" 
+                frameBorder="0"
+                className="absolute top-0 left-0 w-full h-full rounded"
+                title="Kaspersky Cybermap Widget"
+                loading="lazy"
+              ></iframe>
+            </div>
+          </div>
+        </motion.div>
 
         {/* Main Content Grid - Improved for better desktop responsiveness */}
         <div className="grid gap-6 mb-8">

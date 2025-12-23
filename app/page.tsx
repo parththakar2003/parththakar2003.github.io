@@ -9,7 +9,7 @@ import { TbTerminal2 } from "react-icons/tb";
 import { FiVolume2, FiVolumeX, FiPlay, FiPause } from 'react-icons/fi';
 import { IoMdSkipBackward, IoMdSkipForward } from 'react-icons/io';
 import { RiEqualizerLine } from 'react-icons/ri';
-import CustomCyberMap from "@/components/CustomCyberMap";
+import DynamicCyberMap from "@/components/DynamicCyberMap";
 
 export default function Home() {
   const { darkMode } = useTheme();
@@ -380,7 +380,7 @@ export default function Home() {
               </div>
             </div>
             <div className="relative w-full rounded-lg overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900/20 to-gray-900">
-              <CustomCyberMap />
+              <DynamicCyberMap />
             </div>
           </div>
         </motion.div>

@@ -477,15 +477,9 @@ export default function Home() {
                   
                   {/* LinkedIn Badge - Theme-aware */}
                   <div className="mt-4 pt-4 border-t border-dashed border-cyan-500/40 flex justify-center">
-                    {darkMode ? (
-                      <div className="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="dark" data-type="VERTICAL" data-vanity="parthmehulkumarthakar" data-version="v1">
-                        <a className="badge-base__link LI-simple-link" href="https://in.linkedin.com/in/parthmehulkumarthakar?trk=profile-badge">Parth Mehulkumar Thakar</a>
-                      </div>
-                    ) : (
-                      <div className="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="parthmehulkumarthakar" data-version="v1">
-                        <a className="badge-base__link LI-simple-link" href="https://in.linkedin.com/in/parthmehulkumarthakar?trk=profile-badge">Parth Mehulkumar Thakar</a>
-                      </div>
-                    )}
+                    <div className="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme={darkMode ? "dark" : "light"} data-type="VERTICAL" data-vanity="parthmehulkumarthakar" data-version="v1">
+                      <a className="badge-base__link LI-simple-link" href="https://in.linkedin.com/in/parthmehulkumarthakar?trk=profile-badge">Parth Mehulkumar Thakar</a>
+                    </div>
                   </div>
                 </div>
               </section>

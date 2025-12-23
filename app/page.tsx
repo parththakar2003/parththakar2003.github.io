@@ -9,7 +9,7 @@ import { TbTerminal2 } from "react-icons/tb";
 import { FiVolume2, FiVolumeX, FiPlay, FiPause } from 'react-icons/fi';
 import { IoMdSkipBackward, IoMdSkipForward } from 'react-icons/io';
 import { RiEqualizerLine } from 'react-icons/ri';
-import KasperskyCyberMap from "@/components/KasperskyCyberMap";
+import CustomCyberMap from "@/components/CustomCyberMap";
 
 export default function Home() {
   const { darkMode } = useTheme();
@@ -380,19 +380,7 @@ export default function Home() {
               </div>
             </div>
             <div className="relative w-full rounded-lg overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900/20 to-gray-900">
-              <KasperskyCyberMap />
-              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-gray-400">
-                <span>Powered by Kaspersky</span>
-                <a 
-                  href="https://cybermap.kaspersky.com/" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className={`${theme.accent} hover:underline flex items-center gap-1`}
-                >
-                  View Full Map
-                  <FaArrowRight className="text-xs" />
-                </a>
-              </div>
+              <CustomCyberMap />
             </div>
           </div>
         </motion.div>

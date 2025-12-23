@@ -124,6 +124,64 @@ export default function Skills() {
       issuer: "Belkasoft",
       category: "AI in Forensics"
     },
+    {
+      name: "Getting Started with Belkasoft",
+      issuer: "Belkasoft",
+      category: "Digital Forensics"
+    },
+    {
+      name: "Certified AI/ML PENTESTER",
+      issuer: "SecOps Group",
+      category: "Penetration Testing",
+      featured: true
+    },
+    {
+      name: "Certified APPSEC PRACTITIONER",
+      issuer: "SecOps Group",
+      category: "Application Security",
+      featured: true
+    },
+    {
+      name: "Google Cloud Fundamentals Core Infrastructure",
+      issuer: "Coursera/Google",
+      category: "Cloud Security"
+    },
+    {
+      name: "Google SOAR Fundamentals",
+      issuer: "Google",
+      category: "Security Orchestration"
+    },
+    {
+      name: "Google Security Practice with Google Security operations-SIEM",
+      issuer: "Google",
+      category: "SIEM"
+    },
+    {
+      name: "CAPIE Certified API Hacking Expert",
+      issuer: "CAPIE",
+      category: "API Security",
+      featured: true
+    },
+    {
+      name: "Fortinet Certified Associate Cybersecurity",
+      issuer: "Fortinet",
+      category: "Network Security"
+    },
+    {
+      name: "Ethical Hacker Certificate",
+      issuer: "CISCO",
+      category: "Ethical Hacking"
+    },
+    {
+      name: "Online Course 210W-09 Attack Methodologies IT & ICS",
+      issuer: "CISA",
+      category: "Attack Methodologies"
+    },
+    {
+      name: "Introduction to IoT",
+      issuer: "CISCO",
+      category: "IoT Security"
+    },
   ];
 
   // Languages

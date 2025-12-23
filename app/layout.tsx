@@ -96,6 +96,9 @@ export default function RootLayout({
           })}
         </script>
         <link rel="canonical" href="https://parththakar2003.github.io" />
+        
+        {/* LinkedIn Badge Script */}
+        <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
       </head>
       <body className="min-h-screen flex flex-col bg-gray-100 transition-colors duration-300">
         <ThemeProvider>

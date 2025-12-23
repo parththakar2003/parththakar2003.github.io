@@ -378,7 +378,7 @@ export default function Home() {
                 className="absolute top-0 left-0 w-full h-full rounded"
                 title="Kaspersky Cybermap Widget"
                 loading="lazy"
-              ></iframe>
+              />
             </div>
           </div>
         </motion.div>

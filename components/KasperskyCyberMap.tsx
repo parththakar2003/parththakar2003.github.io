@@ -1,22 +1,13 @@
 "use client"
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { FaArrowRight, FaShieldAlt, FaGlobe } from "react-icons/fa";
 
 const KasperskyCyberMap = () => {
-  const [error, setError] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Check if iframe failed to load after a timeout
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 5000); // Give iframe 5 seconds to load
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  // Fallback component when iframe fails or is blocked
-  const CyberMapFallback = () => (
+  // Since Kaspersky iframe embedding is unreliable due to X-Frame-Options
+  // and Content-Security-Policy headers, we provide a professional fallback
+  // that redirects users to the full Kaspersky cyber map
+  
+  return (
     <div className="w-full h-full min-h-[450px] rounded-xl bg-gradient-to-br from-slate-900 via-blue-900/30 to-slate-900 p-6 flex flex-col items-center justify-center text-center relative overflow-hidden">
       {/* Animated background elements */}
       <div className="absolute inset-0 opacity-20">
@@ -80,48 +71,6 @@ const KasperskyCyberMap = () => {
           Opens in new tab • Powered by Kaspersky Security Network
         </p>
       </div>
-    </div>
-  );
-
-  if (error) {
-    return <CyberMapFallback />;
-  }
-
-  return (
-    <div
-      style={{
-        position: "relative",
-        width: "100%",
-        paddingBottom: "50%",
-        minHeight: "450px",
-        overflow: "hidden",
-        borderRadius: "12px",
-      }}
-    >
-      {isLoading && (
-        <div className="absolute inset-0 flex items-center justify-center bg-slate-900 rounded-xl">
-          <div className="flex flex-col items-center gap-3">
-            <div className="w-12 h-12 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
-            <p className="text-slate-400 text-sm">Loading cyber threat map...</p>
-          </div>
-        </div>
-      )}
-      <iframe
-        src="https://cybermap.kaspersky.com/en/widget/dynamic/dark"
-        title="Kaspersky Global Cyber Threat Map"
-        loading="lazy"
-        sandbox="allow-scripts allow-same-origin"
-        onError={() => setError(true)}
-        onLoad={() => setIsLoading(false)}
-        style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          border: "none",
-        }}
-      />
     </div>
   );
 };

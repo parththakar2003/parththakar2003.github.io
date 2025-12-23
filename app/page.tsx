@@ -9,6 +9,7 @@ import { TbTerminal2 } from "react-icons/tb";
 import { FiVolume2, FiVolumeX, FiPlay, FiPause } from 'react-icons/fi';
 import { IoMdSkipBackward, IoMdSkipForward } from 'react-icons/io';
 import { RiEqualizerLine } from 'react-icons/ri';
+import KasperskyCyberMap from "@/components/KasperskyCyberMap";
 
 export default function Home() {
   const { darkMode } = useTheme();
@@ -378,16 +379,8 @@ export default function Home() {
                 <span className="text-xs text-green-400">Live</span>
               </div>
             </div>
-            <div className="relative w-full rounded-lg overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900/20 to-gray-900" style={{ minHeight: '450px' }}>
-              <iframe 
-                width="100%" 
-                height="450" 
-                src="https://cybermap.kaspersky.com/en/widget/dynamic/dark" 
-                className="w-full h-full border-none"
-                title="Live Cyber Threat Map"
-                loading="lazy"
-                sandbox="allow-scripts"
-              />
+            <div className="relative w-full rounded-lg overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900/20 to-gray-900">
+              <KasperskyCyberMap />
               <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-gray-400">
                 <span>Powered by Kaspersky</span>
                 <a 

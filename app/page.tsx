@@ -369,14 +369,14 @@ export default function Home() {
               <FaShieldAlt className={`${theme.accent} text-lg`} />
               <h3 className="font-semibold text-base md:text-lg">Live Cyber Threats Map</h3>
             </div>
-            <div className="w-full" style={{ height: '450px', maxHeight: '450px' }}>
+            <div className="w-full" style={{ height: '450px' }}>
               <iframe 
                 width="100%" 
                 height="450" 
                 src="https://cybermap.kaspersky.com/en/widget/dynamic/dark" 
-                frameBorder="0"
                 title="Kaspersky Cybermap"
                 className="rounded-lg"
+                sandbox="allow-scripts allow-same-origin"
                 style={{ border: 'none' }}
               />
             </div>

@@ -357,6 +357,32 @@ export default function Home() {
           </div>
         </motion.div>
 
+        {/* Kaspersky Cybermap Widget */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mb-8"
+        >
+          <div className={`${theme.card} rounded-lg p-5 sm:p-6 border ${theme.border} backdrop-blur-sm overflow-hidden`}>
+            <div className="flex items-center gap-2 mb-4">
+              <FaShieldAlt className={`${theme.accent} text-lg`} />
+              <h3 className="font-semibold text-base md:text-lg">Live Cyber Threats Map</h3>
+            </div>
+            <div className="w-full" style={{ height: '450px', maxHeight: '450px' }}>
+              <iframe 
+                width="100%" 
+                height="450" 
+                src="https://cybermap.kaspersky.com/en/widget/dynamic/dark" 
+                frameBorder="0"
+                title="Kaspersky Cybermap"
+                className="rounded-lg"
+                style={{ border: 'none' }}
+              />
+            </div>
+          </div>
+        </motion.div>
+
         {/* Main Content Grid - Improved for better desktop responsiveness */}
         <div className="grid gap-6 mb-8">
           {/* Profile & Tech Stack Section */}

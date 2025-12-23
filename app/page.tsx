@@ -376,7 +376,8 @@ export default function Home() {
                 src="https://cybermap.kaspersky.com/en/widget/dynamic/dark" 
                 title="Kaspersky Cybermap"
                 className="rounded-lg"
-                sandbox="allow-scripts allow-same-origin"
+                sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                loading="lazy"
                 style={{ border: 'none' }}
               />
             </div>

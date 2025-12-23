@@ -383,10 +383,10 @@ export default function Home() {
                 width="100%" 
                 height="450" 
                 src="https://cybermap.kaspersky.com/en/widget/dynamic/dark" 
-                className="w-full h-full border-0"
+                className="w-full h-full border-none"
                 title="Live Cyber Threat Map"
                 loading="lazy"
-                sandbox="allow-scripts allow-same-origin"
+                sandbox="allow-scripts"
               />
               <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-gray-400">
                 <span>Powered by Kaspersky</span>

@@ -41,6 +41,11 @@ const attackData = [
   { lat: 25.2048, lng: 55.2708, type: "DDoS Attack", country: "UAE", protocol: "DNS", severity: "high" },
 ];
 
+// Constants for attack simulation
+const MIN_ACTIVE_ATTACKS = 3;
+const ATTACK_RANGE = 3;
+const REFRESH_INTERVAL_MS = 2000;
+
 const CustomCyberMap = () => {
   const { darkMode } = useTheme();
   const [activeAttacks, setActiveAttacks] = useState<number[]>([]);
@@ -51,15 +56,15 @@ const CustomCyberMap = () => {
   useEffect(() => {
     setMounted(true);
     const interval = setInterval(() => {
-      // Randomly select 3-5 attacks to pulse
-      const numActive = Math.floor(Math.random() * 3) + 3;
+      // Randomly select MIN_ACTIVE_ATTACKS to (MIN_ACTIVE_ATTACKS + ATTACK_RANGE) attacks to pulse
+      const numActive = Math.floor(Math.random() * ATTACK_RANGE) + MIN_ACTIVE_ATTACKS;
       const active: number[] = [];
       for (let i = 0; i < numActive; i++) {
         active.push(Math.floor(Math.random() * attackData.length));
       }
       setActiveAttacks(active);
       setAttackCount(prev => prev + numActive);
-    }, 2000);
+    }, REFRESH_INTERVAL_MS);
 
     return () => clearInterval(interval);
   }, []);
@@ -78,7 +83,13 @@ const CustomCyberMap = () => {
   if (!mounted) {
     return (
       <div className="w-full h-full min-h-[450px] rounded-xl bg-gradient-to-br from-slate-900 via-blue-900/30 to-slate-900 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400"></div>
+        <div 
+          className="animate-spin rounded-full h-12 w-12 border-b-2 border-cyan-400"
+          role="status"
+          aria-label="Loading cyber map"
+        >
+          <span className="sr-only">Loading...</span>
+        </div>
       </div>
     );
   }
@@ -96,7 +107,7 @@ const CustomCyberMap = () => {
         }}
         className="cyber-map"
         zoomControl={true}
-        scrollWheelZoom={false}
+        scrollWheelZoom={true}
       >
         <TileLayer
           url={
@@ -123,7 +134,7 @@ const CustomCyberMap = () => {
               className={isActive ? "pulse-marker" : ""}
             >
               <Popup>
-                <div className="text-gray-900 p-1">
+                <div className={`p-1 ${darkMode ? 'text-gray-100' : 'text-gray-900'}`}>
                   <div className="font-bold text-sm">{attack.type}</div>
                   <div className="text-xs mt-1">
                     <div>📍 {attack.country}</div>

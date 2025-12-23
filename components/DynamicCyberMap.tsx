@@ -37,81 +37,41 @@ const DynamicCyberMap = () => {
   const currentTimeRef = useRef(0);
   const animationFrameRef = useRef<number | null>(null);
 
+  // Utility functions moved outside useEffect for better organization
+  const randomCoord = (): number[] => {
+    return [
+      -180 + Math.random() * 360,
+      -60 + Math.random() * 120
+    ];
+  };
+
+  const spawnAttack = (): Attack => {
+    const src = randomCoord();
+    const dst = randomCoord();
+    const severity = Math.random() * 10;
+
+    return {
+      path: [src, dst],
+      timestamps: [0, 200],
+      severity,
+      intensity: 1
+    };
+  };
+
   useEffect(() => {
     if (!mapContainerRef.current) return;
-
-    // Check if scripts are already loaded
-    if (window.mapboxgl && window.deck) {
-      initializeMap();
-      return;
-    }
-
-    // Load Mapbox GL JS
-    const mapboxLink = document.createElement("link");
-    mapboxLink.href = "https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css";
-    mapboxLink.rel = "stylesheet";
-    document.head.appendChild(mapboxLink);
-
-    const mapboxScript = document.createElement("script");
-    mapboxScript.src = "https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js";
-    mapboxScript.async = true;
-
-    // Load deck.gl
-    const deckScript = document.createElement("script");
-    deckScript.src = "https://unpkg.com/deck.gl@8.9.28/dist.min.js";
-    deckScript.async = true;
-
-    let scriptsLoaded = 0;
-    const onScriptLoad = () => {
-      scriptsLoaded++;
-      if (scriptsLoaded === 2) {
-        setTimeout(() => {
-          if (window.mapboxgl && window.deck) {
-            initializeMap();
-          } else {
-            setLoadError(true);
-          }
-        }, 500);
-      }
-    };
-
-    const onScriptError = () => {
-      setLoadError(true);
-    };
-
-    mapboxScript.onload = onScriptLoad;
-    mapboxScript.onerror = onScriptError;
-    deckScript.onload = onScriptLoad;
-    deckScript.onerror = onScriptError;
-
-    document.head.appendChild(mapboxScript);
-    document.head.appendChild(deckScript);
-
-    function randomCoord() {
-      return [
-        -180 + Math.random() * 360,
-        -60 + Math.random() * 120
-      ];
-    }
-
-    function spawnAttack(): Attack {
-      const src = randomCoord();
-      const dst = randomCoord();
-      const severity = Math.random() * 10;
-
-      return {
-        path: [src, dst],
-        timestamps: [0, 200],
-        severity,
-        intensity: 1
-      };
-    }
 
     function initializeMap() {
       if (!window.mapboxgl || !window.deck) return;
 
-      // Use a public Mapbox token (this is a common demo token, should be replaced with user's token)
-      window.mapboxgl.accessToken = "pk.eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2p0MG01MXRqMW45cjQzb2R6b2ptc3J4MSJ9.zA2W0IkI0c6KaAhJfk9bWg";
+      // Mapbox Access Token Configuration
+      // For production: Get your free token at https://account.mapbox.com/access-tokens/
+      // Set NEXT_PUBLIC_MAPBOX_TOKEN in your environment or .env.local file
+      // For development: Using a public demo token (limited features)
+      const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || 
+        "pk.eyJ1IjoiZXhhbXBsZXMiLCJhIjoiY2p0MG01MXRqMW45cjQzb2R6b2ptc3J4MSJ9.zA2W0IkI0c6KaAhJfk9bWg";
+      
+      window.mapboxgl.accessToken = mapboxToken;
 
       const { DeckGL, TripsLayer } = window.deck;
 
@@ -162,9 +122,13 @@ const DynamicCyberMap = () => {
           attacksRef.current.push(spawnAttack());
         }
 
-        // Fade attacks (IMPORTANT)
-        attacksRef.current.forEach((a: Attack) => a.intensity *= 0.98);
-        attacksRef.current = attacksRef.current.filter((a: Attack) => a.intensity > 0.1);
+        // Fade attacks and filter out weak ones (using mutation for performance in animation loop)
+        attacksRef.current = attacksRef.current
+          .map(a => {
+            a.intensity *= 0.98;
+            return a;
+          })
+          .filter(a => a.intensity > 0.1);
 
         setAttackCount(attacksRef.current.length);
 
@@ -174,6 +138,53 @@ const DynamicCyberMap = () => {
 
       tick();
     }
+
+    // Check if scripts are already loaded
+    if (window.mapboxgl && window.deck) {
+      initializeMap();
+      return;
+    }
+
+    // Load Mapbox GL JS
+    const mapboxLink = document.createElement("link");
+    mapboxLink.href = "https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css";
+    mapboxLink.rel = "stylesheet";
+    document.head.appendChild(mapboxLink);
+
+    const mapboxScript = document.createElement("script");
+    mapboxScript.src = "https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js";
+    mapboxScript.async = true;
+
+    // Load deck.gl
+    const deckScript = document.createElement("script");
+    deckScript.src = "https://unpkg.com/deck.gl@8.9.28/dist.min.js";
+    deckScript.async = true;
+
+    let scriptsLoaded = 0;
+    const onScriptLoad = () => {
+      scriptsLoaded++;
+      if (scriptsLoaded === 2) {
+        setTimeout(() => {
+          if (window.mapboxgl && window.deck) {
+            initializeMap();
+          } else {
+            setLoadError(true);
+          }
+        }, 500);
+      }
+    };
+
+    const onScriptError = () => {
+      setLoadError(true);
+    };
+
+    mapboxScript.onload = onScriptLoad;
+    mapboxScript.onerror = onScriptError;
+    deckScript.onload = onScriptLoad;
+    deckScript.onerror = onScriptError;
+
+    document.head.appendChild(mapboxScript);
+    document.head.appendChild(deckScript);
 
     return () => {
       if (animationFrameRef.current) {

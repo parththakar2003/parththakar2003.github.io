@@ -357,7 +357,7 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {/* Kaspersky Cybermap Widget */}
+        {/* Global Cyber Threat Map - Live Visualization */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -365,20 +365,41 @@ export default function Home() {
           className="mb-8"
         >
           <div className={`${theme.card} rounded-lg p-4 sm:p-6 border ${theme.border} backdrop-blur-sm overflow-hidden`}>
-            <div className="flex items-center gap-2 mb-4">
-              <FaShieldAlt className={`${theme.accent} text-lg`} />
-              <h3 className="font-semibold text-base md:text-lg">Global Cyber Threat Map</h3>
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <FaShieldAlt className={`${theme.accent} text-lg`} />
+                <h3 className="font-semibold text-base md:text-lg">Global Cyber Threat Map</h3>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                </span>
+                <span className="text-xs text-green-400">Live</span>
+              </div>
             </div>
-            <div className="relative w-full" style={{ paddingBottom: '50%', minHeight: '450px' }}>
+            <div className="relative w-full rounded-lg overflow-hidden bg-gradient-to-br from-gray-900 via-blue-900/20 to-gray-900" style={{ minHeight: '450px' }}>
               <iframe 
                 width="100%" 
                 height="450" 
                 src="https://cybermap.kaspersky.com/en/widget/dynamic/dark" 
-                frameBorder="0"
-                className="absolute top-0 left-0 w-full h-full rounded"
-                title="Kaspersky Cybermap Widget"
+                className="w-full h-full border-none"
+                title="Live Cyber Threat Map"
                 loading="lazy"
+                sandbox="allow-scripts"
               />
+              <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs text-gray-400">
+                <span>Powered by Kaspersky</span>
+                <a 
+                  href="https://cybermap.kaspersky.com/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className={`${theme.accent} hover:underline flex items-center gap-1`}
+                >
+                  View Full Map
+                  <FaArrowRight className="text-xs" />
+                </a>
+              </div>
             </div>
           </div>
         </motion.div>

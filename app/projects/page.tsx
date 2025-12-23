@@ -276,7 +276,8 @@ export default function Projects() {
                 { event: "IIT-Roorkee CTF", rank: "16th/100 teams", color: "blue" },
                 { event: "Bugcrowd CTF", rank: "144th rank", color: "purple" },
                 { event: "TryHackme Hackfinity Battle", rank: "Participant", color: "green" },
-                { event: "AWS × SANS CTF", rank: "200th rank", color: "orange" }
+                { event: "AWS × SANS CTF", rank: "200th rank", color: "orange" },
+                { event: "University CTF 2025: Tinsel Trouble", rank: "417th/1050 universities - Team NFSU", color: "blue" }
               ].map((ctf, index) => (
                 <div
                   key={index}

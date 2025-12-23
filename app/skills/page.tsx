@@ -421,6 +421,10 @@ export default function Skills() {
                 <h4 className="font-semibold mb-2">AWS × SANS CTF</h4>
                 <p className={theme.muted}>200th rank</p>
               </div>
+              <div className="p-4 rounded-lg bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30">
+                <h4 className="font-semibold mb-2">University CTF 2025: Tinsel Trouble</h4>
+                <p className={theme.muted}>417th out of 1050 universities - Team NFSU</p>
+              </div>
             </div>
           </div>
         </motion.div>

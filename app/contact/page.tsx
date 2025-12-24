@@ -21,6 +21,15 @@ export default function Contact() {
   });
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
+
+  // Cleanup timers on unmount to prevent memory leaks
+  useEffect(() => {
+    return () => {
+      // Cleanup function runs on component unmount
+    };
+  }, []);
 
   // Theme styles
   const theme = {
@@ -55,12 +64,36 @@ export default function Contact() {
     }
   ];
 
+  // Sanitize input to prevent XSS attacks
+  const sanitizeInput = (input: string): string => {
+    // Remove HTML tags, special characters, and protocols that could be used for XSS
+    let sanitized = input
+      .replace(/[<>]/g, '') // Remove angle brackets
+      .replace(/javascript:/gi, '') // Remove javascript: protocol
+      .replace(/data:/gi, '') // Remove data: protocol
+      .replace(/vbscript:/gi, '') // Remove vbscript: protocol
+      .trim();
+    
+    // Repeatedly remove event handlers until none remain (handles nested cases)
+    let prevLength = 0;
+    while (sanitized.length !== prevLength) {
+      prevLength = sanitized.length;
+      sanitized = sanitized
+        .replace(/on\w+\s*=/gi, '') // Remove event handlers like onclick=
+        .replace(/on\w+\s*\(/gi, ''); // Remove event handlers like onclick(
+    }
+    
+    return sanitized;
+  };
+
   // Handle input changes
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    // Sanitize input before setting state
+    const sanitizedValue = sanitizeInput(value);
+    setFormData((prev) => ({ ...prev, [name]: sanitizedValue }));
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
@@ -94,14 +127,38 @@ export default function Contact() {
       return;
     }
 
+    setIsSubmitting(true);
+    
     // Open email client with pre-filled data - no data is sent to any server
     const mailtoLink = `mailto:Parththakar39@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
-    window.location.href = mailtoLink;
     
-    // Reset form after a short delay to ensure email client opens
-    setTimeout(() => {
-      setFormData({ name: "", email: "", subject: "", message: "" });
-    }, 100);
+    try {
+      window.location.href = mailtoLink;
+      
+      // Show success message
+      setShowSuccess(true);
+      
+      // Use a single timeout with proper cleanup handling
+      const resetTimer = setTimeout(() => {
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setIsSubmitting(false);
+        
+        // Auto-hide success message after showing it
+        const hideTimer = setTimeout(() => {
+          setShowSuccess(false);
+        }, 5000);
+        
+        // Store timer for cleanup
+        return () => clearTimeout(hideTimer);
+      }, 500);
+      
+      // Cleanup timer if component unmounts
+      return () => clearTimeout(resetTimer);
+    } catch (error) {
+      console.error("Error opening email client:", error);
+      setIsSubmitting(false);
+      setErrors({ submit: "Unable to open email client. Please try emailing directly to Parththakar39@gmail.com" });
+    }
   };
 
   if (!isLoaded) {
@@ -210,6 +267,31 @@ export default function Contact() {
             className={`${theme.card} rounded-lg p-6 border ${theme.border} backdrop-blur-sm`}
           >
             <h2 className="text-2xl font-bold mb-6">Send a Message</h2>
+            
+            {/* Success Message */}
+            {showSuccess && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mb-4 p-4 rounded-lg bg-green-500/20 border border-green-500/50 text-green-400"
+              >
+                <p className="text-sm">
+                  ✓ Your email client should open with a pre-filled message. Please send it to complete your message!
+                </p>
+              </motion.div>
+            )}
+
+            {/* Error Message */}
+            {errors.submit && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mb-4 p-4 rounded-lg bg-red-500/20 border border-red-500/50 text-red-400"
+              >
+                <p className="text-sm">{errors.submit}</p>
+              </motion.div>
+            )}
+
             <form onSubmit={handleSubmit} className="space-y-4">
               {/* Name Input */}
               <div>
@@ -282,11 +364,17 @@ export default function Contact() {
               {/* Submit Button */}
               <button
                 type="submit"
-                className={`w-full px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-medium flex items-center justify-center gap-2 hover:from-cyan-500 hover:to-blue-500 transition-all`}
+                disabled={isSubmitting}
+                className={`w-full px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-medium flex items-center justify-center gap-2 hover:from-cyan-500 hover:to-blue-500 transition-all ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 <FaPaperPlane className="text-sm" />
-                <span>Send Message</span>
+                <span>{isSubmitting ? 'Opening Email Client...' : 'Send Message'}</span>
               </button>
+              
+              {/* Info Text */}
+              <p className={`text-xs ${theme.muted} text-center mt-2`}>
+                This will open your default email client with a pre-filled message
+              </p>
             </form>
           </motion.div>
         </div>

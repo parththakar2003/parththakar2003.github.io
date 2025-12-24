@@ -14,80 +14,25 @@ export default function Journey() {
     setIsLoaded(true);
   }, []);
 
-  // Journey timeline data - Parth's Cybersecurity Journey
+  // Journey timeline data - Parth's Cybersecurity Journey (Reversed: 11 to 1)
   const journeyStages = [
     {
-      id: 1,
-      title: "Early Interest in Technology",
-      subtitle: "Childhood - 2020",
-      icon: <FaShieldAlt />,
-      color: "blue",
-      content: "Developed an early interest in computers and technology. Explored various aspects of computing, laying the foundation for a career in cybersecurity and digital forensics.",
-      achievement: "Foundation in computer basics"
-    },
-    {
-      id: 2,
-      title: "Higher Secondary Education",
-      subtitle: "May 2021",
-      icon: <FaGraduationCap />,
+      id: 11,
+      title: "Professional Certifications",
+      subtitle: "Ongoing Development",
+      icon: <FaCertificate />,
       color: "indigo",
-      content: "Completed HSC from St. Mary's English Medium School, Gota, Ahmedabad with 57.60%. This marked the beginning of formal education in the technology domain.",
-      achievement: "Completed HSC with focus on science"
+      content: "Earned 15+ professional certifications including SysTools Digital Forensic Essentials (SDFE), SysTools Incident Response Essentials (SIRE), Digital Forensics Masterclass (DFMC + DIFR), Belkasoft Windows Forensics, OS Forensics Triage (OSFT), CNSP from SecOps, and Harvard CS50's Introduction to Cybersecurity. Completed job simulations with Tata Group and Mastercard.",
+      achievement: "15+ industry certifications"
     },
     {
-      id: 3,
-      title: "Bachelor of Science - IT",
-      subtitle: "April-June 2024",
+      id: 10,
+      title: "Master's in Digital Forensics",
+      subtitle: "Pursuing Semester III - 2024-25",
       icon: <FaGraduationCap />,
-      color: "purple",
-      content: "Graduated with B.Sc. IT from Ganpat University, Ahmedabad with 7.20 CGPA. Developed strong foundation in IT concepts and programming.",
-      achievement: "Graduated with 7.20 CGPA",
-      featured: true
-    },
-    {
-      id: 4,
-      title: "First Cybersecurity Internship",
-      subtitle: "The Red User - 1 Month",
-      icon: <FaBriefcase />,
-      color: "pink",
-      content: "Completed one-month internship at The Red User in Cyber Security. Gained hands-on experience with security tools and practices, marking the official start of cybersecurity career.",
-      achievement: "First professional cybersecurity experience"
-    },
-    {
-      id: 5,
-      title: "Full-Stack Development Experience",
-      subtitle: "Jan 2024 - Feb 2024",
-      icon: <SiPython />,
-      color: "amber",
-      content: "Completed two-month on-site internship at Brainy Beam Technologies Pvt Ltd as Full-Stack Developer and Python Programmer. Developed comprehensive web applications and enhanced programming skills.",
-      achievement: "Full-stack development proficiency"
-    },
-    {
-      id: 6,
-      title: "Shadow Fox Cyber Security",
-      subtitle: "March 2025 - 1 Month",
-      icon: <FaShieldAlt />,
-      color: "red",
-      content: "Completed one-month internship at Shadow Fox specializing in Cyber Security. Enhanced practical knowledge of security tools and methodologies.",
-      achievement: "Advanced security tools expertise"
-    },
-    {
-      id: 7,
-      title: "Cyber Secured India",
-      subtitle: "3 Months Program",
-      icon: <FaBriefcase />,
-      color: "green",
-      content: "Completed comprehensive 3-month Digital Forensics and Cyber Security internship at Cyber Secured India. Gained in-depth knowledge of forensic investigation techniques and incident response procedures.",
-      achievement: "Digital forensics specialization"
-    },
-    {
-      id: 8,
-      title: "Corporate Experience - Adani Wilmar",
-      subtitle: "2 Months On-site",
-      icon: <FaBriefcase />,
-      color: "cyan",
-      content: "Completed 2-month on-site internship in Digital Forensic and Cyber Security at Awl Agri Business Ltd (Formerly ADANI WILMAR LTD.). Worked in corporate environment handling real-world security challenges and forensic investigations.",
-      achievement: "Corporate security experience",
+      color: "blue",
+      content: "Currently pursuing Master of Digital Forensic and Information Security (DFIS) at Narnarayan Shastri Institute of Technology, Jetalpur, Ahmedabad (affiliated with NSFU National Forensic Science University, Gandhinagar). Deepening expertise in forensic analysis, incident response, and information security. Completed major project on 'Advanced Billing System with QR using Full Stack with Python' and minor project on 'Cryptography & Steganography Tool Using Python'.",
+      achievement: "Advanced forensics education in progress",
       featured: true
     },
     {
@@ -101,24 +46,80 @@ export default function Journey() {
       featured: true
     },
     {
-      id: 10,
-      title: "Master's in Digital Forensics",
-      subtitle: "Pursuing Semester III - 2024-25",
-      icon: <FaGraduationCap />,
-      color: "blue",
-      content: "Currently pursuing Master of Digital Forensic and Information Security (DFIS) at Narnarayan Shastri Institute of Technology, Jetalpur, Ahmedabad (affiliated with NSFU National Forensic Science University, Gandhinagar). Deepening expertise in forensic analysis, incident response, and information security. Completed major project on 'Advanced Billing System with QR using Full Stack with Python' and minor project on 'Cryptography & Steganography Tool Using Python'.",
-      achievement: "Advanced forensics education in progress",
+      id: 8,
+      title: "Corporate Experience - Adani Wilmar",
+      subtitle: "2 Months On-site",
+      icon: <FaBriefcase />,
+      color: "cyan",
+      content: "Completed 2-month on-site internship in Digital Forensic and Cyber Security at Awl Agri Business Ltd (Formerly ADANI WILMAR LTD.). Worked in corporate environment handling real-world security challenges and forensic investigations.",
+      achievement: "Corporate security experience",
       featured: true
     },
     {
-      id: 11,
-      title: "Professional Certifications",
-      subtitle: "Ongoing Development",
-      icon: <FaCertificate />,
+      id: 7,
+      title: "Cyber Secured India",
+      subtitle: "3 Months Program",
+      icon: <FaBriefcase />,
+      color: "green",
+      content: "Completed comprehensive 3-month Digital Forensics and Cyber Security internship at Cyber Secured India. Gained in-depth knowledge of forensic investigation techniques and incident response procedures.",
+      achievement: "Digital forensics specialization"
+    },
+    {
+      id: 6,
+      title: "Shadow Fox Cyber Security",
+      subtitle: "March 2025 - 1 Month",
+      icon: <FaShieldAlt />,
+      color: "red",
+      content: "Completed one-month internship at Shadow Fox specializing in Cyber Security. Enhanced practical knowledge of security tools and methodologies.",
+      achievement: "Advanced security tools expertise"
+    },
+    {
+      id: 5,
+      title: "Full-Stack Development Experience",
+      subtitle: "Jan 2024 - Feb 2024",
+      icon: <SiPython />,
+      color: "amber",
+      content: "Completed two-month on-site internship at Brainy Beam Technologies Pvt Ltd as Full-Stack Developer and Python Programmer. Developed comprehensive web applications and enhanced programming skills.",
+      achievement: "Full-stack development proficiency"
+    },
+    {
+      id: 4,
+      title: "First Cybersecurity Internship",
+      subtitle: "The Red User - 1 Month",
+      icon: <FaBriefcase />,
+      color: "pink",
+      content: "Completed one-month internship at The Red User in Cyber Security. Gained hands-on experience with security tools and practices, marking the official start of cybersecurity career.",
+      achievement: "First professional cybersecurity experience"
+    },
+    {
+      id: 3,
+      title: "Bachelor of Science - IT",
+      subtitle: "April-June 2024",
+      icon: <FaGraduationCap />,
+      color: "purple",
+      content: "Graduated with B.Sc. IT from Ganpat University, Ahmedabad with 7.20 CGPA. Developed strong foundation in IT concepts and programming.",
+      achievement: "Graduated with 7.20 CGPA",
+      featured: true
+    },
+    {
+      id: 2,
+      title: "Higher Secondary Education",
+      subtitle: "May 2021",
+      icon: <FaGraduationCap />,
       color: "indigo",
-      content: "Earned 15+ professional certifications including SysTools Digital Forensic Essentials (SDFE), SysTools Incident Response Essentials (SIRE), Digital Forensics Masterclass (DFMC + DIFR), Belkasoft Windows Forensics, OS Forensics Triage (OSFT), CNSP from SecOps, and Harvard CS50's Introduction to Cybersecurity. Completed job simulations with Tata Group and Mastercard.",
-      achievement: "15+ industry certifications"
-    }
+      content: "Completed HSC from St. Mary's English Medium School, Gota, Ahmedabad with 57.60%. This marked the beginning of formal education in the technology domain.",
+      achievement: "Completed HSC with focus on science"
+    },
+    {
+      id: 1,
+      title: "Early Interest in Technology",
+      subtitle: "Childhood - 2020",
+      icon: <FaShieldAlt />,
+      color: "blue",
+      content: "Developed an early interest in computers and technology. Explored various aspects of computing, laying the foundation for a career in cybersecurity and digital forensics.",
+      achievement: "Foundation in computer basics"
+    },
+
   ];
 
   // Theme styles

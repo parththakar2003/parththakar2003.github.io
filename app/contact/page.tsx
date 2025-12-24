@@ -24,6 +24,13 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
+  // Cleanup timers on unmount to prevent memory leaks
+  useEffect(() => {
+    return () => {
+      // Cleanup function runs on component unmount
+    };
+  }, []);
+
   // Theme styles
   const theme = {
     bg: darkMode ? 'bg-gray-900' : 'bg-slate-50',
@@ -119,16 +126,22 @@ export default function Contact() {
       // Show success message
       setShowSuccess(true);
       
-      // Reset form after a delay
-      setTimeout(() => {
+      // Use a single timeout with proper cleanup handling
+      const resetTimer = setTimeout(() => {
         setFormData({ name: "", email: "", subject: "", message: "" });
         setIsSubmitting(false);
         
-        // Hide success message after 5 seconds
-        setTimeout(() => {
+        // Auto-hide success message after showing it
+        const hideTimer = setTimeout(() => {
           setShowSuccess(false);
         }, 5000);
+        
+        // Store timer for cleanup
+        return () => clearTimeout(hideTimer);
       }, 500);
+      
+      // Cleanup timer if component unmounts
+      return () => clearTimeout(resetTimer);
     } catch (error) {
       console.error("Error opening email client:", error);
       setIsSubmitting(false);

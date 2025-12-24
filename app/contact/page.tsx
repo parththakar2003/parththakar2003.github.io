@@ -66,12 +66,24 @@ export default function Contact() {
 
   // Sanitize input to prevent XSS attacks
   const sanitizeInput = (input: string): string => {
-    // Remove HTML tags and special characters that could be used for XSS
-    return input
+    // Remove HTML tags, special characters, and protocols that could be used for XSS
+    let sanitized = input
       .replace(/[<>]/g, '') // Remove angle brackets
       .replace(/javascript:/gi, '') // Remove javascript: protocol
-      .replace(/on\w+=/gi, '') // Remove event handlers like onclick=
+      .replace(/data:/gi, '') // Remove data: protocol
+      .replace(/vbscript:/gi, '') // Remove vbscript: protocol
       .trim();
+    
+    // Repeatedly remove event handlers until none remain (handles nested cases)
+    let prevLength = 0;
+    while (sanitized.length !== prevLength) {
+      prevLength = sanitized.length;
+      sanitized = sanitized
+        .replace(/on\w+\s*=/gi, '') // Remove event handlers like onclick=
+        .replace(/on\w+\s*\(/gi, ''); // Remove event handlers like onclick(
+    }
+    
+    return sanitized;
   };
 
   // Handle input changes

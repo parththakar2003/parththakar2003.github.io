@@ -49,6 +49,8 @@ export const metadata = {
     navigationBarColor: "#1e293b",
   },
   keywords: ["parth thakar, digital forensics, cybersecurity, DFIR, SOC, information security, CTF, security analyst, cyber security professional"],
+  // Security: Referrer policy for privacy
+  referrer: 'strict-origin-when-cross-origin',
 };
 
 export default function RootLayout({
@@ -59,6 +61,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        {/* Security Headers */}
+        <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
+        <meta httpEquiv="X-Frame-Options" content="SAMEORIGIN" />
+        <meta httpEquiv="X-XSS-Protection" content="1; mode=block" />
+        <meta name="referrer" content="strict-origin-when-cross-origin" />
+        
         {/* Favicon for general browsers */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />

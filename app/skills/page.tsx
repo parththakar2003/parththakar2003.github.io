@@ -9,6 +9,10 @@ export default function Skills() {
   const { darkMode } = useTheme();
   const [isLoaded, setIsLoaded] = useState(false);
   const [activeTab, setActiveTab] = useState("tools");
+  const [activeToolCategory, setActiveToolCategory] = useState<"all" | "cybersecurity" | "forensics">("all");
+  const [activeCyberSecToolCategory, setActiveCyberSecToolCategory] = useState<"redTeam" | "blueTeam" | "whiteTeam" | "purpleTeam">("redTeam");
+  const [activeCertCategory, setActiveCertCategory] = useState<"all" | "cybersecurity" | "forensics">("all");
+  const [activeCyberSecCertCategory, setActiveCyberSecCertCategory] = useState<"redTeam" | "blueTeam" | "whiteTeam" | "purpleTeam">("redTeam");
 
   useEffect(() => {
     setIsLoaded(true);
@@ -24,18 +28,42 @@ export default function Skills() {
     border: darkMode ? 'border-gray-700' : 'border-gray-200',
   };
 
-  // Computer Skills & Tools
-  const computerSkills = [
-    { name: "Burp Suite", category: "Web Application Security", icon: <FaShieldAlt />, color: "orange" },
-    { name: "Nessus", category: "Vulnerability Scanner", icon: <FaShieldAlt />, color: "red" },
-    { name: "FTK Imager", category: "Forensic Imaging", icon: <FaShieldAlt />, color: "blue" },
-    { name: "OS Forensic Tool", category: "Digital Forensics", icon: <FaShieldAlt />, color: "purple" },
-    { name: "OSINT Tools", category: "Intelligence Gathering", icon: <FaShieldAlt />, color: "cyan" },
-    { name: "Autopsy", category: "Digital Forensics", icon: <FaShieldAlt />, color: "indigo" },
-    { name: "Wireshark", category: "Network Analysis", icon: <SiWireshark />, color: "blue" },
-    { name: "Kali Linux", category: "Security OS", icon: <SiKalilinux />, color: "purple" },
-    { name: "Python", category: "Programming & Automation", icon: <FaPython />, color: "green" },
-  ];
+  // Computer Skills & Tools - Categorized
+  const securityTools = {
+    cybersecurity: {
+      redTeam: [
+        { name: "Burp Suite", category: "Web Application Security", icon: <FaShieldAlt />, color: "orange" },
+        { name: "Metasploit", category: "Exploitation Framework", icon: <FaShieldAlt />, color: "red" },
+        { name: "Nmap", category: "Network Scanner", icon: <FaShieldAlt />, color: "purple" },
+        { name: "Sqlmap", category: "SQL Injection", icon: <FaShieldAlt />, color: "orange" },
+        { name: "Nikto", category: "Web Scanner", icon: <FaShieldAlt />, color: "red" },
+      ],
+      blueTeam: [
+        { name: "Nessus", category: "Vulnerability Scanner", icon: <FaShieldAlt />, color: "blue" },
+        { name: "Wireshark", category: "Network Analysis", icon: <SiWireshark />, color: "cyan" },
+        { name: "Snort", category: "IDS/IPS", icon: <FaShieldAlt />, color: "blue" },
+        { name: "SIEM Tools", category: "Security Monitoring", icon: <FaShieldAlt />, color: "indigo" },
+      ],
+      whiteTeam: [
+        { name: "GRC Tools", category: "Governance & Compliance", icon: <FaShieldAlt />, color: "green" },
+        { name: "Audit Tools", category: "Security Auditing", icon: <FaShieldAlt />, color: "green" },
+      ],
+      purpleTeam: [
+        { name: "Kali Linux", category: "Security OS", icon: <SiKalilinux />, color: "purple" },
+        { name: "Python", category: "Security Automation", icon: <FaPython />, color: "purple" },
+        { name: "CTF Platforms", category: "Training & Assessment", icon: <FaShieldAlt />, color: "purple" },
+      ],
+    },
+    digitalForensics: [
+      { name: "FTK Imager", category: "Forensic Imaging", icon: <FaShieldAlt />, color: "blue" },
+      { name: "Autopsy", category: "Digital Forensics", icon: <FaShieldAlt />, color: "indigo" },
+      { name: "OS Forensic Tool", category: "Digital Forensics", icon: <FaShieldAlt />, color: "purple" },
+      { name: "Belkasoft", category: "Evidence Analysis", icon: <FaShieldAlt />, color: "cyan" },
+      { name: "OSINT Tools", category: "Intelligence Gathering", icon: <FaShieldAlt />, color: "cyan" },
+      { name: "Volatility", category: "Memory Forensics", icon: <FaShieldAlt />, color: "indigo" },
+      { name: "EnCase", category: "Forensic Analysis", icon: <FaShieldAlt />, color: "blue" },
+    ],
+  };
 
   // Professional Skills
   const professionalSkills = [
@@ -46,143 +74,171 @@ export default function Skills() {
     { name: "Analytical Thinking", level: 90, color: "red" },
   ];
 
-  // Certifications
-  const certifications = [
-    {
-      name: "SysTools Digital Forensic Essentials (SDFE)",
-      issuer: "SysTools",
-      category: "Digital Forensics",
-      featured: true
+  // Certifications - Categorized (newest at the top)
+  const certifications = {
+    cybersecurity: {
+      redTeam: [
+        {
+          name: "Certified AI/ML PENTESTER",
+          issuer: "SecOps Group",
+          category: "Red Team",
+          featured: true
+        },
+        {
+          name: "CAPIE Certified API Hacking Expert",
+          issuer: "CAPIE",
+          category: "Red Team",
+          featured: true
+        },
+        {
+          name: "Ethical Hacker Certificate",
+          issuer: "CISCO",
+          category: "Red Team",
+          featured: false
+        },
+        {
+          name: "Online Course 210W-09 Attack Methodologies IT & ICS",
+          issuer: "CISA",
+          category: "Red Team",
+          featured: false
+        },
+      ],
+      blueTeam: [
+        {
+          name: "Student SOC Program Foundation Training",
+          issuer: "Microsoft",
+          category: "Blue Team",
+          featured: false
+        },
+        {
+          name: "Security Analyst Certificate",
+          issuer: "Skill India & Reliance Foundation",
+          category: "Blue Team",
+          featured: true
+        },
+        {
+          name: "Cyber Security Analyst Job Simulation",
+          issuer: "Tata Group",
+          category: "Blue Team",
+          featured: false
+        },
+        {
+          name: "Cyber Security Job Simulation",
+          issuer: "Mastercard",
+          category: "Blue Team",
+          featured: false
+        },
+        {
+          name: "Google Security Practice with Google Security operations-SIEM",
+          issuer: "Google",
+          category: "Blue Team",
+          featured: false
+        },
+        {
+          name: "Google SOAR Fundamentals",
+          issuer: "Google",
+          category: "Blue Team",
+          featured: false
+        },
+      ],
+      whiteTeam: [
+        {
+          name: "Fortinet Certified Associate Cybersecurity",
+          issuer: "Fortinet",
+          category: "White Team",
+          featured: false
+        },
+      ],
+      purpleTeam: [
+        {
+          name: "CS50's Introduction to Cybersecurity",
+          issuer: "Harvard Online",
+          category: "Purple Team",
+          featured: true
+        },
+        {
+          name: "Certified Network Security Practitioner (CNSP)",
+          issuer: "SecOps",
+          category: "Purple Team",
+          featured: true
+        },
+        {
+          name: "Certified APPSEC PRACTITIONER",
+          issuer: "SecOps Group",
+          category: "Purple Team",
+          featured: true
+        },
+        {
+          name: "Google Cloud Fundamentals Core Infrastructure",
+          issuer: "Coursera/Google",
+          category: "Purple Team",
+          featured: false
+        },
+        {
+          name: "Introduction to IoT",
+          issuer: "CISCO",
+          category: "Purple Team",
+          featured: false
+        },
+      ],
     },
-    {
-      name: "SysTools Incident Response Essentials (SIRE)",
-      issuer: "SysTools",
-      category: "Incident Response",
-      featured: true
-    },
-    {
-      name: "Digital Forensics Masterclass (DFMC + DIFR)",
-      issuer: "Udemy",
-      category: "Digital Forensics",
-      featured: true
-    },
-    {
-      name: "Windows Forensics with Belkasoft",
-      issuer: "Belkasoft",
-      category: "Windows Forensics"
-    },
-    {
-      name: "OS Forensics Triage Certification (OSFT)",
-      issuer: "OSForensics",
-      category: "Forensic Triage"
-    },
-    {
-      name: "Introduction to Digital Forensics",
-      issuer: "Security Blue Team",
-      category: "Digital Forensics"
-    },
-    {
-      name: "Introduction to OSINT",
-      issuer: "Security Blue Team",
-      category: "OSINT"
-    },
-    {
-      name: "Student SOC Program Foundation Training",
-      issuer: "Microsoft",
-      category: "SOC Operations"
-    },
-    {
-      name: "Security Analyst Certificate",
-      issuer: "Skill India & Reliance Foundation",
-      category: "Security Analysis",
-      featured: true
-    },
-    {
-      name: "CS50's Introduction to Cybersecurity",
-      issuer: "Harvard Online",
-      category: "Cybersecurity",
-      featured: true
-    },
-    {
-      name: "Cyber Security Analyst Job Simulation",
-      issuer: "Tata Group",
-      category: "Job Simulation"
-    },
-    {
-      name: "Cyber Security Job Simulation",
-      issuer: "Mastercard",
-      category: "Job Simulation"
-    },
-    {
-      name: "Certified Network Security Practitioner (CNSP)",
-      issuer: "SecOps",
-      category: "Network Security",
-      featured: true
-    },
-    {
-      name: "BelkaGPT: Effective AI in DFIR",
-      issuer: "Belkasoft",
-      category: "AI in Forensics"
-    },
-    {
-      name: "Getting Started with Belkasoft",
-      issuer: "Belkasoft",
-      category: "Digital Forensics"
-    },
-    {
-      name: "Certified AI/ML PENTESTER",
-      issuer: "SecOps Group",
-      category: "Penetration Testing",
-      featured: true
-    },
-    {
-      name: "Certified APPSEC PRACTITIONER",
-      issuer: "SecOps Group",
-      category: "Application Security",
-      featured: true
-    },
-    {
-      name: "Google Cloud Fundamentals Core Infrastructure",
-      issuer: "Coursera/Google",
-      category: "Cloud Security"
-    },
-    {
-      name: "Google SOAR Fundamentals",
-      issuer: "Google",
-      category: "Security Orchestration"
-    },
-    {
-      name: "Google Security Practice with Google Security operations-SIEM",
-      issuer: "Google",
-      category: "SIEM"
-    },
-    {
-      name: "CAPIE Certified API Hacking Expert",
-      issuer: "CAPIE",
-      category: "API Security",
-      featured: true
-    },
-    {
-      name: "Fortinet Certified Associate Cybersecurity",
-      issuer: "Fortinet",
-      category: "Network Security"
-    },
-    {
-      name: "Ethical Hacker Certificate",
-      issuer: "CISCO",
-      category: "Ethical Hacking"
-    },
-    {
-      name: "Online Course 210W-09 Attack Methodologies IT & ICS",
-      issuer: "CISA",
-      category: "Attack Methodologies"
-    },
-    {
-      name: "Introduction to IoT",
-      issuer: "CISCO",
-      category: "IoT Security"
-    },
-  ];
+    digitalForensics: [
+      {
+        name: "SysTools Digital Forensic Essentials (SDFE)",
+        issuer: "SysTools",
+        category: "Digital Forensics",
+        featured: true
+      },
+      {
+        name: "SysTools Incident Response Essentials (SIRE)",
+        issuer: "SysTools",
+        category: "Digital Forensics",
+        featured: true
+      },
+      {
+        name: "Digital Forensics Masterclass (DFMC + DIFR)",
+        issuer: "Udemy",
+        category: "Digital Forensics",
+        featured: true
+      },
+      {
+        name: "Windows Forensics with Belkasoft",
+        issuer: "Belkasoft",
+        category: "Digital Forensics",
+        featured: false
+      },
+      {
+        name: "OS Forensics Triage Certification (OSFT)",
+        issuer: "OSForensics",
+        category: "Digital Forensics",
+        featured: false
+      },
+      {
+        name: "Introduction to Digital Forensics",
+        issuer: "Security Blue Team",
+        category: "Digital Forensics",
+        featured: false
+      },
+      {
+        name: "Introduction to OSINT",
+        issuer: "Security Blue Team",
+        category: "Digital Forensics",
+        featured: false
+      },
+      {
+        name: "BelkaGPT: Effective AI in DFIR",
+        issuer: "Belkasoft",
+        category: "Digital Forensics",
+        featured: false
+      },
+      {
+        name: "Getting Started with Belkasoft",
+        issuer: "Belkasoft",
+        category: "Digital Forensics",
+        featured: false
+      },
+    ],
+  };
 
   // Languages
   const languages = [
@@ -263,23 +319,154 @@ export default function Skills() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
           >
-            {computerSkills.map((skill, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                className={`${theme.card} rounded-lg p-6 border ${theme.border} backdrop-blur-sm hover:scale-105 transition-transform`}
+            {/* Category Selection */}
+            <div className="flex flex-wrap justify-center gap-2 mb-6">
+              <button
+                onClick={() => setActiveToolCategory("all")}
+                className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                  activeToolCategory === "all"
+                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white'
+                    : `${theme.card} border ${theme.border}`
+                }`}
               >
-                <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${getColorClasses(skill.color)}`}>
-                  <span className="text-2xl">{skill.icon}</span>
-                </div>
-                <h3 className="text-lg font-semibold mb-2">{skill.name}</h3>
-                <p className={`${theme.muted} text-sm`}>{skill.category}</p>
-              </motion.div>
-            ))}
+                All Tools
+              </button>
+              <button
+                onClick={() => setActiveToolCategory("cybersecurity")}
+                className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                  activeToolCategory === "cybersecurity"
+                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white'
+                    : `${theme.card} border ${theme.border}`
+                }`}
+              >
+                Cybersecurity
+              </button>
+              <button
+                onClick={() => setActiveToolCategory("forensics")}
+                className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                  activeToolCategory === "forensics"
+                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white'
+                    : `${theme.card} border ${theme.border}`
+                }`}
+              >
+                Digital Forensics
+              </button>
+            </div>
+
+            {/* Cybersecurity Sub-categories */}
+            {activeToolCategory === "cybersecurity" && (
+              <div className="flex flex-wrap justify-center gap-2 mb-6">
+                <button
+                  onClick={() => setActiveCyberSecToolCategory("redTeam")}
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                    activeCyberSecToolCategory === "redTeam"
+                      ? 'bg-red-500 text-white'
+                      : `${theme.card} border ${theme.border}`
+                  }`}
+                >
+                  Red Team
+                </button>
+                <button
+                  onClick={() => setActiveCyberSecToolCategory("blueTeam")}
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                    activeCyberSecToolCategory === "blueTeam"
+                      ? 'bg-blue-500 text-white'
+                      : `${theme.card} border ${theme.border}`
+                  }`}
+                >
+                  Blue Team
+                </button>
+                <button
+                  onClick={() => setActiveCyberSecToolCategory("whiteTeam")}
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                    activeCyberSecToolCategory === "whiteTeam"
+                      ? 'bg-green-500 text-white'
+                      : `${theme.card} border ${theme.border}`
+                  }`}
+                >
+                  White Team
+                </button>
+                <button
+                  onClick={() => setActiveCyberSecToolCategory("purpleTeam")}
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                    activeCyberSecToolCategory === "purpleTeam"
+                      ? 'bg-purple-500 text-white'
+                      : `${theme.card} border ${theme.border}`
+                  }`}
+                >
+                  Purple Team
+                </button>
+              </div>
+            )}
+
+            {/* Tools Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {activeToolCategory === "all" && (
+                <>
+                  {Object.values(securityTools.cybersecurity).flat().map((skill, index) => (
+                    <motion.div
+                      key={`cyber-${index}`}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3, delay: index * 0.05 }}
+                      className={`${theme.card} rounded-lg p-6 border ${theme.border} backdrop-blur-sm hover:scale-105 transition-transform`}
+                    >
+                      <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${getColorClasses(skill.color)}`}>
+                        <span className="text-2xl">{skill.icon}</span>
+                      </div>
+                      <h3 className="text-lg font-semibold mb-2">{skill.name}</h3>
+                      <p className={`${theme.muted} text-sm`}>{skill.category}</p>
+                    </motion.div>
+                  ))}
+                  {securityTools.digitalForensics.map((skill, index) => (
+                    <motion.div
+                      key={`forensics-${index}`}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3, delay: (Object.values(securityTools.cybersecurity).flat().length + index) * 0.05 }}
+                      className={`${theme.card} rounded-lg p-6 border ${theme.border} backdrop-blur-sm hover:scale-105 transition-transform`}
+                    >
+                      <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${getColorClasses(skill.color)}`}>
+                        <span className="text-2xl">{skill.icon}</span>
+                      </div>
+                      <h3 className="text-lg font-semibold mb-2">{skill.name}</h3>
+                      <p className={`${theme.muted} text-sm`}>{skill.category}</p>
+                    </motion.div>
+                  ))}
+                </>
+              )}
+              {activeToolCategory === "cybersecurity" && securityTools.cybersecurity[activeCyberSecToolCategory].map((skill, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                  className={`${theme.card} rounded-lg p-6 border ${theme.border} backdrop-blur-sm hover:scale-105 transition-transform`}
+                >
+                  <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${getColorClasses(skill.color)}`}>
+                    <span className="text-2xl">{skill.icon}</span>
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2">{skill.name}</h3>
+                  <p className={`${theme.muted} text-sm`}>{skill.category}</p>
+                </motion.div>
+              ))}
+              {activeToolCategory === "forensics" && securityTools.digitalForensics.map((skill, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                  className={`${theme.card} rounded-lg p-6 border ${theme.border} backdrop-blur-sm hover:scale-105 transition-transform`}
+                >
+                  <div className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${getColorClasses(skill.color)}`}>
+                    <span className="text-2xl">{skill.icon}</span>
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2">{skill.name}</h3>
+                  <p className={`${theme.muted} text-sm`}>{skill.category}</p>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         )}
 
@@ -289,40 +476,222 @@ export default function Skills() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="space-y-4"
           >
-            {certifications.map((cert, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
-                className={`${theme.card} rounded-lg p-6 border ${theme.border} backdrop-blur-sm ${cert.featured ? 'ring-2 ring-cyan-500/50' : ''}`}
+            {/* Category Selection */}
+            <div className="flex flex-wrap justify-center gap-2 mb-6">
+              <button
+                onClick={() => setActiveCertCategory("all")}
+                className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                  activeCertCategory === "all"
+                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white'
+                    : `${theme.card} border ${theme.border}`
+                }`}
               >
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    {cert.featured && (
-                      <div className="flex items-center gap-2 mb-2">
-                        <FaAward className="text-yellow-500" />
-                        <span className="text-xs font-semibold uppercase tracking-wide text-yellow-500">Featured</span>
+                All Certifications
+              </button>
+              <button
+                onClick={() => setActiveCertCategory("cybersecurity")}
+                className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                  activeCertCategory === "cybersecurity"
+                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white'
+                    : `${theme.card} border ${theme.border}`
+                }`}
+              >
+                Cybersecurity
+              </button>
+              <button
+                onClick={() => setActiveCertCategory("forensics")}
+                className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                  activeCertCategory === "forensics"
+                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white'
+                    : `${theme.card} border ${theme.border}`
+                }`}
+              >
+                Digital Forensics
+              </button>
+            </div>
+
+            {/* Cybersecurity Sub-categories */}
+            {activeCertCategory === "cybersecurity" && (
+              <div className="flex flex-wrap justify-center gap-2 mb-6">
+                <button
+                  onClick={() => setActiveCyberSecCertCategory("redTeam")}
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                    activeCyberSecCertCategory === "redTeam"
+                      ? 'bg-red-500 text-white'
+                      : `${theme.card} border ${theme.border}`
+                  }`}
+                >
+                  Red Team
+                </button>
+                <button
+                  onClick={() => setActiveCyberSecCertCategory("blueTeam")}
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                    activeCyberSecCertCategory === "blueTeam"
+                      ? 'bg-blue-500 text-white'
+                      : `${theme.card} border ${theme.border}`
+                  }`}
+                >
+                  Blue Team
+                </button>
+                <button
+                  onClick={() => setActiveCyberSecCertCategory("whiteTeam")}
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                    activeCyberSecCertCategory === "whiteTeam"
+                      ? 'bg-green-500 text-white'
+                      : `${theme.card} border ${theme.border}`
+                  }`}
+                >
+                  White Team
+                </button>
+                <button
+                  onClick={() => setActiveCyberSecCertCategory("purpleTeam")}
+                  className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${
+                    activeCyberSecCertCategory === "purpleTeam"
+                      ? 'bg-purple-500 text-white'
+                      : `${theme.card} border ${theme.border}`
+                  }`}
+                >
+                  Purple Team
+                </button>
+              </div>
+            )}
+
+            {/* Certifications List */}
+            <div className="space-y-4">
+              {activeCertCategory === "all" && (
+                <>
+                  {Object.values(certifications.cybersecurity).flat().map((cert, index) => (
+                    <motion.div
+                      key={`cyber-${index}`}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.05 }}
+                      className={`${theme.card} rounded-lg p-6 border ${theme.border} backdrop-blur-sm ${cert.featured ? 'ring-2 ring-cyan-500/50' : ''}`}
+                    >
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          {cert.featured && (
+                            <div className="flex items-center gap-2 mb-2">
+                              <FaAward className="text-yellow-500" />
+                              <span className="text-xs font-semibold uppercase tracking-wide text-yellow-500">Featured</span>
+                            </div>
+                          )}
+                          <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
+                            <FaCertificate className={theme.accent} />
+                            {cert.name}
+                          </h3>
+                          <div className="flex flex-wrap gap-2">
+                            <span className={`text-xs px-2 py-1 rounded ${getColorClasses('blue')}`}>
+                              {cert.issuer}
+                            </span>
+                            <span className={`text-xs px-2 py-1 rounded ${getColorClasses('purple')}`}>
+                              {cert.category}
+                            </span>
+                          </div>
+                        </div>
                       </div>
-                    )}
-                    <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
-                      <FaCertificate className={theme.accent} />
-                      {cert.name}
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
-                      <span className={`text-xs px-2 py-1 rounded ${getColorClasses('blue')}`}>
-                        {cert.issuer}
-                      </span>
-                      <span className={`text-xs px-2 py-1 rounded ${getColorClasses('purple')}`}>
-                        {cert.category}
-                      </span>
+                    </motion.div>
+                  ))}
+                  {certifications.digitalForensics.map((cert, index) => (
+                    <motion.div
+                      key={`forensics-${index}`}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: (Object.values(certifications.cybersecurity).flat().length + index) * 0.05 }}
+                      className={`${theme.card} rounded-lg p-6 border ${theme.border} backdrop-blur-sm ${cert.featured ? 'ring-2 ring-cyan-500/50' : ''}`}
+                    >
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1">
+                          {cert.featured && (
+                            <div className="flex items-center gap-2 mb-2">
+                              <FaAward className="text-yellow-500" />
+                              <span className="text-xs font-semibold uppercase tracking-wide text-yellow-500">Featured</span>
+                            </div>
+                          )}
+                          <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
+                            <FaCertificate className={theme.accent} />
+                            {cert.name}
+                          </h3>
+                          <div className="flex flex-wrap gap-2">
+                            <span className={`text-xs px-2 py-1 rounded ${getColorClasses('blue')}`}>
+                              {cert.issuer}
+                            </span>
+                            <span className={`text-xs px-2 py-1 rounded ${getColorClasses('purple')}`}>
+                              {cert.category}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </>
+              )}
+              {activeCertCategory === "cybersecurity" && certifications.cybersecurity[activeCyberSecCertCategory].map((cert, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                  className={`${theme.card} rounded-lg p-6 border ${theme.border} backdrop-blur-sm ${cert.featured ? 'ring-2 ring-cyan-500/50' : ''}`}
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      {cert.featured && (
+                        <div className="flex items-center gap-2 mb-2">
+                          <FaAward className="text-yellow-500" />
+                          <span className="text-xs font-semibold uppercase tracking-wide text-yellow-500">Featured</span>
+                        </div>
+                      )}
+                      <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
+                        <FaCertificate className={theme.accent} />
+                        {cert.name}
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        <span className={`text-xs px-2 py-1 rounded ${getColorClasses('blue')}`}>
+                          {cert.issuer}
+                        </span>
+                        <span className={`text-xs px-2 py-1 rounded ${getColorClasses('purple')}`}>
+                          {cert.category}
+                        </span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              ))}
+              {activeCertCategory === "forensics" && certifications.digitalForensics.map((cert, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                  className={`${theme.card} rounded-lg p-6 border ${theme.border} backdrop-blur-sm ${cert.featured ? 'ring-2 ring-cyan-500/50' : ''}`}
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      {cert.featured && (
+                        <div className="flex items-center gap-2 mb-2">
+                          <FaAward className="text-yellow-500" />
+                          <span className="text-xs font-semibold uppercase tracking-wide text-yellow-500">Featured</span>
+                        </div>
+                      )}
+                      <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
+                        <FaCertificate className={theme.accent} />
+                        {cert.name}
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        <span className={`text-xs px-2 py-1 rounded ${getColorClasses('blue')}`}>
+                          {cert.issuer}
+                        </span>
+                        <span className={`text-xs px-2 py-1 rounded ${getColorClasses('purple')}`}>
+                          {cert.category}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </motion.div>
         )}
 

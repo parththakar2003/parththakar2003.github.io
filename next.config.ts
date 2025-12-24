@@ -7,10 +7,8 @@ const nextConfig: NextConfig = {
   },
   basePath: '',
   trailingSlash: true,
-  allowedDevOrigins: [
-    'http://localhost:3000',
-    'http://192.168.29.73:3000',
-  ],
+  // Security: Removed specific dev origins to prevent exposing internal IPs in public repo
+  // Configure your dev origins in local environment variables if needed
 };
 
 export default nextConfig;

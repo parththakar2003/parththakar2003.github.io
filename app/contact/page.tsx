@@ -113,11 +113,9 @@ export default function Contact() {
     return newErrors;
   };
 
-  // Handle form submission
-  // NOTE: Contact form data is NOT stored anywhere. When submitted, it opens the user's
-  // default email client (mailto link) with pre-filled recipient, subject, and message.
-  // The data only goes to the recipient (Parththakar39@gmail.com) when the user sends the email.
-  // No backend server or database is involved - this is a client-side only form.
+  // Handle form submission using Web3Forms API
+  // This sends emails directly without requiring a backend server
+  // Form data is sent to Web3Forms API which forwards it to the configured email
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const validationErrors = validateForm();
@@ -128,36 +126,74 @@ export default function Contact() {
     }
 
     setIsSubmitting(true);
+    setErrors({});
     
-    // Open email client with pre-filled data - no data is sent to any server
-    const mailtoLink = `mailto:Parththakar39@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
+    // Get Web3Forms access key from environment variable
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+    
+    // Fallback to mailto if access key is not configured
+    if (!accessKey || accessKey === 'your_web3forms_access_key_here') {
+      // Use mailto as fallback
+      const mailtoLink = `mailto:Parththakar39@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
+      
+      try {
+        window.location.href = mailtoLink;
+        setShowSuccess(true);
+        
+        setTimeout(() => {
+          setFormData({ name: "", email: "", subject: "", message: "" });
+          setIsSubmitting(false);
+          setShowSuccess(false);
+        }, 3000);
+      } catch (error) {
+        console.error("Error opening email client:", error);
+        setIsSubmitting(false);
+        setErrors({ submit: "Unable to send message. Please try emailing directly to Parththakar39@gmail.com" });
+      }
+      return;
+    }
     
     try {
-      window.location.href = mailtoLink;
+      // Web3Forms API endpoint
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          from_name: formData.name,
+        }),
+      });
+
+      const result = await response.json();
       
-      // Show success message
-      setShowSuccess(true);
-      
-      // Use a single timeout with proper cleanup handling
-      const resetTimer = setTimeout(() => {
-        setFormData({ name: "", email: "", subject: "", message: "" });
-        setIsSubmitting(false);
+      if (result.success) {
+        // Show success message
+        setShowSuccess(true);
         
-        // Auto-hide success message after showing it
-        const hideTimer = setTimeout(() => {
+        // Reset form
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        
+        // Auto-hide success message after 5 seconds
+        setTimeout(() => {
           setShowSuccess(false);
         }, 5000);
-        
-        // Store timer for cleanup
-        return () => clearTimeout(hideTimer);
-      }, 500);
-      
-      // Cleanup timer if component unmounts
-      return () => clearTimeout(resetTimer);
+      } else {
+        throw new Error(result.message || "Failed to send message");
+      }
     } catch (error) {
-      console.error("Error opening email client:", error);
+      console.error("Error sending message:", error);
+      setErrors({ 
+        submit: "Failed to send message. Please try emailing directly to Parththakar39@gmail.com or try again later." 
+      });
+    } finally {
       setIsSubmitting(false);
-      setErrors({ submit: "Unable to open email client. Please try emailing directly to Parththakar39@gmail.com" });
     }
   };
 
@@ -276,7 +312,7 @@ export default function Contact() {
                 className="mb-4 p-4 rounded-lg bg-green-500/20 border border-green-500/50 text-green-400"
               >
                 <p className="text-sm">
-                  ✓ Your email client should open with a pre-filled message. Please send it to complete your message!
+                  ✓ Message sent successfully! I&apos;ll get back to you soon.
                 </p>
               </motion.div>
             )}
@@ -368,12 +404,12 @@ export default function Contact() {
                 className={`w-full px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-medium flex items-center justify-center gap-2 hover:from-cyan-500 hover:to-blue-500 transition-all ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 <FaPaperPlane className="text-sm" />
-                <span>{isSubmitting ? 'Opening Email Client...' : 'Send Message'}</span>
+                <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
               </button>
               
               {/* Info Text */}
               <p className={`text-xs ${theme.muted} text-center mt-2`}>
-                This will open your default email client with a pre-filled message
+                Your message will be sent directly to my email
               </p>
             </form>
           </motion.div>

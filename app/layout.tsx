@@ -14,8 +14,46 @@ export const viewport = {
 };
 
 export const metadata = {
-  title: "Parth Thakar - Cybersecurity Professional | Digital Forensics & InfoSec",
-  description: "Explore Parth Thakar's portfolio showcasing expertise in Digital Forensics, Information Security, Cybersecurity, SOC Operations, and DFIR.",
+  metadataBase: new URL('https://parththakar2003.github.io'),
+  title: {
+    default: "Parth Thakar - Cybersecurity Professional | Digital Forensics & InfoSec Expert",
+    template: "%s | Parth Thakar - Cybersecurity Professional"
+  },
+  description: "Expert in Digital Forensics, Information Security, Cybersecurity, SOC Operations, DFIR, VAPT, and Red Teaming. Master's student specializing in incident response, threat hunting, and CTF competitions.",
+  applicationName: "Parth Thakar Portfolio",
+  authors: [{ name: "Parth Thakar", url: "https://parththakar2003.github.io" }],
+  generator: "Next.js",
+  keywords: [
+    "Parth Thakar",
+    "Digital Forensics",
+    "Cybersecurity Professional",
+    "Information Security",
+    "DFIR Specialist",
+    "SOC Analyst",
+    "Security Operations Center",
+    "Incident Response",
+    "Threat Hunting",
+    "VAPT",
+    "Vulnerability Assessment",
+    "Penetration Testing",
+    "Red Teaming",
+    "Blue Teaming",
+    "CTF Competitions",
+    "Cyber Security Expert",
+    "Forensics Investigator",
+    "Malware Analysis",
+    "Network Security",
+    "Ethical Hacking",
+    "Security Analyst",
+    "Kali Linux",
+    "Wireshark",
+    "Python Security",
+    "Security Research",
+    "Ahmedabad",
+    "India",
+    "NSIT",
+    "Cybersecurity Portfolio"
+  ],
   color: "#000001",
   icons: {
     icon: "/favicon.ico",
@@ -24,23 +62,40 @@ export const metadata = {
   },
   manifest: "/site.webmanifest",
   openGraph: {
-    title: "Parth Thakar - Cybersecurity Professional | Digital Forensics & InfoSec",
-    description: "Master's student in Digital Forensics and Information Security with expertise in SOC, DFIR, and CTF competitions.",
-    url: "https://parththakar2003.github.io",
-    siteName: "Parth Thakar Portfolio",
-    locale: "en-IN",
     type: "website",
+    locale: "en_IN",
+    url: "https://parththakar2003.github.io",
+    siteName: "Parth Thakar - Cybersecurity Professional Portfolio",
+    title: "Parth Thakar - Cybersecurity Professional | Digital Forensics & InfoSec Expert",
+    description: "Master's student in Digital Forensics and Information Security with expertise in SOC Operations, DFIR, VAPT, Red Teaming, and CTF competitions. Specializing in incident response and threat hunting.",
+    images: [
+      {
+        url: "/images/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Parth Thakar - Cybersecurity Professional"
+      }
+    ]
   },
   twitter: {
     card: "summary_large_image",
-    title: "Parth Thakar - Cybersecurity Professional",
-    description: "Master's student in Digital Forensics and Information Security with expertise in SOC, DFIR, and CTF competitions.",
+    site: "@parththakar",
     creator: "@parththakar",
+    title: "Parth Thakar - Cybersecurity Professional | Digital Forensics Expert",
+    description: "Expert in Digital Forensics, DFIR, VAPT, and Red Teaming. Master's student specializing in SOC Operations and incident response.",
+    images: ["/images/og-image.png"]
   },
   robots: {
     index: true,
     follow: true,
     nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    }
   },
   appleWebApp: {
     capable: true,
@@ -48,9 +103,17 @@ export const metadata = {
     statusBarStyle: "default",
     navigationBarColor: "#1e293b",
   },
-  keywords: ["parth thakar, digital forensics, cybersecurity, DFIR, SOC, information security, CTF, security analyst, cyber security professional"],
+  alternates: {
+    canonical: "https://parththakar2003.github.io",
+    languages: {
+      'en-IN': 'https://parththakar2003.github.io',
+      'en-US': 'https://parththakar2003.github.io',
+    }
+  },
   // Security: Referrer policy for privacy
   referrer: 'strict-origin-when-cross-origin',
+  category: 'technology',
+  classification: 'Cybersecurity Portfolio',
 };
 
 export default function RootLayout({
@@ -59,7 +122,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en-IN" itemScope itemType="https://schema.org/WebPage">
       <head>
         {/* Google Site Verification */}
         <meta name="google-site-verification" content="GsNdr0i_kczPydqwDiK-NXmfeUbDRbDdrNMnki_oWno" />
@@ -69,6 +132,17 @@ export default function RootLayout({
         <meta httpEquiv="X-Frame-Options" content="SAMEORIGIN" />
         <meta httpEquiv="X-XSS-Protection" content="1; mode=block" />
         <meta name="referrer" content="strict-origin-when-cross-origin" />
+        
+        {/* SEO Enhancement */}
+        <meta name="author" content="Parth Thakar" />
+        <meta name="language" content="English" />
+        <meta name="revisit-after" content="7 days" />
+        <meta name="distribution" content="global" />
+        <meta name="rating" content="general" />
+        <meta name="geo.region" content="IN-GJ" />
+        <meta name="geo.placename" content="Ahmedabad" />
+        <meta name="geo.position" content="23.0225;72.5714" />
+        <meta name="ICBM" content="23.0225, 72.5714" />
         
         {/* Favicon for general browsers */}
         <link rel="icon" href="/favicon.ico" sizes="any" />
@@ -88,13 +162,55 @@ export default function RootLayout({
             "@context": "https://schema.org",
             "@type": "Person",
             name: "Parth Thakar",
-            alternateName: ["parththakar2003"],
+            alternateName: ["parththakar2003", "Parth Mehulkumar Thakar"],
             jobTitle: "Cybersecurity Professional & Digital Forensics Specialist",
+            description: "Master's student in Digital Forensics and Information Security with expertise in SOC Operations, DFIR, VAPT, Red Teaming, and CTF competitions. Specializing in incident response, threat hunting, and forensics investigation.",
             url: "https://parththakar2003.github.io",
+            email: "Parththakar39@gmail.com",
+            image: "https://parththakar2003.github.io/images/profile.jpg",
             sameAs: [
               "https://github.com/parththakar2003",
+              "https://www.linkedin.com/in/parthmehulkumarthakar/",
             ],
-            description: "Parth Thakar is a Master's student in Digital Forensics and Information Security with expertise in SOC Operations, DFIR, and CTF competitions.",
+            alumniOf: {
+              "@type": "EducationalOrganization",
+              name: "Narnarayan Shastri Institute of Technology",
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Ahmedabad",
+                addressRegion: "Gujarat",
+                addressCountry: "IN"
+              }
+            },
+            knowsAbout: [
+              "Digital Forensics",
+              "Information Security",
+              "Cybersecurity",
+              "SOC Operations",
+              "DFIR",
+              "Incident Response",
+              "Threat Hunting",
+              "VAPT",
+              "Vulnerability Assessment",
+              "Penetration Testing",
+              "Red Teaming",
+              "Blue Teaming",
+              "Malware Analysis",
+              "Network Security",
+              "CTF Competitions",
+              "Python Programming",
+              "Kali Linux",
+              "Wireshark"
+            ],
+            hasOccupation: {
+              "@type": "Occupation",
+              name: "Cybersecurity Professional",
+              occupationLocation: {
+                "@type": "City",
+                name: "Ahmedabad"
+              },
+              skills: "Digital Forensics, Information Security, DFIR, SOC Operations, VAPT, Red Teaming"
+            }
           })}
         </script>
         <script type="application/ld+json">
@@ -102,8 +218,43 @@ export default function RootLayout({
             "@context": "https://schema.org",
             "@type": "WebSite",
             url: "https://parththakar2003.github.io",
-            name: "Parth Thakar Portfolio",
-            description: "Explore Parth Thakar's portfolio showcasing cybersecurity skills, digital forensics expertise, and achievements.",
+            name: "Parth Thakar - Cybersecurity Professional Portfolio",
+            description: "Professional portfolio showcasing cybersecurity skills, digital forensics expertise, SOC operations experience, VAPT capabilities, and achievements in the field of information security.",
+            author: {
+              "@type": "Person",
+              name: "Parth Thakar"
+            },
+            inLanguage: "en-IN",
+            potentialAction: {
+              "@type": "SearchAction",
+              target: {
+                "@type": "EntryPoint",
+                urlTemplate: "https://parththakar2003.github.io/?q={search_term_string}"
+              },
+              "query-input": "required name=search_term_string"
+            }
+          })}
+        </script>
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ProfilePage",
+            mainEntity: {
+              "@type": "Person",
+              name: "Parth Thakar",
+              description: "Cybersecurity Professional specializing in Digital Forensics and Information Security"
+            },
+            breadcrumb: {
+              "@type": "BreadcrumbList",
+              itemListElement: [
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Home",
+                  item: "https://parththakar2003.github.io"
+                }
+              ]
+            }
           })}
         </script>
         <link rel="canonical" href="https://parththakar2003.github.io" />

@@ -103,13 +103,14 @@ export default function Contact() {
         .replace(/on\w+\s*\(/gi, ''); // Remove event handlers like onclick(
     }
     
-    // Additional protection against script injection
+    // Additional protection: Remove dangerous patterns at start of strings
+    // Only remove if at beginning to avoid breaking legitimate content like "JavaScript developer"
     sanitized = sanitized
-      .replace(/script/gi, '') // Remove script keyword
-      .replace(/iframe/gi, '') // Remove iframe keyword
-      .replace(/object/gi, '') // Remove object keyword
-      .replace(/embed/gi, '') // Remove embed keyword
-      .replace(/applet/gi, ''); // Remove applet keyword
+      .replace(/^<script>/gi, '')
+      .replace(/^<iframe>/gi, '')
+      .replace(/^<object>/gi, '')
+      .replace(/^<embed>/gi, '')
+      .replace(/^<applet>/gi, '');
     
     return sanitized;
   };
@@ -131,15 +132,15 @@ export default function Contact() {
   const validateForm = () => {
     const newErrors: { [key: string]: string } = {};
     
-    // Name validation - min 2 chars, max 100 chars, alphanumeric and spaces only
+    // Name validation - allow letters, numbers, spaces, hyphens, apostrophes
     if (!formData.name.trim()) {
       newErrors.name = "Name is required";
     } else if (formData.name.length < 2) {
       newErrors.name = "Name must be at least 2 characters";
     } else if (formData.name.length > 100) {
       newErrors.name = "Name must be less than 100 characters";
-    } else if (!/^[a-zA-Z0-9\s]+$/.test(formData.name)) {
-      newErrors.name = "Name can only contain letters, numbers, and spaces";
+    } else if (!/^[a-zA-Z0-9\s'-]+$/.test(formData.name)) {
+      newErrors.name = "Name can only contain letters, numbers, spaces, hyphens, and apostrophes";
     }
     
     // Email validation

@@ -1,24 +1,27 @@
-                                       _                                              _   _          _            _                   
-  _   _    __ _ _ __ ___   _ __   ___ | |_   ___ _   _ _ __  _ __   ___  ___  ___  __| | | |_ ___   | |__   ___  | |__   ___ _ __ ___ 
- | | | |  / _` | '__/ _ \ | '_ \ / _ \| __| / __| | | | '_ \| '_ \ / _ \/ __|/ _ \/ _` | | __/ _ \  | '_ \ / _ \ | '_ \ / _ \ '__/ _ \
- | |_| | | (_| | | |  __/ | | | | (_) | |_  \__ \ |_| | |_) | |_) | (_) \__ \  __/ (_| | | || (_) | | |_) |  __/ | | | |  __/ | |  __/
-  \__,_|  \__,_|_|  \___| |_| |_|\___/ \__| |___/\__,_| .__/| .__/ \___/|___/\___|\__,_|  \__\___/  |_.__/ \___| |_| |_|\___|_|  \___|
-                                                      |_|   |_|                                                                       
-
-
+# robots.txt for parththakar2003.github.io
+# Cybersecurity Professional Portfolio - SEO Optimized
 
 User-agent: *
 Allow: /
 
-# Disallow admin panel
-Disallow: /admin/
-
-# Disallow data files
-Disallow: /data/
-
-# Allow all other content
-Allow: /*.html$
+# Allow search engines to crawl all public content
 Allow: /*.css$
 Allow: /*.js$
+Allow: /*.html$
+Allow: /images/
+Allow: /audio/
 
+# Disallow admin and data directories (if they exist)
+Disallow: /admin/
+Disallow: /_next/static/
+Disallow: /api/
+
+# Crawl-delay for respectful crawling (optional, can be removed if needed)
+# Crawl-delay: 1
+
+# Sitemap location
 Sitemap: https://parththakar2003.github.io/sitemap.xml
+
+# Additional info for search engines
+# This is a professional portfolio website showcasing
+# cybersecurity skills, digital forensics expertise, and information security knowledge

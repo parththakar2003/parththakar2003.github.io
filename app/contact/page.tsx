@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTheme } from "@/context/ThemeContext";
 import { FaEnvelope, FaLinkedin, FaGithub, FaPaperPlane } from "react-icons/fa";
 
@@ -23,11 +23,14 @@ export default function Contact() {
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const successTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Cleanup timers on unmount to prevent memory leaks
   useEffect(() => {
     return () => {
-      // Cleanup function runs on component unmount
+      if (successTimerRef.current) {
+        clearTimeout(successTimerRef.current);
+      }
     };
   }, []);
 
@@ -66,15 +69,16 @@ export default function Contact() {
 
   // Sanitize input to prevent XSS attacks
   const sanitizeInput = (input: string): string => {
-    // Remove HTML tags, special characters, and protocols that could be used for XSS
+    // Remove HTML tags and dangerous characters
     let sanitized = input
       .replace(/[<>]/g, '') // Remove angle brackets
       .replace(/javascript:/gi, '') // Remove javascript: protocol
       .replace(/data:/gi, '') // Remove data: protocol
       .replace(/vbscript:/gi, '') // Remove vbscript: protocol
+      .replace(/['"\\]/g, '') // Remove quotes and backslashes
       .trim();
     
-    // Repeatedly remove event handlers until none remain (handles nested cases)
+    // Remove event handlers (repeatedly to handle nested cases)
     let prevLength = 0;
     while (sanitized.length !== prevLength) {
       prevLength = sanitized.length;
@@ -105,7 +109,7 @@ export default function Contact() {
     if (!formData.name.trim()) newErrors.name = "Name is required";
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = "Email is invalid";
     }
     if (!formData.subject.trim()) newErrors.subject = "Subject is required";
@@ -128,10 +132,10 @@ export default function Contact() {
     setIsSubmitting(true);
     setErrors({});
     
-    // Get Web3Forms access key from environment variable
-    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+    // Get Web3Forms access key from environment variable or use default
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || 'c8b5ae36-c601-41af-950f-a9adac3dcbb9';
     
-    // Fallback to mailto if access key is not configured
+    // Fallback to mailto if access key is not configured properly
     if (!accessKey || accessKey === 'your_web3forms_access_key_here') {
       // Use mailto as fallback
       const mailtoLink = `mailto:Parththakar39@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
@@ -140,10 +144,15 @@ export default function Contact() {
         window.location.href = mailtoLink;
         setShowSuccess(true);
         
-        setTimeout(() => {
+        // Clear any existing timer first
+        if (successTimerRef.current) {
+          clearTimeout(successTimerRef.current);
+        }
+        successTimerRef.current = setTimeout(() => {
           setFormData({ name: "", email: "", subject: "", message: "" });
           setIsSubmitting(false);
           setShowSuccess(false);
+          successTimerRef.current = null;
         }, 3000);
       } catch (error) {
         console.error("Error opening email client:", error);
@@ -181,8 +190,13 @@ export default function Contact() {
         setFormData({ name: "", email: "", subject: "", message: "" });
         
         // Auto-hide success message after 5 seconds
-        setTimeout(() => {
+        // Clear any existing timer first
+        if (successTimerRef.current) {
+          clearTimeout(successTimerRef.current);
+        }
+        successTimerRef.current = setTimeout(() => {
           setShowSuccess(false);
+          successTimerRef.current = null;
         }, 5000);
       } else {
         throw new Error(result.message || "Failed to send message");

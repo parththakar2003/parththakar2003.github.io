@@ -52,16 +52,16 @@ Edit JSON files in `/data/`:
 - `projects.json` - Projects
 - `certifications.json` - Certs & achievements
 
-## 📧 Contact Form Setup
+## 📧 Contact Form
 
-The contact form requires a free Web3Forms access key to work. See [CONTACT_FORM_SETUP.md](./CONTACT_FORM_SETUP.md) for detailed instructions.
+The contact form is **already configured and working** with Web3Forms! Messages are sent directly to Parththakar39@gmail.com.
 
-**Quick Setup:**
-1. Get a free access key at [web3forms.com](https://web3forms.com)
-2. Add it to your `.env.local` file or GitHub Secrets
-3. The form will work automatically
+- ✅ No setup required - works out of the box
+- ✅ Secure form submission via HTTPS
+- ✅ Spam protection included
+- ✅ Automatic fallback to mailto if needed
 
-**Note**: If the access key is not configured, the form falls back to opening the user's email client (mailto link).
+See [CONTACT_FORM_SETUP.md](./CONTACT_FORM_SETUP.md) for more details or to use your own Web3Forms account.
 
 ## 🏗️ Build & Deploy
 

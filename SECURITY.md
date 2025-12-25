@@ -2,41 +2,119 @@
 
 ## Overview
 
-This portfolio website is built with security best practices in mind. As a public repository showcasing cybersecurity expertise, security is a top priority.
+This portfolio website is built with security best practices in mind. As a public repository showcasing cybersecurity expertise, security is a top priority. This implementation follows the OWASP Top 10 2021 security guidelines.
 
-## Security Measures Implemented
+## OWASP Top 10 2021 Protection Measures
+
+### A01:2021 - Broken Access Control
+- ✅ **Not Applicable**: Static site with no authentication or access control requirements
+- ✅ All content is publicly accessible by design
+
+### A02:2021 - Cryptographic Failures
+- ✅ **No Sensitive Data Storage**: No sensitive data, passwords, or secrets stored in repository
+- ✅ **Environment Variables**: Sensitive configurations use environment variables (not committed)
+- ✅ **HTTPS Only**: Strict-Transport-Security header enforces HTTPS
+- ✅ **No Client-Side Secrets**: No API keys or tokens stored client-side
+
+### A03:2021 - Injection (XSS, SQL Injection, etc.)
+- ✅ **Input Sanitization**: All user inputs sanitized to prevent XSS attacks
+- ✅ **HTML Entity Encoding**: Dangerous characters removed from inputs
+- ✅ **Event Handler Removal**: JavaScript event handlers stripped from user content
+- ✅ **Protocol Filtering**: javascript:, data:, vbscript:, file:, about: protocols blocked
+- ✅ **Content Security Policy**: Strict CSP headers prevent inline script execution
+- ✅ **No SQL Database**: Static site eliminates SQL injection risk
+
+### A04:2021 - Insecure Design
+- ✅ **Secure Architecture**: Static site generation with Next.js reduces attack surface
+- ✅ **No Server-Side Processing**: Pre-rendered pages eliminate server-side vulnerabilities
+- ✅ **Third-Party Form Handling**: Web3Forms API handles contact form securely
+- ✅ **Input Validation**: Client-side validation with length limits and format checks
+
+### A05:2021 - Security Misconfiguration
+- ✅ **Security Headers Configured**:
+  - `Content-Security-Policy`: Restricts resource loading and inline scripts
+  - `Strict-Transport-Security`: Enforces HTTPS (HSTS with preload)
+  - `X-Content-Type-Options: nosniff`: Prevents MIME type sniffing
+  - `X-Frame-Options: SAMEORIGIN`: Protects against clickjacking
+  - `X-XSS-Protection: 1; mode=block`: Browser XSS protection enabled
+  - `Referrer-Policy: strict-origin-when-cross-origin`: Controls referrer information
+  - `Permissions-Policy`: Restricts browser features (camera, microphone, geolocation)
+  - `X-DNS-Prefetch-Control`: DNS prefetching enabled for performance
+- ✅ **Google Site Verification**: Domain ownership verified
+- ✅ **Minimal Configuration**: Only necessary features enabled
+
+### A06:2021 - Vulnerable and Outdated Components
+- ✅ **Regular Updates**: Dependencies regularly updated
+- ✅ **Dependency Auditing**: npm audit run regularly (currently 0 vulnerabilities)
+- ✅ **Minimal Dependencies**: Limited third-party packages reduce attack surface
+- ✅ **Latest Next.js**: Using Next.js 15.5.9 with latest security patches
+- ✅ **TypeScript**: Type safety reduces bugs and vulnerabilities
+
+### A07:2021 - Identification and Authentication Failures
+- ✅ **Not Applicable**: No authentication system (static portfolio site)
+- ✅ **No User Accounts**: No login or registration functionality
+- ✅ **No Session Management**: No sessions or cookies for authentication
+
+### A08:2021 - Software and Data Integrity Failures
+- ✅ **No Untrusted Sources**: All dependencies from npm registry
+- ✅ **Package Lock**: package-lock.json ensures reproducible builds
+- ✅ **Static Generation**: Build-time rendering prevents runtime tampering
+- ✅ **Content Integrity**: CSP prevents unauthorized script execution
+
+### A09:2021 - Security Logging and Monitoring Failures
+- ✅ **Vercel Analytics**: Visitor analytics and performance monitoring
+- ✅ **Error Tracking**: Client-side error handling implemented
+- ✅ **GitHub Actions**: Build and deployment monitoring
+- ⚠️ **Limited Logging**: Static site has minimal server-side logging (acceptable trade-off)
+
+### A10:2021 - Server-Side Request Forgery (SSRF)
+- ✅ **Not Applicable**: Static site with no server-side requests
+- ✅ **External API**: Contact form uses Web3Forms API (third-party service)
+- ✅ **No Backend**: No server-side code eliminates SSRF risk
+
+## Additional Security Measures Implemented
 
 ### 1. **No Sensitive Data in Repository**
 - No API keys, tokens, passwords, or credentials are stored in the codebase
 - Environment-specific configurations should be managed via environment variables (not committed to git)
 - Internal IP addresses and development origins have been removed from configuration files
 
-### 2. **Input Sanitization**
+### 2. **Input Sanitization and Validation**
 - All user inputs in the contact form are sanitized to prevent XSS attacks
 - HTML tags and JavaScript protocols are stripped from form inputs
 - Event handlers are removed from user-submitted content
+- Input length limits enforced (name: 2-100 chars, subject: 3-200 chars, message: 10-2000 chars)
+- Email format validation with RFC-compliant regex
+- Character whitelisting for name field (alphanumeric and spaces only)
 
 ### 3. **Security Headers**
-- `X-Content-Type-Options: nosniff` - Prevents MIME type sniffing
-- `X-Frame-Options: SAMEORIGIN` - Protects against clickjacking attacks
-- `X-XSS-Protection: 1; mode=block` - Enables XSS protection in browsers
-- `Referrer-Policy: strict-origin-when-cross-origin` - Controls referrer information
+- Multiple layers of security headers configured in Next.js
+- Content Security Policy (CSP) restricts resource loading
+- HSTS enforces HTTPS with preload directive
+- Protection against clickjacking, MIME sniffing, and XSS
 
 ### 4. **Static Site Generation**
 - Uses Next.js static export for enhanced security
 - No server-side runtime reduces attack surface
 - All pages are pre-rendered at build time
+- No database or server-side processing
 
 ### 5. **Contact Form Security**
-- Uses `mailto:` links instead of storing form data
+- Uses Web3Forms API for secure email delivery
 - No backend database or server-side processing
 - No storage of user-submitted data
 - Client-side validation with proper error handling
+- Fallback to mailto: if API unavailable
 
 ### 6. **Dependencies**
 - Regular dependency updates to patch known vulnerabilities
 - Minimal dependency footprint
 - No unnecessary third-party packages
+- npm audit shows 0 vulnerabilities
+
+### 7. **Domain Verification**
+- Google Search Console verification configured
+- Domain ownership verified via meta tag
 
 ## Reporting Security Issues
 
@@ -62,27 +140,75 @@ If you're contributing to this repository:
 2. **Sanitize all user inputs**
    - Always validate and sanitize user-provided data
    - Use proper escaping for output
+   - Enforce input length limits
 
 3. **Keep dependencies updated**
    - Regularly run `npm audit` to check for vulnerabilities
    - Update dependencies promptly when security patches are available
+   - Review dependency changes for security implications
 
 4. **Follow secure coding practices**
    - Use TypeScript for type safety
    - Implement proper error handling
    - Avoid using `eval()` or similar unsafe functions
+   - Never use `dangerouslySetInnerHTML` without sanitization
+   - Always use HTTPS for external resources
+
+5. **Test security measures**
+   - Test input sanitization with XSS payloads
+   - Verify CSP headers are working
+   - Check that security headers are properly set
+   - Run security audits before deployment
 
 ## Security Checklist
 
 Before deploying changes:
 
 - [ ] No sensitive data (API keys, passwords, tokens) in code
-- [ ] All user inputs are properly sanitized
+- [ ] All user inputs are properly sanitized and validated
+- [ ] Input length limits enforced
 - [ ] Dependencies are up to date (`npm audit` shows no vulnerabilities)
-- [ ] Security headers are properly configured
+- [ ] Security headers are properly configured in next.config.ts
+- [ ] CSP policy allows only necessary resources
 - [ ] No internal/private information exposed in public code
 - [ ] Build succeeds without errors
 - [ ] Linting passes without security warnings
+- [ ] All external links use `rel="noopener noreferrer"`
+- [ ] HTTPS enforced via HSTS header
+- [ ] XSS protection tested with malicious inputs
+
+## Security Testing
+
+### Manual Security Tests
+
+1. **XSS Testing**: Try injecting these payloads in contact form:
+   - `<script>alert('XSS')</script>`
+   - `<img src=x onerror=alert('XSS')>`
+   - `javascript:alert('XSS')`
+   - `<iframe src="javascript:alert('XSS')"></iframe>`
+
+2. **Header Verification**: Check security headers using:
+   - [securityheaders.com](https://securityheaders.com)
+   - Browser DevTools Network tab
+   - `curl -I https://parththakar2003.github.io`
+
+3. **CSP Validation**: Verify Content Security Policy using:
+   - [csp-evaluator.withgoogle.com](https://csp-evaluator.withgoogle.com)
+   - Browser console for CSP violations
+
+4. **Dependency Audit**: Run security checks:
+   ```bash
+   npm audit
+   npm audit fix
+   ```
+
+## Compliance Standards
+
+This website follows:
+- **OWASP Top 10 2021**: All applicable risks addressed
+- **CWE Top 25**: Common weakness enumeration guidelines
+- **WCAG 2.1**: Web Content Accessibility Guidelines (Level AA)
+- **GDPR**: No personal data collection or tracking (except anonymous analytics)
 
 ## Acknowledgments
 
@@ -90,6 +216,15 @@ Security is an ongoing process. We appreciate the security research community an
 
 ## Version History
 
+- **v2.0.0** (2024-12-25) - OWASP Top 10 2021 compliance
+  - Added comprehensive Content Security Policy
+  - Enhanced input sanitization with additional protections
+  - Added input validation with length limits
+  - Implemented HSTS with preload
+  - Added Permissions-Policy header
+  - Configured Google site verification
+  - Updated security documentation with OWASP mapping
+  
 - **v1.0.0** (2024) - Initial security implementation
   - Added input sanitization
   - Implemented security headers

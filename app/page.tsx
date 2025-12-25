@@ -360,46 +360,6 @@ export default function Home() {
           </div>
         </motion.div>
 
-        {/* About Section - Adding more content for SEO */}
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          className={`${theme.card} rounded-lg p-5 sm:p-6 border ${theme.border} backdrop-blur-sm mb-8`}
-        >
-          <h2 className="text-xl md:text-2xl font-bold mb-4 flex items-center gap-2">
-            <FaShieldAlt className={theme.accent} />
-            About Me
-          </h2>
-          <div className={`space-y-4 ${theme.text}`}>
-            <p className="text-sm sm:text-base leading-relaxed">
-              Welcome to my professional portfolio. I am a dedicated cybersecurity professional from Ahmedabad, India, 
-              specializing in digital forensics and information security. My expertise spans across multiple domains 
-              including Digital Forensics and Incident Response (DFIR), Security Operations Center (SOC) operations, 
-              Vulnerability Assessment and Penetration Testing (VAPT), and Red Team operations.
-            </p>
-            <p className="text-sm sm:text-base leading-relaxed">
-              As a master&apos;s student in Digital Forensics and Information Security, I have developed comprehensive skills 
-              in incident response, threat hunting, and forensic investigation. My technical proficiency includes working 
-              with industry-standard tools such as Kali Linux, Wireshark, Burp Suite, Autopsy, FTK Imager, and Nessus. 
-              I am passionate about securing digital infrastructure and investigating cyber threats.
-            </p>
-            <p className="text-sm sm:text-base leading-relaxed">
-              My experience encompasses SOC operations where I monitor, detect, and respond to security incidents in real-time. 
-              I conduct vulnerability assessments and penetration tests to identify and remediate security weaknesses. Through 
-              participation in Capture The Flag (CTF) competitions and hands-on projects, I continuously enhance my skills 
-              in threat analysis, malware analysis, and network security. My goal is to contribute to building more secure 
-              digital environments through proactive defense strategies and thorough forensic investigations.
-            </p>
-            <p className="text-sm sm:text-base leading-relaxed">
-              I am actively seeking opportunities in cybersecurity roles where I can apply my expertise in DFIR, SOC operations, 
-              and security testing. Feel free to explore my projects, certifications, and professional journey through this 
-              portfolio. Connect with me on LinkedIn or GitHub to discuss cybersecurity, digital forensics, or potential 
-              collaboration opportunities in the field of information security.
-            </p>
-          </div>
-        </motion.section>
-
         {/* Main Content Grid - Improved for better desktop responsiveness */}
         <div className="grid gap-6 mb-8">
           {/* Profile & Tech Stack Section */}

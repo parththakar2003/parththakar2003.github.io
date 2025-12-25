@@ -16,10 +16,10 @@ export const viewport = {
 export const metadata = {
   metadataBase: new URL('https://parththakar2003.github.io'),
   title: {
-    default: "Parth Thakar - Cybersecurity Professional | Digital Forensics & InfoSec Expert",
-    template: "%s | Parth Thakar - Cybersecurity Professional"
+    default: "Parth Thakar - Cybersecurity Professional & DFIR Expert",
+    template: "%s | Parth Thakar"
   },
-  description: "Expert in Digital Forensics, Information Security, Cybersecurity, SOC Operations, DFIR, VAPT, and Red Teaming. Master's student specializing in incident response, threat hunting, and CTF competitions.",
+  description: "Cybersecurity Professional specializing in Digital Forensics, DFIR, SOC Operations, VAPT, and Red Teaming. Expert in incident response and threat hunting.",
   applicationName: "Parth Thakar Portfolio",
   authors: [{ name: "Parth Thakar", url: "https://parththakar2003.github.io" }],
   generator: "Next.js",
@@ -66,8 +66,8 @@ export const metadata = {
     locale: "en_IN",
     url: "https://parththakar2003.github.io",
     siteName: "Parth Thakar - Cybersecurity Professional Portfolio",
-    title: "Parth Thakar - Cybersecurity Professional | Digital Forensics & InfoSec Expert",
-    description: "Master's student in Digital Forensics and Information Security with expertise in SOC Operations, DFIR, VAPT, Red Teaming, and CTF competitions. Specializing in incident response and threat hunting.",
+    title: "Parth Thakar - Cybersecurity Professional & DFIR Expert",
+    description: "Cybersecurity Professional specializing in Digital Forensics, DFIR, SOC Operations, VAPT, and Red Teaming. Expert in incident response and threat hunting.",
     images: [
       {
         url: "/images/og-image.png",
@@ -81,8 +81,8 @@ export const metadata = {
     card: "summary_large_image",
     site: "@parththakar",
     creator: "@parththakar",
-    title: "Parth Thakar - Cybersecurity Professional | Digital Forensics Expert",
-    description: "Expert in Digital Forensics, DFIR, VAPT, and Red Teaming. Master's student specializing in SOC Operations and incident response.",
+    title: "Parth Thakar - Cybersecurity Professional & DFIR Expert",
+    description: "Cybersecurity Professional specializing in Digital Forensics, DFIR, SOC Operations, VAPT, and Red Teaming. Expert in incident response and threat hunting.",
     images: ["/images/og-image.png"]
   },
   robots: {
@@ -105,10 +105,6 @@ export const metadata = {
   },
   alternates: {
     canonical: "https://parththakar2003.github.io",
-    languages: {
-      'en-IN': 'https://parththakar2003.github.io',
-      'en-US': 'https://parththakar2003.github.io',
-    }
   },
   // Security: Referrer policy for privacy
   referrer: 'strict-origin-when-cross-origin',
@@ -127,6 +123,9 @@ export default function RootLayout({
         {/* Google Site Verification */}
         <meta name="google-site-verification" content="GsNdr0i_kczPydqwDiK-NXmfeUbDRbDdrNMnki_oWno" />
         
+        {/* Bing Webmaster Verification */}
+        <meta name="msvalidate.01" content="EB3B8E4CA41E0107775B910C04406DDF" />
+        
         {/* Security Headers */}
         <meta httpEquiv="X-Content-Type-Options" content="nosniff" />
         <meta httpEquiv="X-Frame-Options" content="SAMEORIGIN" />
@@ -135,7 +134,6 @@ export default function RootLayout({
         
         {/* SEO Enhancement */}
         <meta name="author" content="Parth Thakar" />
-        <meta name="language" content="English" />
         <meta name="revisit-after" content="7 days" />
         <meta name="distribution" content="global" />
         <meta name="rating" content="general" />
@@ -257,7 +255,6 @@ export default function RootLayout({
             }
           })}
         </script>
-        <link rel="canonical" href="https://parththakar2003.github.io" />
       </head>
       <body className="min-h-screen flex flex-col bg-gray-100 transition-colors duration-300">
         <ThemeProvider>

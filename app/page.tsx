@@ -379,7 +379,7 @@ export default function Home() {
               Vulnerability Assessment and Penetration Testing (VAPT), and Red Team operations.
             </p>
             <p className="text-sm sm:text-base leading-relaxed">
-              As a master's student in Digital Forensics and Information Security, I have developed comprehensive skills 
+              As a master&apos;s student in Digital Forensics and Information Security, I have developed comprehensive skills 
               in incident response, threat hunting, and forensic investigation. My technical proficiency includes working 
               with industry-standard tools such as Kali Linux, Wireshark, Burp Suite, Autopsy, FTK Imager, and Nessus. 
               I am passionate about securing digital infrastructure and investigating cyber threats.

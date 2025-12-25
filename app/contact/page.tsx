@@ -4,6 +4,13 @@ import { useState, useEffect, useRef } from "react";
 import { useTheme } from "@/context/ThemeContext";
 import { FaEnvelope, FaLinkedin, FaGithub, FaPaperPlane } from "react-icons/fa";
 
+// Web3Forms API Configuration
+// NOTE: This API key is safe to expose in client-side code. Web3Forms keys are designed
+// to be public-facing and are rate-limited and CORS-protected by Web3Forms service.
+// See: https://docs.web3forms.com/getting-started/security
+const WEB3FORMS_API_KEY = 'c8b5ae36-c601-41af-950f-a9adac3dcbb9';
+const PLACEHOLDER_KEY = 'your_web3forms_access_key_here';
+
 export default function Contact() {
   const { darkMode } = useTheme();
   const [isLoaded, setIsLoaded] = useState(false);
@@ -133,10 +140,12 @@ export default function Contact() {
     setErrors({});
     
     // Get Web3Forms access key from environment variable or use default
-    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || 'c8b5ae36-c601-41af-950f-a9adac3dcbb9';
+    // Web3Forms API keys are safe to expose in client-side code as they are
+    // designed for public use and protected by CORS and rate limiting
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY || WEB3FORMS_API_KEY;
     
-    // Fallback to mailto if access key is not configured properly
-    if (!accessKey || accessKey === 'your_web3forms_access_key_here') {
+    // Fallback to mailto if access key is placeholder
+    if (accessKey === PLACEHOLDER_KEY) {
       // Use mailto as fallback
       const mailtoLink = `mailto:Parththakar39@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
       

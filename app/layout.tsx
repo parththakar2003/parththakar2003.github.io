@@ -121,7 +121,7 @@ export default function RootLayout({
     <html lang="en-IN" itemScope itemType="https://schema.org/WebPage">
       <head>
         {/* Google Site Verification */}
-        <meta name="google-site-verification" content="GsNdr0i_kczPydqwDiK-NXmfeUbDRbDdrNMnki_oWno" />
+        <meta name="google-site-verification" content="KNxRncXbje4Lzo8IJzfDibkSoNXF3nVm1DMg2U3ndaE" />
         
         {/* Bing Webmaster Verification */}
         <meta name="msvalidate.01" content="EB3B8E4CA41E0107775B910C04406DDF" />

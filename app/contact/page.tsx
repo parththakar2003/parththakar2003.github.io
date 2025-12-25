@@ -74,7 +74,7 @@ export default function Contact() {
     }
   ];
 
-  // Sanitize input to prevent XSS attacks
+  // Sanitize input to prevent XSS attacks (OWASP A03:2021 - Injection)
   const sanitizeInput = (input: string): string => {
     // Remove HTML tags and dangerous characters
     let sanitized = input
@@ -82,7 +82,16 @@ export default function Contact() {
       .replace(/javascript:/gi, '') // Remove javascript: protocol
       .replace(/data:/gi, '') // Remove data: protocol
       .replace(/vbscript:/gi, '') // Remove vbscript: protocol
+      .replace(/file:/gi, '') // Remove file: protocol
+      .replace(/about:/gi, '') // Remove about: protocol
       .replace(/['"\\]/g, '') // Remove quotes and backslashes
+      .replace(/&lt;/gi, '') // Remove HTML encoded less than
+      .replace(/&gt;/gi, '') // Remove HTML encoded greater than
+      .replace(/&quot;/gi, '') // Remove HTML encoded quotes
+      .replace(/&#x3C;/gi, '') // Remove hex encoded less than
+      .replace(/&#60;/gi, '') // Remove decimal encoded less than
+      .replace(/&#x3E;/gi, '') // Remove hex encoded greater than
+      .replace(/&#62;/gi, '') // Remove decimal encoded greater than
       .trim();
     
     // Remove event handlers (repeatedly to handle nested cases)
@@ -93,6 +102,15 @@ export default function Contact() {
         .replace(/on\w+\s*=/gi, '') // Remove event handlers like onclick=
         .replace(/on\w+\s*\(/gi, ''); // Remove event handlers like onclick(
     }
+    
+    // Additional protection: Remove dangerous patterns at start of strings
+    // Only remove if at beginning to avoid breaking legitimate content like "JavaScript developer"
+    sanitized = sanitized
+      .replace(/^<script>/gi, '')
+      .replace(/^<iframe>/gi, '')
+      .replace(/^<object>/gi, '')
+      .replace(/^<embed>/gi, '')
+      .replace(/^<applet>/gi, '');
     
     return sanitized;
   };
@@ -113,14 +131,45 @@ export default function Contact() {
   // Validate form
   const validateForm = () => {
     const newErrors: { [key: string]: string } = {};
-    if (!formData.name.trim()) newErrors.name = "Name is required";
+    
+    // Name validation - allow letters, numbers, spaces, hyphens, apostrophes
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required";
+    } else if (formData.name.length < 2) {
+      newErrors.name = "Name must be at least 2 characters";
+    } else if (formData.name.length > 100) {
+      newErrors.name = "Name must be less than 100 characters";
+    } else if (!/^[a-zA-Z0-9\s'-]+$/.test(formData.name)) {
+      newErrors.name = "Name can only contain letters, numbers, spaces, hyphens, and apostrophes";
+    }
+    
+    // Email validation
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = "Email is invalid";
+    } else if (formData.email.length > 254) {
+      newErrors.email = "Email is too long";
     }
-    if (!formData.subject.trim()) newErrors.subject = "Subject is required";
-    if (!formData.message.trim()) newErrors.message = "Message is required";
+    
+    // Subject validation - min 3 chars, max 200 chars
+    if (!formData.subject.trim()) {
+      newErrors.subject = "Subject is required";
+    } else if (formData.subject.length < 3) {
+      newErrors.subject = "Subject must be at least 3 characters";
+    } else if (formData.subject.length > 200) {
+      newErrors.subject = "Subject must be less than 200 characters";
+    }
+    
+    // Message validation - min 10 chars, max 2000 chars
+    if (!formData.message.trim()) {
+      newErrors.message = "Message is required";
+    } else if (formData.message.length < 10) {
+      newErrors.message = "Message must be at least 10 characters";
+    } else if (formData.message.length > 2000) {
+      newErrors.message = "Message must be less than 2000 characters";
+    }
+    
     return newErrors;
   };
 

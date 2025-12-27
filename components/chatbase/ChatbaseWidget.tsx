@@ -22,19 +22,22 @@ export default function ChatbaseWidget() {
     // Initialize Chatbase widget
     const initChatbase = () => {
       // Check if Chatbase is already initialized
-      if (window.chatbase && window.chatbase('getState') === 'initialized') {
-        return;
+      if (window.chatbase && typeof window.chatbase === 'function') {
+        try {
+          if (window.chatbase('getState') === 'initialized') {
+            return;
+          }
+        } catch {
+          // If calling getState fails, continue with initialization
+        }
       }
 
       // Setup Chatbase function with queue
       const chatbaseFunc: ChatbaseFunction = (...args: unknown[]) => {
-        if (!chatbaseFunc.q) {
-          chatbaseFunc.q = [];
-        }
-        chatbaseFunc.q.push(args);
+        chatbaseFunc.q?.push(args);
       };
       
-      // Initialize the queue immediately
+      // Initialize the queue
       chatbaseFunc.q = [];
 
       // Wrap with Proxy for method-style calls

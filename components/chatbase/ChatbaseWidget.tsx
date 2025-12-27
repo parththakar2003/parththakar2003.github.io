@@ -37,18 +37,21 @@ export default function ChatbaseWidget() {
     script.setAttribute('chatbotId', chatId);
     script.setAttribute('domain', 'www.chatbase.co');
 
+    // Add error handling for script loading
+    script.onerror = () => {
+      console.error('Chatbase: Failed to load the chat widget script.');
+    };
+
     document.body.appendChild(script);
 
     // Cleanup function
     return () => {
       // Remove script on unmount
-      if (script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
+      script.remove();
       // Remove chatbase config
       delete window.embeddedChatbotConfig;
     };
-  }, []);
+  }, []); // Empty dependency array as chatId comes from build-time env variable
 
   return null; // This component doesn't render anything visible itself
 }

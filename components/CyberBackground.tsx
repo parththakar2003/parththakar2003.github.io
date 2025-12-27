@@ -71,7 +71,7 @@ export default function CyberBackground() {
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
       {/* Animated grid background */}
-      <div className="absolute inset-0 opacity-[0.03]">
+      <div className="absolute inset-0 opacity-[0.08]">
         <div className="absolute inset-0" style={{
           backgroundImage: `
             linear-gradient(rgba(6, 182, 212, 0.4) 1px, transparent 1px),
@@ -92,11 +92,11 @@ export default function CyberBackground() {
             top: `${particle.y}%`,
             width: `${particle.size}px`,
             height: `${particle.size}px`,
-            opacity: 0.15,
+            opacity: 0.3,
           }}
           animate={{
             y: [0, -40, 0],
-            opacity: [0.1, 0.3, 0.1],
+            opacity: [0.2, 0.5, 0.2],
             scale: [1, 1.2, 1],
           }}
           transition={{
@@ -112,7 +112,7 @@ export default function CyberBackground() {
       {hexagons.map((hex) => (
         <motion.div
           key={hex.id}
-          className="absolute border border-cyan-500/20"
+          className="absolute border border-cyan-500/30"
           style={{
             left: `${hex.x}%`,
             top: `${hex.y}%`,
@@ -123,7 +123,7 @@ export default function CyberBackground() {
           animate={{
             rotate: [0, 360],
             scale: [1, 1.15, 1],
-            opacity: [0.05, 0.15, 0.05],
+            opacity: [0.15, 0.35, 0.15],
           }}
           transition={{
             duration: hex.duration,
@@ -141,7 +141,7 @@ export default function CyberBackground() {
           style={{
             left: `${mousePosition.x}%`,
             top: `${mousePosition.y}%`,
-            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.25) 0%, transparent 70%)',
             transform: 'translate(-50%, -50%)',
           }}
           initial={{ opacity: 0, scale: 0.8 }}
@@ -152,7 +152,7 @@ export default function CyberBackground() {
       )}
 
       {/* Circuit lines connecting nodes */}
-      <svg className="absolute inset-0 w-full h-full opacity-10">
+      <svg className="absolute inset-0 w-full h-full opacity-20">
         <defs>
           <linearGradient id="circuitGradient" x1="0%" y1="0%" x2="100%" y2="0%">
             <stop offset="0%" stopColor="rgba(6, 182, 212, 0)" />
@@ -173,7 +173,7 @@ export default function CyberBackground() {
               stroke="url(#circuitGradient)"
               strokeWidth="1"
               animate={{
-                opacity: [0.1, 0.4, 0.1],
+                opacity: [0.2, 0.6, 0.2],
               }}
               transition={{
                 duration: Math.random() * 4 + 3,
@@ -191,14 +191,14 @@ export default function CyberBackground() {
             cx={`${node.x}%`}
             cy={`${node.y}%`}
             r="2"
-            fill="rgba(6, 182, 212, 0.4)"
-            opacity="0.5"
+            fill="rgba(6, 182, 212, 0.6)"
+            opacity="0.7"
           />
         ))}
       </svg>
 
       {/* Binary code rain effect (subtle) */}
-      <div className="absolute inset-0 opacity-5">
+      <div className="absolute inset-0 opacity-10">
         {Array.from({ length: 12 }).map((_, i) => (
           <motion.div
             key={i}
@@ -228,7 +228,7 @@ export default function CyberBackground() {
 
       {/* Scanning lines */}
       <motion.div
-        className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent"
+        className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent"
         animate={{
           y: ['0%', '100%'],
         }}
@@ -240,7 +240,7 @@ export default function CyberBackground() {
       />
 
       <motion.div
-        className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-cyan-400/10 to-transparent"
+        className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent"
         animate={{
           y: ['100%', '0%'],
         }}
@@ -252,10 +252,10 @@ export default function CyberBackground() {
       />
 
       {/* Corner decorations */}
-      <div className="absolute top-0 left-0 w-32 h-32 border-t-2 border-l-2 border-cyan-500/20 opacity-50" />
-      <div className="absolute top-0 right-0 w-32 h-32 border-t-2 border-r-2 border-cyan-500/20 opacity-50" />
-      <div className="absolute bottom-0 left-0 w-32 h-32 border-b-2 border-l-2 border-cyan-500/20 opacity-50" />
-      <div className="absolute bottom-0 right-0 w-32 h-32 border-b-2 border-r-2 border-cyan-500/20 opacity-50" />
+      <div className="absolute top-0 left-0 w-32 h-32 border-t-2 border-l-2 border-cyan-500/30 opacity-60" />
+      <div className="absolute top-0 right-0 w-32 h-32 border-t-2 border-r-2 border-cyan-500/30 opacity-60" />
+      <div className="absolute bottom-0 left-0 w-32 h-32 border-b-2 border-l-2 border-cyan-500/30 opacity-60" />
+      <div className="absolute bottom-0 right-0 w-32 h-32 border-b-2 border-r-2 border-cyan-500/30 opacity-60" />
 
       <style jsx>{`
         @keyframes gridMove {

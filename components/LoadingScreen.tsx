@@ -66,7 +66,6 @@ export default function LoadingScreen() {
   useEffect(() => {
     // Skip all animations if loading screen shouldn't be shown
     if (!isVisible) {
-      document.body.style.overflow = 'unset';
       return;
     }
 
@@ -128,7 +127,8 @@ export default function LoadingScreen() {
       clearTimeout(hideTimeout);
       document.body.style.overflow = 'unset';
     };
-  }, [isVisible]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <AnimatePresence>

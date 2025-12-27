@@ -7,6 +7,7 @@ export default function CyberBackground() {
   const { darkMode } = useTheme();
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isInteracting, setIsInteracting] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
   // Generate particles for background
   const particles = useMemo(() => {
@@ -55,11 +56,17 @@ export default function CyberBackground() {
   }, []);
 
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+    
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [handleMouseMove]);
+  }, [handleMouseMove, mounted]);
 
-  if (!darkMode) return null; // Only show in dark mode
+  if (!mounted || !darkMode) return null; // Only show in dark mode after mounting
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>

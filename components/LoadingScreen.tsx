@@ -26,7 +26,14 @@ const installLines = [
 ];
 
 export default function LoadingScreen() {
-  const [isVisible, setIsVisible] = useState(true);
+  // Check if loading screen has been shown in this session
+  const [isVisible, setIsVisible] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const hasShown = sessionStorage.getItem('loadingScreenShown');
+      return !hasShown;
+    }
+    return true;
+  });
   const [progress, setProgress] = useState(0);
   const [currentLine, setCurrentLine] = useState(0);
   const [showGlitch, setShowGlitch] = useState(false);
@@ -57,6 +64,12 @@ export default function LoadingScreen() {
   }, []);
 
   useEffect(() => {
+    // Skip all animations if loading screen shouldn't be shown
+    if (!isVisible) {
+      document.body.style.overflow = 'unset';
+      return;
+    }
+
     // Prevent scrolling while loading
     document.body.style.overflow = 'hidden';
 
@@ -97,10 +110,13 @@ export default function LoadingScreen() {
       setInstallComplete(true);
     }, INSTALL_COMPLETE_DELAY);
 
-    // Hide loading screen
+    // Hide loading screen and mark as shown in session
     const hideTimeout = setTimeout(() => {
       setIsVisible(false);
       document.body.style.overflow = 'unset';
+      if (typeof window !== 'undefined') {
+        sessionStorage.setItem('loadingScreenShown', 'true');
+      }
     }, HIDE_SCREEN_DELAY);
 
     return () => {
@@ -112,7 +128,7 @@ export default function LoadingScreen() {
       clearTimeout(hideTimeout);
       document.body.style.overflow = 'unset';
     };
-  }, []);
+  }, [isVisible]);
 
   return (
     <AnimatePresence>

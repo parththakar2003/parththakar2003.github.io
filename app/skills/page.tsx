@@ -79,6 +79,12 @@ export default function Skills() {
     cybersecurity: {
       redTeam: [
         {
+          name: "Advent of Cyber 2025🎄 – Side Quests",
+          issuer: "TryHackMe",
+          category: "Red Team",
+          featured: true
+        },
+        {
           name: "Certified AI/ML PENTESTER",
           issuer: "SecOps Group",
           category: "Red Team",
@@ -87,6 +93,12 @@ export default function Skills() {
         {
           name: "CAPIE Certified API Hacking Expert",
           issuer: "CAPIE",
+          category: "Red Team",
+          featured: true
+        },
+        {
+          name: "CRPO Certified Ransomware Protection Officer",
+          issuer: "SecOps Group",
           category: "Red Team",
           featured: true
         },
@@ -104,6 +116,12 @@ export default function Skills() {
         },
       ],
       blueTeam: [
+        {
+          name: "Advent of Cyber 2025🎄",
+          issuer: "TryHackMe",
+          category: "Blue Team",
+          featured: true
+        },
         {
           name: "Student SOC Program Foundation Training",
           issuer: "Microsoft",
@@ -240,6 +258,30 @@ export default function Skills() {
     ],
   };
 
+  // Webinars
+  const webinars = [
+    {
+      name: "Getting Started with API Security Testing: From Basics to Practical Attacks",
+      platform: "Security Webinar",
+      category: "API Security",
+      featured: true
+    },
+  ];
+
+  // Member of
+  const memberships = [
+    {
+      name: "ISC2 Candidate",
+      organization: "ISC2",
+      icon: "🎓"
+    },
+    {
+      name: "Secure with Techies",
+      organization: "Security Community",
+      icon: "🔐"
+    },
+  ];
+
   // Languages
   const languages = [
     { name: "English", proficiency: "Professional" },
@@ -296,7 +338,9 @@ export default function Skills() {
           {[
             { id: "tools", label: "Security Tools" },
             { id: "certs", label: "Certifications" },
+            { id: "webinars", label: "Webinars" },
             { id: "skills", label: "Professional Skills" },
+            { id: "memberships", label: "Member of" },
             { id: "lang", label: "Languages" },
           ].map((tab) => (
             <button
@@ -695,6 +739,50 @@ export default function Skills() {
           </motion.div>
         )}
 
+        {/* Webinars */}
+        {activeTab === "webinars" && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="space-y-4">
+              {webinars.map((webinar, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: index * 0.05 }}
+                  className={`${theme.card} rounded-lg p-6 border ${theme.border} backdrop-blur-sm ${webinar.featured ? 'ring-2 ring-cyan-500/50' : ''}`}
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      {webinar.featured && (
+                        <div className="flex items-center gap-2 mb-2">
+                          <FaAward className="text-yellow-500" />
+                          <span className="text-xs font-semibold uppercase tracking-wide text-yellow-500">Featured</span>
+                        </div>
+                      )}
+                      <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
+                        <FaCertificate className={theme.accent} />
+                        {webinar.name}
+                      </h3>
+                      <div className="flex flex-wrap gap-2">
+                        <span className={`text-xs px-2 py-1 rounded ${getColorClasses('blue')}`}>
+                          {webinar.platform}
+                        </span>
+                        <span className={`text-xs px-2 py-1 rounded ${getColorClasses('purple')}`}>
+                          {webinar.category}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        )}
+
         {/* Professional Skills */}
         {activeTab === "skills" && (
           <motion.div
@@ -728,6 +816,36 @@ export default function Skills() {
                       'bg-red-500'
                     }`}
                   ></motion.div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
+
+        {/* Member of */}
+        {activeTab === "memberships" && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="grid grid-cols-1 sm:grid-cols-2 gap-6"
+          >
+            {memberships.map((membership, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+                className={`${theme.card} rounded-lg p-6 border ${theme.border} backdrop-blur-sm`}
+              >
+                <div className="flex items-center gap-4">
+                  <div className={`w-16 h-16 rounded-full flex items-center justify-center ${getColorClasses('blue')}`}>
+                    <span className="text-3xl">{membership.icon}</span>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-xl font-semibold mb-1">{membership.name}</h3>
+                    <p className={`${theme.muted} text-sm`}>{membership.organization}</p>
+                  </div>
                 </div>
               </motion.div>
             ))}

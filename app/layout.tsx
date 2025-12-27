@@ -1,6 +1,5 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import LoadingScreen from "../components/LoadingScreen";
 import CyberBackground from "../components/CyberBackground";
 import "./globals.css";
 import { ThemeProvider } from '../context/ThemeContext';
@@ -259,7 +258,6 @@ export default function RootLayout({
         </script>
       </head>
       <body className="min-h-screen flex flex-col bg-gray-100 transition-colors duration-300">
-        <LoadingScreen />
         <ThemeProvider>
           <CyberBackground />
           <Navbar />

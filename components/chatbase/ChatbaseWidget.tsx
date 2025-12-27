@@ -26,15 +26,16 @@ export default function ChatbaseWidget() {
         return;
       }
 
-      // Setup Chatbase proxy
-      window.chatbase = (...args: unknown[]) => {
-        if (!window.chatbase.q) {
-          window.chatbase.q = [];
+      // Setup Chatbase function with queue
+      const chatbaseFunc: ChatbaseFunction = (...args: unknown[]) => {
+        if (!chatbaseFunc.q) {
+          chatbaseFunc.q = [];
         }
-        window.chatbase.q.push(args);
+        chatbaseFunc.q.push(args);
       };
 
-      window.chatbase = new Proxy(window.chatbase, {
+      // Wrap with Proxy for method-style calls
+      window.chatbase = new Proxy(chatbaseFunc, {
         get(target, prop) {
           if (prop === 'q') {
             return target.q;
@@ -99,5 +100,4 @@ declare global {
     chatbase: ChatbaseFunction;
   }
 }
-
 

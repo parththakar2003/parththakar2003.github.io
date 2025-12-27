@@ -33,6 +33,9 @@ export default function ChatbaseWidget() {
         }
         chatbaseFunc.q.push(args);
       };
+      
+      // Initialize the queue immediately
+      chatbaseFunc.q = [];
 
       // Wrap with Proxy for method-style calls
       window.chatbase = new Proxy(chatbaseFunc, {
@@ -100,4 +103,3 @@ declare global {
     chatbase: ChatbaseFunction;
   }
 }
-

@@ -14,6 +14,13 @@ export default function FloatingChatbot() {
       return;
     }
 
+    // Validate chatId format (alphanumeric, hyphens, underscores only)
+    const validChatIdPattern = /^[a-zA-Z0-9_-]+$/;
+    if (!validChatIdPattern.test(chatId)) {
+      console.error('Chatbase: Invalid chat ID format. Must contain only alphanumeric characters, hyphens, and underscores.');
+      return;
+    }
+
     // Mark as loaded to show the floating button
     setIsLoaded(true);
   }, [chatId]);

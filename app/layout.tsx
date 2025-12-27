@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import ChatbaseWidget from "../components/chatbase/ChatbaseWidget";
+import FloatingChatbot from "../components/chatbase/FloatingChatbot";
 import "./globals.css";
 import { ThemeProvider } from '../context/ThemeContext';
 import { Analytics } from '@vercel/analytics/next';
@@ -266,7 +266,7 @@ export default function RootLayout({
             <SpeedInsights /> {/* Vercel Speed Insights */}
           </main>
           <Footer />
-          <ChatbaseWidget /> {/* Chatbase floating chat widget */}
+          <FloatingChatbot /> {/* Floating expandable chat widget */}
         </ThemeProvider>
       </body>
     </html>

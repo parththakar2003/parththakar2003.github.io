@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import LoadingScreen from "../components/LoadingScreen";
 import "./globals.css";
 import { ThemeProvider } from '../context/ThemeContext';
 import { Analytics } from '@vercel/analytics/next';
@@ -257,6 +258,7 @@ export default function RootLayout({
         </script>
       </head>
       <body className="min-h-screen flex flex-col bg-gray-100 transition-colors duration-300">
+        <LoadingScreen />
         <ThemeProvider>
           <Navbar />
           <main className="flex-grow">

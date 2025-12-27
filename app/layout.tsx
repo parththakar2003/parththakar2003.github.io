@@ -1,6 +1,7 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import LoadingScreen from "../components/LoadingScreen";
+import CyberBackground from "../components/CyberBackground";
 import "./globals.css";
 import { ThemeProvider } from '../context/ThemeContext';
 import { Analytics } from '@vercel/analytics/next';
@@ -260,8 +261,9 @@ export default function RootLayout({
       <body className="min-h-screen flex flex-col bg-gray-100 transition-colors duration-300">
         <LoadingScreen />
         <ThemeProvider>
+          <CyberBackground />
           <Navbar />
-          <main className="flex-grow">
+          <main className="flex-grow relative z-10">
             {children}
             <Analytics /> {/* Vercel Analytics */}
             <SpeedInsights /> {/* Vercel Speed Insights */}

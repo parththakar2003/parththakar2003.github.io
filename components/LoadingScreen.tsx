@@ -1,5 +1,5 @@
 "use client"
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // Animation timing constants
@@ -10,6 +10,9 @@ const GLITCH_START_DELAY = 2000;
 const GLITCH_DURATION = 800;
 const INSTALL_COMPLETE_DELAY = 3000;
 const HIDE_SCREEN_DELAY = 4500;
+const Z_INDEX_OVERLAY = 9999;
+const SCANNING_LINE_HEIGHT = 600;
+const GRID_TRANSLATE_Y = 50;
 
 const installLines = [
   '> Initializing Security System...',
@@ -28,6 +31,30 @@ export default function LoadingScreen() {
   const [currentLine, setCurrentLine] = useState(0);
   const [showGlitch, setShowGlitch] = useState(false);
   const [installComplete, setInstallComplete] = useState(false);
+
+  // Generate random particles for cyber background
+  const particles = useMemo(() => {
+    return Array.from({ length: 30 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 100,
+      y: Math.random() * 100,
+      size: Math.random() * 3 + 1,
+      duration: Math.random() * 3 + 2,
+      delay: Math.random() * 2,
+    }));
+  }, []);
+
+  // Generate hexagons for cyber background
+  const hexagons = useMemo(() => {
+    return Array.from({ length: 8 }, (_, i) => ({
+      id: i,
+      x: Math.random() * 90 + 5,
+      y: Math.random() * 90 + 5,
+      size: Math.random() * 40 + 30,
+      duration: Math.random() * 5 + 5,
+      delay: Math.random() * 2,
+    }));
+  }, []);
 
   useEffect(() => {
     // Prevent scrolling while loading
@@ -58,8 +85,12 @@ export default function LoadingScreen() {
     // Trigger glitch effect
     const glitchTimeout = setTimeout(() => {
       setShowGlitch(true);
-      setTimeout(() => setShowGlitch(false), GLITCH_DURATION);
     }, GLITCH_START_DELAY);
+
+    // End glitch effect
+    const glitchEndTimeout = setTimeout(() => {
+      setShowGlitch(false);
+    }, GLITCH_START_DELAY + GLITCH_DURATION);
 
     // Show install complete message
     const completeTimeout = setTimeout(() => {
@@ -76,6 +107,7 @@ export default function LoadingScreen() {
       clearInterval(progressInterval);
       clearInterval(lineInterval);
       clearTimeout(glitchTimeout);
+      clearTimeout(glitchEndTimeout);
       clearTimeout(completeTimeout);
       clearTimeout(hideTimeout);
       document.body.style.overflow = 'unset';
@@ -89,7 +121,8 @@ export default function LoadingScreen() {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.8 }}
-          className="fixed inset-0 z-[9999] bg-black flex items-center justify-center overflow-hidden"
+          style={{ zIndex: Z_INDEX_OVERLAY }}
+          className="fixed inset-0 bg-black flex items-center justify-center overflow-hidden"
         >
           {/* Animated grid background */}
           <div className="absolute inset-0 opacity-20">
@@ -102,6 +135,119 @@ export default function LoadingScreen() {
               animation: 'gridMove 20s linear infinite'
             }} />
           </div>
+
+          {/* Floating particles */}
+          <div className="absolute inset-0 pointer-events-none">
+            {particles.map((particle) => (
+              <motion.div
+                key={particle.id}
+                className="absolute rounded-full bg-cyan-400"
+                style={{
+                  left: `${particle.x}%`,
+                  top: `${particle.y}%`,
+                  width: `${particle.size}px`,
+                  height: `${particle.size}px`,
+                }}
+                animate={{
+                  y: [0, -30, 0],
+                  opacity: [0.2, 0.8, 0.2],
+                }}
+                transition={{
+                  duration: particle.duration,
+                  repeat: Infinity,
+                  delay: particle.delay,
+                  ease: "easeInOut",
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Hexagon shapes */}
+          <div className="absolute inset-0 pointer-events-none overflow-hidden">
+            {hexagons.map((hex) => (
+              <motion.div
+                key={hex.id}
+                className="absolute border border-cyan-500/30"
+                style={{
+                  left: `${hex.x}%`,
+                  top: `${hex.y}%`,
+                  width: `${hex.size}px`,
+                  height: `${hex.size}px`,
+                  clipPath: 'polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%)',
+                }}
+                animate={{
+                  rotate: [0, 360],
+                  scale: [1, 1.2, 1],
+                  opacity: [0.1, 0.4, 0.1],
+                }}
+                transition={{
+                  duration: hex.duration,
+                  repeat: Infinity,
+                  delay: hex.delay,
+                  ease: "linear",
+                }}
+              />
+            ))}
+          </div>
+
+          {/* Binary rain effect */}
+          <div className="absolute inset-0 pointer-events-none opacity-10">
+            {Array.from({ length: 15 }).map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute text-cyan-400 font-mono text-xs"
+                style={{
+                  left: `${(i * 7) % 100}%`,
+                  top: '-20px',
+                }}
+                animate={{
+                  y: ['0vh', '120vh'],
+                }}
+                transition={{
+                  duration: Math.random() * 5 + 3,
+                  repeat: Infinity,
+                  delay: Math.random() * 3,
+                  ease: "linear",
+                }}
+              >
+                {Array.from({ length: 10 }).map((_, j) => (
+                  <div key={j}>
+                    {Math.random() > 0.5 ? '1' : '0'}
+                  </div>
+                ))}
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Circuit lines */}
+          <svg className="absolute inset-0 w-full h-full opacity-20 pointer-events-none">
+            <defs>
+              <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stopColor="rgba(6, 182, 212, 0)" />
+                <stop offset="50%" stopColor="rgba(6, 182, 212, 0.6)" />
+                <stop offset="100%" stopColor="rgba(6, 182, 212, 0)" />
+              </linearGradient>
+            </defs>
+            {Array.from({ length: 8 }).map((_, i) => (
+              <motion.line
+                key={i}
+                x1={`${Math.random() * 100}%`}
+                y1={`${Math.random() * 100}%`}
+                x2={`${Math.random() * 100}%`}
+                y2={`${Math.random() * 100}%`}
+                stroke="url(#lineGradient)"
+                strokeWidth="1"
+                animate={{
+                  opacity: [0.2, 0.8, 0.2],
+                }}
+                transition={{
+                  duration: Math.random() * 3 + 2,
+                  repeat: Infinity,
+                  delay: Math.random() * 2,
+                }}
+              />
+            ))}
+          </svg>
 
           {/* Glitch overlay */}
           {showGlitch && (
@@ -260,7 +406,7 @@ export default function LoadingScreen() {
             {/* Scanning line effect */}
             <motion.div
               className="absolute inset-0 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent opacity-50"
-              animate={{ y: [0, 600, 0] }}
+              animate={{ y: [0, SCANNING_LINE_HEIGHT, 0] }}
               transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
             />
           </div>
@@ -268,7 +414,7 @@ export default function LoadingScreen() {
           <style jsx>{`
             @keyframes gridMove {
               0% { transform: translateY(0); }
-              100% { transform: translateY(50px); }
+              100% { transform: translateY(${GRID_TRANSLATE_Y}px); }
             }
           `}</style>
         </motion.div>

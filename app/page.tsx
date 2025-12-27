@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect, useMemo, useRef } from "react";
 import { useTheme } from "@/context/ThemeContext";
+import Image from "next/image";
 import { FaArrowRight, FaGithub, FaLinkedin, FaEnvelope, FaCode, FaServer, FaDatabase, FaShieldAlt } from "react-icons/fa";
 import { SiReact, SiNextdotjs, SiTypescript, SiJavascript, SiPython, SiKalilinux, SiWireshark } from "react-icons/si";
 import { LuBraces } from "react-icons/lu";
@@ -379,14 +380,21 @@ export default function Home() {
                 <div className="flex items-center gap-4 relative z-10">
                   <div className="relative">
                     <div 
-                      className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full border-2 border-cyan-500 bg-gradient-to-br from-cyan-500 to-indigo-500 flex items-center justify-center cursor-pointer hover:scale-105 transition-transform" 
+                      className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full border-2 border-cyan-500 overflow-hidden cursor-pointer hover:scale-105 transition-transform" 
                       onClick={() => setShowProfileModal(true)}
                       onKeyDown={(e) => e.key === 'Enter' && setShowProfileModal(true)}
                       role="button"
                       tabIndex={0}
                       aria-label="View profile picture"
                     >
-                      <FaShieldAlt className="text-2xl sm:text-3xl md:text-4xl text-white" />
+                      <Image 
+                        src="/images/profile.jpg" 
+                        alt="Parth Thakar - Cybersecurity Professional" 
+                        width={96} 
+                        height={96}
+                        className="w-full h-full object-cover"
+                        priority
+                      />
                     </div>
                     <div className="absolute -bottom-1 -right-1 w-5 h-5 md:w-6 md:h-6 rounded-full bg-green-500 border-2 border-white flex items-center justify-center">
                       <FaShieldAlt className="text-[10px] md:text-xs text-white" />
@@ -945,8 +953,14 @@ export default function Home() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="relative">
-              <div className="w-full h-96 bg-gradient-to-br from-cyan-500 to-indigo-500 flex items-center justify-center">
-                <FaShieldAlt className="text-9xl text-white opacity-90" />
+              <div className="w-full h-96 relative overflow-hidden bg-gray-200">
+                <Image 
+                  src="/images/profile.jpg" 
+                  alt="Parth Thakar - Cybersecurity Professional" 
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
               <button
                 className="absolute top-3 right-3 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"

@@ -2,6 +2,15 @@
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+// Animation timing constants
+const PROGRESS_UPDATE_INTERVAL = 200;
+const PROGRESS_INCREMENT_MAX = 15;
+const LINE_UPDATE_INTERVAL = 300;
+const GLITCH_START_DELAY = 2000;
+const GLITCH_DURATION = 800;
+const INSTALL_COMPLETE_DELAY = 3000;
+const HIDE_SCREEN_DELAY = 4500;
+
 const installLines = [
   '> Initializing Security System...',
   '> Loading Defense Modules...',
@@ -31,9 +40,9 @@ export default function LoadingScreen() {
           clearInterval(progressInterval);
           return 100;
         }
-        return prev + Math.random() * 15;
+        return prev + Math.random() * PROGRESS_INCREMENT_MAX;
       });
-    }, 200);
+    }, PROGRESS_UPDATE_INTERVAL);
 
     // Terminal line animation
     const lineInterval = setInterval(() => {
@@ -44,24 +53,24 @@ export default function LoadingScreen() {
         }
         return prev + 1;
       });
-    }, 300);
+    }, LINE_UPDATE_INTERVAL);
 
-    // Trigger glitch effect at ~85% progress
+    // Trigger glitch effect
     const glitchTimeout = setTimeout(() => {
       setShowGlitch(true);
-      setTimeout(() => setShowGlitch(false), 800);
-    }, 2000);
+      setTimeout(() => setShowGlitch(false), GLITCH_DURATION);
+    }, GLITCH_START_DELAY);
 
     // Show install complete message
     const completeTimeout = setTimeout(() => {
       setInstallComplete(true);
-    }, 3000);
+    }, INSTALL_COMPLETE_DELAY);
 
     // Hide loading screen
     const hideTimeout = setTimeout(() => {
       setIsVisible(false);
       document.body.style.overflow = 'unset';
-    }, 4500);
+    }, HIDE_SCREEN_DELAY);
 
     return () => {
       clearInterval(progressInterval);

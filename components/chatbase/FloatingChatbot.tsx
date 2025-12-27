@@ -40,9 +40,6 @@ export default function FloatingChatbot() {
           aria-label="Open chat"
         >
           <FaComments className="text-2xl" />
-          <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-6 h-6 flex items-center justify-center animate-pulse">
-            ?
-          </span>
         </button>
       </div>
 
@@ -78,10 +75,12 @@ export default function FloatingChatbot() {
           {/* Chat Content (iframe) */}
           <div className="flex-1 overflow-hidden">
             <iframe
-              src={`https://www.chatbase.co/chatbot-iframe/${chatId}`}
+              src={`https://www.chatbase.co/chatbot-iframe/${encodeURIComponent(chatId)}`}
               title="Chatbase chat support"
               className="w-full h-full border-0"
               allow="clipboard-write"
+              sandbox="allow-scripts allow-same-origin allow-forms"
+              referrerPolicy="strict-origin-when-cross-origin"
             />
           </div>
         </div>

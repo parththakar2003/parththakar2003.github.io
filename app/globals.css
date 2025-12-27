@@ -149,35 +149,6 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Floating Chatbot Animations */
-@keyframes chat-bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.chat-button-bounce {
-  animation: chat-bounce 2s ease-in-out infinite;
-}
-
-@keyframes chat-pulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.8;
-    transform: scale(1.05);
-  }
-}
-
-.chat-pulse {
-  animation: chat-pulse 2s ease-in-out infinite;
-}
-
 /* Cyber Map Animations */
 @keyframes pulse-marker {
   0%, 100% {

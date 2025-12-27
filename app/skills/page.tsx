@@ -258,13 +258,67 @@ export default function Skills() {
     ],
   };
 
-  // Webinars
+  // Webinars/Seminars
   const webinars = [
     {
       name: "Getting Started with API Security Testing: From Basics to Practical Attacks",
       platform: "Security Webinar",
       category: "API Security",
       featured: true
+    },
+    {
+      name: "Hibernate Framework",
+      platform: "Workshop",
+      category: "Development",
+      featured: false
+    },
+    {
+      name: "Workshop on React native",
+      platform: "Workshop",
+      category: "Mobile Development",
+      featured: false
+    },
+    {
+      name: "Workshop for Odoo-ERP function",
+      platform: "Workshop",
+      category: "ERP Systems",
+      featured: false
+    },
+    {
+      name: "Flutter- Build apps for any Screen",
+      platform: "Workshop",
+      category: "Mobile Development",
+      featured: false
+    },
+    {
+      name: "Power BI – Visualization",
+      platform: "Seminar",
+      category: "Data Analytics",
+      featured: false
+    },
+    {
+      name: "Cybersecurity: Privacy & Data Protection",
+      platform: "Seminar",
+      category: "Cybersecurity",
+      featured: false
+    },
+    {
+      name: "Implementing cybersecurity best Practices",
+      platform: "Seminar",
+      category: "Cybersecurity",
+      featured: false
+    },
+    {
+      name: "Fraud Investigation Augmented by AI & Technology",
+      platform: "Seminar",
+      category: "Digital Forensics",
+      featured: false
+    },
+    {
+      name: "IoTSEC Workshop 2025",
+      platform: "Workshop",
+      category: "IoT Security",
+      featured: false
     },
   ];
 
@@ -338,7 +392,7 @@ export default function Skills() {
           {[
             { id: "tools", label: "Security Tools" },
             { id: "certs", label: "Certifications" },
-            { id: "webinars", label: "Webinars" },
+            { id: "webinars", label: "Webinars/Seminars" },
             { id: "skills", label: "Professional Skills" },
             { id: "memberships", label: "Member of" },
             { id: "lang", label: "Languages" },

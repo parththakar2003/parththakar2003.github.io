@@ -11,9 +11,11 @@
     "reset": "rimraf node_modules .next package-lock.json && npm install && npm run build && npm dev"
   },
   "dependencies": {
+    "@types/jsonwebtoken": "^9.0.10",
     "@vercel/analytics": "^1.5.0",
     "@vercel/speed-insights": "^1.2.0",
     "framer-motion": "^12.6.3",
+    "jsonwebtoken": "^9.0.3",
     "next": "15.5.9",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

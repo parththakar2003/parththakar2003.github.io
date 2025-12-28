@@ -31,6 +31,11 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const successTimerRef = useRef<NodeJS.Timeout | null>(null);
+  
+  // DoS/DDoS Protection: Rate limiting state
+  const [submissionAttempts, setSubmissionAttempts] = useState<number[]>([]);
+  const [isRateLimited, setIsRateLimited] = useState(false);
+  const rateLimitTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Cleanup timers on unmount to prevent memory leaks
   useEffect(() => {
@@ -38,8 +43,79 @@ export default function Contact() {
       if (successTimerRef.current) {
         clearTimeout(successTimerRef.current);
       }
+      if (rateLimitTimerRef.current) {
+        clearTimeout(rateLimitTimerRef.current);
+      }
     };
   }, []);
+
+  // DoS/DDoS Protection: Load submission attempts from localStorage on mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const stored = localStorage.getItem('contactFormAttempts');
+        if (stored) {
+          const attempts = JSON.parse(stored) as number[];
+          const now = Date.now();
+          const fiveMinutesAgo = now - 5 * 60 * 1000;
+          // Only keep recent attempts
+          const recentAttempts = attempts.filter(timestamp => timestamp > fiveMinutesAgo);
+          setSubmissionAttempts(recentAttempts);
+        }
+      } catch (error) {
+        console.error('Error loading rate limit data:', error instanceof Error ? error.message : 'Unknown error');
+      }
+    }
+  }, []);
+
+  // DoS/DDoS Protection: Check and clean up old submission attempts
+  // Rate limit: Maximum 3 submissions per 5 minutes from same client
+  useEffect(() => {
+    const checkRateLimit = () => {
+      const now = Date.now();
+      const fiveMinutesAgo = now - 5 * 60 * 1000; // 5 minutes
+      
+      // Remove attempts older than 5 minutes
+      const recentAttempts = submissionAttempts.filter(timestamp => timestamp > fiveMinutesAgo);
+      
+      // Update state and localStorage if changed
+      if (recentAttempts.length !== submissionAttempts.length) {
+        setSubmissionAttempts(recentAttempts);
+        if (typeof window !== 'undefined') {
+          try {
+            localStorage.setItem('contactFormAttempts', JSON.stringify(recentAttempts));
+          } catch (error) {
+            console.error('Error saving rate limit data:', error instanceof Error ? error.message : 'Unknown error');
+          }
+        }
+      }
+      
+      // Check if rate limited (more than 3 attempts in 5 minutes)
+      if (recentAttempts.length >= 3) {
+        setIsRateLimited(true);
+        // Auto-remove rate limit after 5 minutes from first attempt
+        // Only set timer if there are attempts
+        if (recentAttempts.length > 0) {
+          const oldestAttempt = Math.min(...recentAttempts);
+          const timeUntilReset = (oldestAttempt + 5 * 60 * 1000) - now;
+          
+          // Clear existing timer before setting new one
+          if (rateLimitTimerRef.current) {
+            clearTimeout(rateLimitTimerRef.current);
+          }
+          
+          rateLimitTimerRef.current = setTimeout(() => {
+            setIsRateLimited(false);
+            rateLimitTimerRef.current = null;
+          }, timeUntilReset);
+        }
+      } else {
+        setIsRateLimited(false);
+      }
+    };
+    
+    checkRateLimit();
+  }, [submissionAttempts]);
 
   // Theme styles
   const theme = {
@@ -74,12 +150,13 @@ export default function Contact() {
     }
   ];
 
-  // Sanitize input to prevent XSS attacks (OWASP A03:2021 - Injection)
+  // Sanitize input to prevent XSS attacks (OWASP A05:2025 - Injection)
+  // This function removes dangerous content from user input before processing
   const sanitizeInput = (input: string): string => {
     // Remove HTML tags and dangerous characters
     let sanitized = input
       .replace(/[<>]/g, '') // Remove angle brackets
-      .replace(/javascript:/gi, '') // Remove javascript: protocol
+      .replace(/javascript:/gi, '') // Remove javascript: protocol (OWASP A05:2025)
       .replace(/data:/gi, '') // Remove data: protocol
       .replace(/vbscript:/gi, '') // Remove vbscript: protocol
       .replace(/file:/gi, '') // Remove file: protocol
@@ -95,6 +172,7 @@ export default function Contact() {
       .trim();
     
     // Remove event handlers (repeatedly to handle nested cases)
+    // OWASP A05:2025 - Protection against XSS via event handlers
     let prevLength = 0;
     while (sanitized.length !== prevLength) {
       prevLength = sanitized.length;
@@ -176,8 +254,18 @@ export default function Contact() {
   // Handle form submission using Web3Forms API
   // This sends emails directly without requiring a backend server
   // Form data is sent to Web3Forms API which forwards it to the configured email
+  // OWASP A10:2025 - Mishandling of Exceptional Conditions: Comprehensive error handling
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    // DoS/DDoS Protection: Check rate limit before processing
+    if (isRateLimited) {
+      setErrors({ 
+        submit: "Too many submission attempts. Please wait a few minutes before trying again." 
+      });
+      return;
+    }
+    
     const validationErrors = validateForm();
     
     if (Object.keys(validationErrors).length > 0) {
@@ -188,6 +276,19 @@ export default function Contact() {
     setIsSubmitting(true);
     setErrors({});
     
+    // DoS/DDoS Protection: Record submission attempt
+    const newAttempts = [...submissionAttempts, Date.now()];
+    setSubmissionAttempts(newAttempts);
+    
+    // Save to localStorage for persistence
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem('contactFormAttempts', JSON.stringify(newAttempts));
+      } catch (error) {
+        console.error('Error saving rate limit data:', error instanceof Error ? error.message : 'Unknown error');
+      }
+    }
+    
     // Get Web3Forms access key from environment variable or use default
     // Web3Forms API keys are safe to expose in client-side code as they are
     // designed for public use and protected by CORS and rate limiting
@@ -195,7 +296,7 @@ export default function Contact() {
     
     // Fallback to mailto if access key is placeholder
     if (accessKey === PLACEHOLDER_KEY) {
-      // Use mailto as fallback
+      // Use mailto as fallback (graceful degradation)
       const mailtoLink = `mailto:Parththakar39@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
       
       try {
@@ -213,7 +314,8 @@ export default function Contact() {
           successTimerRef.current = null;
         }, 3000);
       } catch (error) {
-        console.error("Error opening email client:", error);
+        // Log error without exposing sensitive details (OWASP A09:2025)
+        console.error("Error opening email client:", error instanceof Error ? error.message : 'Unknown error');
         setIsSubmitting(false);
         setErrors({ submit: "Unable to send message. Please try emailing directly to Parththakar39@gmail.com" });
       }
@@ -221,7 +323,11 @@ export default function Contact() {
     }
     
     try {
-      // Web3Forms API endpoint
+      // OWASP A10:2025 - Add timeout protection for API requests
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
+      
+      // Web3Forms API endpoint (OWASP A04:2025 - Always use HTTPS)
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
         headers: {
@@ -236,7 +342,15 @@ export default function Contact() {
           message: formData.message,
           from_name: formData.name,
         }),
+        signal: controller.signal,
       });
+      
+      clearTimeout(timeoutId);
+
+      // OWASP A10:2025 - Handle HTTP error responses
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
       const result = await response.json();
       
@@ -257,14 +371,32 @@ export default function Contact() {
           successTimerRef.current = null;
         }, 5000);
       } else {
+        // API returned unsuccessful response
         throw new Error(result.message || "Failed to send message");
       }
     } catch (error) {
-      console.error("Error sending message:", error);
-      setErrors({ 
-        submit: "Failed to send message. Please try emailing directly to Parththakar39@gmail.com or try again later." 
-      });
+      // OWASP A10:2025 - Handle different types of errors gracefully
+      // OWASP A09:2025 - Log errors for monitoring without exposing sensitive data
+      let errorMessage = "Failed to send message. Please try emailing directly to Parththakar39@gmail.com or try again later.";
+      
+      if (error instanceof Error) {
+        // Handle specific error types
+        if (error.name === 'AbortError') {
+          errorMessage = "Request timed out. Please check your internet connection and try again.";
+          console.error("Request timeout:", error.message);
+        } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+          errorMessage = "Network error. Please check your internet connection and try again.";
+          console.error("Network error:", error.message);
+        } else {
+          console.error("Error sending message:", error.message);
+        }
+      } else {
+        console.error("Unknown error sending message:", String(error));
+      }
+      
+      setErrors({ submit: errorMessage });
     } finally {
+      // Always reset submitting state
       setIsSubmitting(false);
     }
   };
@@ -394,7 +526,11 @@ export default function Contact() {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mb-4 p-4 rounded-lg bg-red-500/20 border border-red-500/50 text-red-400"
+                className={`mb-4 p-4 rounded-lg border ${
+                  isRateLimited 
+                    ? 'bg-orange-500/20 border-orange-500/50 text-orange-400'
+                    : 'bg-red-500/20 border-red-500/50 text-red-400'
+                }`}
               >
                 <p className="text-sm">{errors.submit}</p>
               </motion.div>
@@ -472,11 +608,13 @@ export default function Contact() {
               {/* Submit Button */}
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className={`w-full px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-medium flex items-center justify-center gap-2 hover:from-cyan-500 hover:to-blue-500 transition-all ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                disabled={isSubmitting || isRateLimited}
+                className={`w-full px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-medium flex items-center justify-center gap-2 hover:from-cyan-500 hover:to-blue-500 transition-all ${
+                  (isSubmitting || isRateLimited) ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
               >
                 <FaPaperPlane className="text-sm" />
-                <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
+                <span>{isSubmitting ? 'Sending...' : isRateLimited ? 'Rate Limited' : 'Send Message'}</span>
               </button>
               
               {/* Info Text */}

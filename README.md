@@ -89,10 +89,15 @@ See [CONTACT_FORM_SETUP.md](./CONTACT_FORM_SETUP.md) for detailed deployment ins
 │   ├── projects/       # Projects page
 │   ├── journey/        # Journey/experience page
 │   ├── skills/         # Skills page
-│   └── blog/           # Blog section
+│   ├── blog/           # Blog section
+│   └── error.tsx       # Error boundary
 ├── components/         # React components
 ├── context/            # React context providers
 ├── data/              # Content (JSON)
+├── docs/              # Documentation
+│   ├── security/      # Security docs (OWASP, DoS/DDoS)
+│   ├── setup/         # Setup guides
+│   └── features/      # Feature documentation
 ├── public/            # Static assets
 └── .github/           # GitHub Actions workflows
 ```
@@ -105,6 +110,29 @@ See [CONTACT_FORM_SETUP.md](./CONTACT_FORM_SETUP.md) for detailed deployment ins
 - `npm run lint` - Run ESLint
 - `npm run clean` - Clean build artifacts and reinstall
 - `npm run reset` - Full reset (removes node_modules)
+
+## 📚 Documentation
+
+Comprehensive documentation is available in the [`docs/`](./docs/) directory:
+
+- **Security**: [OWASP Top 10:2025 Compliance](./docs/security/SECURITY.md), [DoS/DDoS Protection](./docs/security/DOS_DDOS_PROTECTION.md)
+- **Setup**: [Project Setup](./docs/setup/SETUP.md), [Contact Form](./docs/setup/CONTACT_FORM_SETUP.md)
+- **Features**: [SEO Strategy](./docs/features/SEO_STRATEGY.md), [Implementation](./docs/features/IMPLEMENTATION_SUMMARY.md)
+
+See the [Documentation Index](./docs/README.md) for a complete list.
+
+## 🔐 Security
+
+This website implements **OWASP Top 10:2025** security standards with comprehensive protection measures:
+
+- ✅ Input validation and sanitization
+- ✅ Security headers (CSP, HSTS, X-Frame-Options, etc.)
+- ✅ DoS/DDoS protection with rate limiting
+- ✅ Error handling without information disclosure
+- ✅ Software supply chain security
+- ✅ No sensitive data exposure
+
+For detailed security information, see [docs/security/SECURITY.md](./docs/security/SECURITY.md).
 
 ## 🌐 Deployment
 

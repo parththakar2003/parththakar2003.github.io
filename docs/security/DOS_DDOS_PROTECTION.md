@@ -10,9 +10,10 @@ This document outlines the Denial of Service (DoS) and Distributed Denial of Ser
 
 **Implementation**: Contact Form Rate Limiting
 - **Location**: `/app/contact/page.tsx`
-- **Mechanism**: Client-side rate limiting using localStorage and state management
+- **Mechanism**: Client-side rate limiting using localStorage and React state management
 - **Limits**: Maximum 3 form submissions per 5 minutes per browser session
 - **Purpose**: Prevents automated form spam and reduces server load
+- **Persistence**: Submission attempts are stored in localStorage, surviving page refreshes
 
 **How it works**:
 ```typescript

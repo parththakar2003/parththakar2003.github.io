@@ -35,6 +35,7 @@ export default function Contact() {
   // DoS/DDoS Protection: Rate limiting state
   const [submissionAttempts, setSubmissionAttempts] = useState<number[]>([]);
   const [isRateLimited, setIsRateLimited] = useState(false);
+  const rateLimitTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   // Cleanup timers on unmount to prevent memory leaks
   useEffect(() => {
@@ -42,7 +43,29 @@ export default function Contact() {
       if (successTimerRef.current) {
         clearTimeout(successTimerRef.current);
       }
+      if (rateLimitTimerRef.current) {
+        clearTimeout(rateLimitTimerRef.current);
+      }
     };
+  }, []);
+
+  // DoS/DDoS Protection: Load submission attempts from localStorage on mount
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      try {
+        const stored = localStorage.getItem('contactFormAttempts');
+        if (stored) {
+          const attempts = JSON.parse(stored) as number[];
+          const now = Date.now();
+          const fiveMinutesAgo = now - 5 * 60 * 1000;
+          // Only keep recent attempts
+          const recentAttempts = attempts.filter(timestamp => timestamp > fiveMinutesAgo);
+          setSubmissionAttempts(recentAttempts);
+        }
+      } catch (error) {
+        console.error('Error loading rate limit data:', error instanceof Error ? error.message : 'Unknown error');
+      }
+    }
   }, []);
 
   // DoS/DDoS Protection: Check and clean up old submission attempts
@@ -54,15 +77,38 @@ export default function Contact() {
       
       // Remove attempts older than 5 minutes
       const recentAttempts = submissionAttempts.filter(timestamp => timestamp > fiveMinutesAgo);
-      setSubmissionAttempts(recentAttempts);
+      
+      // Update state and localStorage if changed
+      if (recentAttempts.length !== submissionAttempts.length) {
+        setSubmissionAttempts(recentAttempts);
+        if (typeof window !== 'undefined') {
+          try {
+            localStorage.setItem('contactFormAttempts', JSON.stringify(recentAttempts));
+          } catch (error) {
+            console.error('Error saving rate limit data:', error instanceof Error ? error.message : 'Unknown error');
+          }
+        }
+      }
       
       // Check if rate limited (more than 3 attempts in 5 minutes)
       if (recentAttempts.length >= 3) {
         setIsRateLimited(true);
         // Auto-remove rate limit after 5 minutes from first attempt
-        const oldestAttempt = Math.min(...recentAttempts);
-        const timeUntilReset = (oldestAttempt + 5 * 60 * 1000) - now;
-        setTimeout(() => setIsRateLimited(false), timeUntilReset);
+        // Only set timer if there are attempts
+        if (recentAttempts.length > 0) {
+          const oldestAttempt = Math.min(...recentAttempts);
+          const timeUntilReset = (oldestAttempt + 5 * 60 * 1000) - now;
+          
+          // Clear existing timer before setting new one
+          if (rateLimitTimerRef.current) {
+            clearTimeout(rateLimitTimerRef.current);
+          }
+          
+          rateLimitTimerRef.current = setTimeout(() => {
+            setIsRateLimited(false);
+            rateLimitTimerRef.current = null;
+          }, timeUntilReset);
+        }
       } else {
         setIsRateLimited(false);
       }
@@ -231,7 +277,17 @@ export default function Contact() {
     setErrors({});
     
     // DoS/DDoS Protection: Record submission attempt
-    setSubmissionAttempts(prev => [...prev, Date.now()]);
+    const newAttempts = [...submissionAttempts, Date.now()];
+    setSubmissionAttempts(newAttempts);
+    
+    // Save to localStorage for persistence
+    if (typeof window !== 'undefined') {
+      try {
+        localStorage.setItem('contactFormAttempts', JSON.stringify(newAttempts));
+      } catch (error) {
+        console.error('Error saving rate limit data:', error instanceof Error ? error.message : 'Unknown error');
+      }
+    }
     
     // Get Web3Forms access key from environment variable or use default
     // Web3Forms API keys are safe to expose in client-side code as they are

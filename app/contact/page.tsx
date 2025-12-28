@@ -31,6 +31,10 @@ export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
   const successTimerRef = useRef<NodeJS.Timeout | null>(null);
+  
+  // DoS/DDoS Protection: Rate limiting state
+  const [submissionAttempts, setSubmissionAttempts] = useState<number[]>([]);
+  const [isRateLimited, setIsRateLimited] = useState(false);
 
   // Cleanup timers on unmount to prevent memory leaks
   useEffect(() => {
@@ -40,6 +44,32 @@ export default function Contact() {
       }
     };
   }, []);
+
+  // DoS/DDoS Protection: Check and clean up old submission attempts
+  // Rate limit: Maximum 3 submissions per 5 minutes from same client
+  useEffect(() => {
+    const checkRateLimit = () => {
+      const now = Date.now();
+      const fiveMinutesAgo = now - 5 * 60 * 1000; // 5 minutes
+      
+      // Remove attempts older than 5 minutes
+      const recentAttempts = submissionAttempts.filter(timestamp => timestamp > fiveMinutesAgo);
+      setSubmissionAttempts(recentAttempts);
+      
+      // Check if rate limited (more than 3 attempts in 5 minutes)
+      if (recentAttempts.length >= 3) {
+        setIsRateLimited(true);
+        // Auto-remove rate limit after 5 minutes from first attempt
+        const oldestAttempt = Math.min(...recentAttempts);
+        const timeUntilReset = (oldestAttempt + 5 * 60 * 1000) - now;
+        setTimeout(() => setIsRateLimited(false), timeUntilReset);
+      } else {
+        setIsRateLimited(false);
+      }
+    };
+    
+    checkRateLimit();
+  }, [submissionAttempts]);
 
   // Theme styles
   const theme = {
@@ -181,6 +211,15 @@ export default function Contact() {
   // OWASP A10:2025 - Mishandling of Exceptional Conditions: Comprehensive error handling
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    // DoS/DDoS Protection: Check rate limit before processing
+    if (isRateLimited) {
+      setErrors({ 
+        submit: "Too many submission attempts. Please wait a few minutes before trying again." 
+      });
+      return;
+    }
+    
     const validationErrors = validateForm();
     
     if (Object.keys(validationErrors).length > 0) {
@@ -190,6 +229,9 @@ export default function Contact() {
 
     setIsSubmitting(true);
     setErrors({});
+    
+    // DoS/DDoS Protection: Record submission attempt
+    setSubmissionAttempts(prev => [...prev, Date.now()]);
     
     // Get Web3Forms access key from environment variable or use default
     // Web3Forms API keys are safe to expose in client-side code as they are
@@ -428,7 +470,11 @@ export default function Contact() {
               <motion.div
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mb-4 p-4 rounded-lg bg-red-500/20 border border-red-500/50 text-red-400"
+                className={`mb-4 p-4 rounded-lg border ${
+                  isRateLimited 
+                    ? 'bg-orange-500/20 border-orange-500/50 text-orange-400'
+                    : 'bg-red-500/20 border-red-500/50 text-red-400'
+                }`}
               >
                 <p className="text-sm">{errors.submit}</p>
               </motion.div>
@@ -506,11 +552,13 @@ export default function Contact() {
               {/* Submit Button */}
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className={`w-full px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-medium flex items-center justify-center gap-2 hover:from-cyan-500 hover:to-blue-500 transition-all ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                disabled={isSubmitting || isRateLimited}
+                className={`w-full px-6 py-3 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 text-white font-medium flex items-center justify-center gap-2 hover:from-cyan-500 hover:to-blue-500 transition-all ${
+                  (isSubmitting || isRateLimited) ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
               >
                 <FaPaperPlane className="text-sm" />
-                <span>{isSubmitting ? 'Sending...' : 'Send Message'}</span>
+                <span>{isSubmitting ? 'Sending...' : isRateLimited ? 'Rate Limited' : 'Send Message'}</span>
               </button>
               
               {/* Info Text */}

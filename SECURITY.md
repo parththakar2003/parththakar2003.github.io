@@ -105,12 +105,21 @@ This portfolio website is built with security best practices in mind. As a publi
 
 ## Additional Security Measures Implemented
 
-### 1. **No Sensitive Data in Repository**
+### 1. **DoS/DDoS Protection**
+- Client-side rate limiting on contact form (3 submissions per 5 minutes)
+- Static site architecture naturally resistant to DDoS attacks
+- CDN distribution via GitHub Pages reduces attack surface
+- Cloudflare integration recommended for advanced protection (see DOS_DDOS_PROTECTION.md)
+- No server-side processing eliminates resource exhaustion attacks
+- Web3Forms API includes rate limiting and spam protection
+- Input validation reduces malicious request processing
+
+### 2. **No Sensitive Data in Repository**
 - No API keys, tokens, passwords, or credentials are stored in the codebase
 - Environment-specific configurations should be managed via environment variables (not committed to git)
 - Internal IP addresses and development origins have been removed from configuration files
 
-### 2. **Input Sanitization and Validation**
+### 3. **Input Sanitization and Validation**
 - All user inputs in the contact form are sanitized to prevent XSS attacks
 - HTML tags and JavaScript protocols are stripped from form inputs
 - Event handlers are removed from user-submitted content
@@ -118,34 +127,47 @@ This portfolio website is built with security best practices in mind. As a publi
 - Email format validation with RFC-compliant regex
 - Character whitelisting for name field (alphanumeric and spaces only)
 
-### 3. **Security Headers**
+### 4. **Security Headers**
 - Multiple layers of security headers configured in Next.js
 - Content Security Policy (CSP) restricts resource loading
 - HSTS enforces HTTPS with preload directive
 - Protection against clickjacking, MIME sniffing, and XSS
 
-### 4. **Static Site Generation**
+### 5. **Static Site Generation**
 - Uses Next.js static export for enhanced security
 - No server-side runtime reduces attack surface
 - All pages are pre-rendered at build time
 - No database or server-side processing
 
-### 5. **Contact Form Security**
+### 6. **Contact Form Security**
 - Uses Web3Forms API for secure email delivery
 - No backend database or server-side processing
 - No storage of user-submitted data
 - Client-side validation with proper error handling
 - Fallback to mailto: if API unavailable
+- Rate limiting (3 submissions per 5 minutes)
 
-### 6. **Dependencies**
+### 7. **Dependencies**
 - Regular dependency updates to patch known vulnerabilities
 - Minimal dependency footprint
 - No unnecessary third-party packages
 - npm audit shows 0 vulnerabilities
 
-### 7. **Domain Verification**
+### 8. **Domain Verification**
 - Google Search Console verification configured
 - Domain ownership verified via meta tag
+
+## DoS/DDoS Protection
+
+This website implements multiple layers of protection against Denial of Service attacks:
+
+1. **Client-Side Rate Limiting**: Contact form limited to 3 submissions per 5 minutes per browser
+2. **Static Architecture**: No server-side processing reduces attack surface
+3. **CDN Distribution**: GitHub Pages uses global CDN for load distribution
+4. **Input Validation**: Reduces processing of malicious requests
+5. **Cloudflare Integration**: Recommended for advanced DDoS protection
+
+For detailed information about DoS/DDoS protection measures, see [DOS_DDOS_PROTECTION.md](./DOS_DDOS_PROTECTION.md).
 
 ## Reporting Security Issues
 

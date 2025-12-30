@@ -137,8 +137,8 @@ export default function CyberBackground() {
       <div className="absolute inset-0 opacity-[0.08]">
         <div className="absolute inset-0" style={{
           backgroundImage: `
-            linear-gradient(rgba(6, 182, 212, 0.4) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(6, 182, 212, 0.4) 1px, transparent 1px)
+            linear-gradient(rgba(239, 68, 68, 0.4) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(239, 68, 68, 0.4) 1px, transparent 1px)
           `,
           backgroundSize: '60px 60px',
           animation: 'gridMove 30s linear infinite'
@@ -149,7 +149,7 @@ export default function CyberBackground() {
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute rounded-full bg-cyan-400"
+          className="absolute rounded-full bg-red-500"
           style={{
             left: `${particle.x}%`,
             top: `${particle.y}%`,
@@ -175,7 +175,7 @@ export default function CyberBackground() {
       {hexagons.map((hex) => (
         <motion.div
           key={hex.id}
-          className="absolute border border-cyan-500/30"
+          className="absolute border border-red-500/30"
           style={{
             left: `${hex.x}%`,
             top: `${hex.y}%`,
@@ -204,7 +204,7 @@ export default function CyberBackground() {
           style={{
             left: `${mousePosition.x}%`,
             top: `${mousePosition.y}%`,
-            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.25) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(239, 68, 68, 0.25) 0%, transparent 70%)',
             transform: 'translate(-50%, -50%)',
           }}
           initial={{ opacity: 0, scale: 0.8 }}
@@ -218,9 +218,9 @@ export default function CyberBackground() {
       <svg className="absolute inset-0 w-full h-full opacity-20">
         <defs>
           <linearGradient id="circuitGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="rgba(6, 182, 212, 0)" />
-            <stop offset="50%" stopColor="rgba(6, 182, 212, 0.8)" />
-            <stop offset="100%" stopColor="rgba(6, 182, 212, 0)" />
+            <stop offset="0%" stopColor="rgba(239, 68, 68, 0)" />
+            <stop offset="50%" stopColor="rgba(239, 68, 68, 0.8)" />
+            <stop offset="100%" stopColor="rgba(239, 68, 68, 0)" />
           </linearGradient>
         </defs>
         {circuitNodes.map((node, i) => {
@@ -254,7 +254,7 @@ export default function CyberBackground() {
             cx={`${node.x}%`}
             cy={`${node.y}%`}
             r="2"
-            fill="rgba(6, 182, 212, 0.6)"
+            fill="rgba(239, 68, 68, 0.6)"
             opacity="0.7"
           />
         ))}
@@ -265,7 +265,7 @@ export default function CyberBackground() {
         {Array.from({ length: 12 }).map((_, i) => (
           <motion.div
             key={i}
-            className="absolute text-cyan-400 font-mono text-xs"
+            className="absolute text-red-500 font-mono text-xs"
             style={{
               left: `${(i * 8.33) % 100}%`,
               top: '-5%',
@@ -294,7 +294,7 @@ export default function CyberBackground() {
         {guiWindows.map((window, idx) => (
           <motion.div
             key={window.id}
-            className="absolute backdrop-blur-sm bg-black/30 border border-cyan-500/40 rounded-lg overflow-hidden shadow-lg shadow-cyan-500/20"
+            className="absolute backdrop-blur-sm bg-black/30 border border-red-500/40 rounded-lg overflow-hidden shadow-lg shadow-red-500/20"
             style={{
               left: `${window.x}%`,
               top: `${window.y}%`,
@@ -312,13 +312,13 @@ export default function CyberBackground() {
             }}
           >
             {/* Window Header */}
-            <div className="bg-gradient-to-r from-cyan-900/50 to-blue-900/50 px-2 py-1 flex items-center justify-between border-b border-cyan-500/30">
+            <div className="bg-gradient-to-r from-red-900/50 to-rose-900/50 px-2 py-1 flex items-center justify-between border-b border-red-500/30">
               <div className="flex items-center gap-1">
                 <div className="w-2 h-2 rounded-full bg-red-500/70"></div>
                 <div className="w-2 h-2 rounded-full bg-yellow-500/70"></div>
                 <div className="w-2 h-2 rounded-full bg-green-500/70"></div>
               </div>
-              <span className="text-[10px] text-cyan-300/80 font-mono">{window.title}</span>
+              <span className="text-[10px] text-red-300/80 font-mono">{window.title}</span>
             </div>
             {/* Window Content */}
             <div className="p-2 space-y-1">
@@ -330,7 +330,7 @@ export default function CyberBackground() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: i * 0.2 + idx * 0.3 }}
                 >
-                  <span className="text-cyan-400/60">{'>'}</span> {line}
+                  <span className="text-red-400/60">{'>'}</span> {line}
                 </motion.div>
               ))}
             </div>
@@ -340,14 +340,14 @@ export default function CyberBackground() {
 
       {/* Floating Terminal Command Display */}
       <motion.div
-        className="absolute top-[40%] left-[50%] transform -translate-x-1/2 backdrop-blur-md bg-black/40 border border-cyan-500/30 rounded-lg px-4 py-2 shadow-xl shadow-cyan-500/20"
+        className="absolute top-[40%] left-[50%] transform -translate-x-1/2 backdrop-blur-md bg-black/40 border border-red-500/30 rounded-lg px-4 py-2 shadow-xl shadow-red-500/20"
         initial={{ opacity: 0 }}
         animate={{ opacity: [0.5, 0.8, 0.5] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
-          <span className="text-xs font-mono text-cyan-300/80">
+          <span className="text-xs font-mono text-red-300/80">
             $ {terminalCommands[activeTerminal]}
           </span>
         </div>
@@ -355,23 +355,23 @@ export default function CyberBackground() {
 
       {/* System Stats Panel */}
       <motion.div
-        className="absolute top-[10%] right-[8%] backdrop-blur-sm bg-black/30 border border-cyan-500/40 rounded-lg p-3 w-48 shadow-lg shadow-cyan-500/20"
+        className="absolute top-[10%] right-[8%] backdrop-blur-sm bg-black/30 border border-red-500/40 rounded-lg p-3 w-48 shadow-lg shadow-red-500/20"
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 0.7, x: 0 }}
         transition={{ duration: 1 }}
       >
-        <div className="text-[10px] font-mono text-cyan-300/80 space-y-1.5">
-          <div className="flex justify-between border-b border-cyan-500/20 pb-1">
+        <div className="text-[10px] font-mono text-red-300/80 space-y-1.5">
+          <div className="flex justify-between border-b border-red-500/20 pb-1">
             <span>SYSTEM STATUS</span>
             <span className="text-green-400">ONLINE</span>
           </div>
           <div className="flex justify-between">
             <span className="text-gray-400">CPU:</span>
-            <span className="text-cyan-400">{Math.floor(Math.random() * 30 + 20)}%</span>
+            <span className="text-red-400">{Math.floor(Math.random() * 30 + 20)}%</span>
           </div>
           <div className="flex justify-between">
             <span className="text-gray-400">RAM:</span>
-            <span className="text-cyan-400">{Math.floor(Math.random() * 40 + 40)}%</span>
+            <span className="text-red-400">{Math.floor(Math.random() * 40 + 40)}%</span>
           </div>
           <div className="flex justify-between">
             <span className="text-gray-400">NET:</span>
@@ -379,7 +379,7 @@ export default function CyberBackground() {
           </div>
           <div className="flex justify-between">
             <span className="text-gray-400">TIME:</span>
-            <span className="text-cyan-400">{time.toLocaleTimeString('en-US', { hour12: false })}</span>
+            <span className="text-red-400">{time.toLocaleTimeString('en-US', { hour12: false })}</span>
           </div>
         </div>
       </motion.div>
@@ -389,7 +389,7 @@ export default function CyberBackground() {
         {dataStreamBars.map((bar) => (
           <motion.div
             key={bar.id}
-            className="w-1 bg-gradient-to-t from-cyan-500 to-transparent rounded-full"
+            className="w-1 bg-gradient-to-t from-red-500 to-transparent rounded-full"
             animate={{
               height: [10, bar.maxHeight, 10],
             }}
@@ -404,7 +404,7 @@ export default function CyberBackground() {
 
       {/* Glitch Effect Overlay (occasional) */}
       <motion.div
-        className="absolute inset-0 bg-cyan-500/5 pointer-events-none mix-blend-screen"
+        className="absolute inset-0 bg-red-500/5 pointer-events-none mix-blend-screen"
         animate={{
           opacity: [0, 0, 0, 0.3, 0, 0, 0],
         }}
@@ -417,7 +417,7 @@ export default function CyberBackground() {
 
       {/* Scanning lines */}
       <motion.div
-        className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent"
+        className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-red-500/30 to-transparent"
         animate={{
           y: ['0%', '100%'],
         }}
@@ -429,7 +429,7 @@ export default function CyberBackground() {
       />
 
       <motion.div
-        className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent"
+        className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-red-500/20 to-transparent"
         animate={{
           y: ['100%', '0%'],
         }}
@@ -441,10 +441,10 @@ export default function CyberBackground() {
       />
 
       {/* Corner decorations */}
-      <div className="absolute top-0 left-0 w-32 h-32 border-t-2 border-l-2 border-cyan-500/30 opacity-60" />
-      <div className="absolute top-0 right-0 w-32 h-32 border-t-2 border-r-2 border-cyan-500/30 opacity-60" />
-      <div className="absolute bottom-0 left-0 w-32 h-32 border-b-2 border-l-2 border-cyan-500/30 opacity-60" />
-      <div className="absolute bottom-0 right-0 w-32 h-32 border-b-2 border-r-2 border-cyan-500/30 opacity-60" />
+      <div className="absolute top-0 left-0 w-32 h-32 border-t-2 border-l-2 border-red-500/30 opacity-60" />
+      <div className="absolute top-0 right-0 w-32 h-32 border-t-2 border-r-2 border-red-500/30 opacity-60" />
+      <div className="absolute bottom-0 left-0 w-32 h-32 border-b-2 border-l-2 border-red-500/30 opacity-60" />
+      <div className="absolute bottom-0 right-0 w-32 h-32 border-b-2 border-r-2 border-red-500/30 opacity-60" />
 
       <style jsx>{`
         @keyframes gridMove {

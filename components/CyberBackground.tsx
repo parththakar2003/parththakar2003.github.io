@@ -80,10 +80,26 @@ export default function CyberBackground() {
     'netstat -tuln | grep LISTEN',
   ], []);
 
+  // Data stream bars configuration (memoized to avoid re-calculating random values)
+  const dataStreamBars = useMemo(() => 
+    Array.from({ length: 8 }, (_, i) => ({
+      id: i,
+      maxHeight: Math.random() * 40 + 20,
+      duration: Math.random() * 1.5 + 1,
+    }))
+  , []);
+
   // Update time every second
   useEffect(() => {
     const interval = setInterval(() => {
       setTime(new Date());
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Cycle terminal commands every 3 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
       setActiveTerminal((prev) => (prev + 1) % terminalCommands.length);
     }, 3000);
     return () => clearInterval(interval);
@@ -370,17 +386,17 @@ export default function CyberBackground() {
 
       {/* Data Stream Visualization */}
       <div className="absolute bottom-[15%] left-[10%] flex gap-1 opacity-40">
-        {Array.from({ length: 8 }).map((_, i) => (
+        {dataStreamBars.map((bar) => (
           <motion.div
-            key={i}
+            key={bar.id}
             className="w-1 bg-gradient-to-t from-cyan-500 to-transparent rounded-full"
             animate={{
-              height: [10, Math.random() * 40 + 20, 10],
+              height: [10, bar.maxHeight, 10],
             }}
             transition={{
-              duration: Math.random() * 1.5 + 1,
+              duration: bar.duration,
               repeat: Infinity,
-              delay: i * 0.1,
+              delay: bar.id * 0.1,
             }}
           />
         ))}

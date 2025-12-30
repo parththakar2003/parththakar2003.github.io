@@ -70,23 +70,27 @@ export default function CyberBackground() {
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
-      {/* Animated grid background */}
-      <div className="absolute inset-0 opacity-[0.08]">
+      {/* Animated grid background with red theme */}
+      <div className="absolute inset-0 opacity-[0.12] red-grid-bg">
         <div className="absolute inset-0" style={{
           backgroundImage: `
-            linear-gradient(rgba(6, 182, 212, 0.4) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(6, 182, 212, 0.4) 1px, transparent 1px)
+            linear-gradient(rgba(255, 0, 0, 0.5) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 0, 0, 0.5) 1px, transparent 1px)
           `,
           backgroundSize: '60px 60px',
           animation: 'gridMove 30s linear infinite'
         }} />
       </div>
 
-      {/* Floating particles */}
+      {/* Floating particles with red glow */}
       {particles.map((particle) => (
         <motion.div
           key={particle.id}
-          className="absolute rounded-full bg-cyan-400"
+          className="absolute rounded-full"
+          style={{
+            background: 'radial-gradient(circle, rgba(255, 0, 0, 0.8), rgba(139, 0, 0, 0.4))',
+            boxShadow: '0 0 10px rgba(255, 0, 0, 0.6), 0 0 20px rgba(255, 0, 0, 0.3)'
+          }}
           style={{
             left: `${particle.x}%`,
             top: `${particle.y}%`,
@@ -108,11 +112,11 @@ export default function CyberBackground() {
         />
       ))}
 
-      {/* Hexagon shapes */}
+      {/* Hexagon shapes with red theme */}
       {hexagons.map((hex) => (
         <motion.div
           key={hex.id}
-          className="absolute border border-cyan-500/30"
+          className="absolute border-2 border-red-500/40 red-neon-border"
           style={{
             left: `${hex.x}%`,
             top: `${hex.y}%`,
@@ -134,14 +138,14 @@ export default function CyberBackground() {
         />
       ))}
 
-      {/* Interactive glow that follows mouse */}
+      {/* Interactive red glow that follows mouse */}
       {isInteracting && (
         <motion.div
-          className="absolute w-96 h-96 rounded-full pointer-events-none"
+          className="absolute w-96 h-96 rounded-full pointer-events-none red-shadow-pulse"
           style={{
             left: `${mousePosition.x}%`,
             top: `${mousePosition.y}%`,
-            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.25) 0%, transparent 70%)',
+            background: 'radial-gradient(circle, rgba(255, 0, 0, 0.35) 0%, transparent 70%)',
             transform: 'translate(-50%, -50%)',
           }}
           initial={{ opacity: 0, scale: 0.8 }}
@@ -151,13 +155,13 @@ export default function CyberBackground() {
         />
       )}
 
-      {/* Circuit lines connecting nodes */}
-      <svg className="absolute inset-0 w-full h-full opacity-20">
+      {/* Circuit lines connecting nodes with red theme */}
+      <svg className="absolute inset-0 w-full h-full opacity-25">
         <defs>
           <linearGradient id="circuitGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="rgba(6, 182, 212, 0)" />
-            <stop offset="50%" stopColor="rgba(6, 182, 212, 0.8)" />
-            <stop offset="100%" stopColor="rgba(6, 182, 212, 0)" />
+            <stop offset="0%" stopColor="rgba(255, 0, 0, 0)" />
+            <stop offset="50%" stopColor="rgba(255, 0, 0, 0.9)" />
+            <stop offset="100%" stopColor="rgba(255, 0, 0, 0)" />
           </linearGradient>
         </defs>
         {circuitNodes.map((node, i) => {
@@ -184,25 +188,29 @@ export default function CyberBackground() {
           );
         })}
         
-        {/* Circuit nodes as dots */}
+        {/* Circuit nodes as red pulsing dots */}
         {circuitNodes.map((node) => (
           <circle
             key={node.id}
             cx={`${node.x}%`}
             cy={`${node.y}%`}
-            r="2"
-            fill="rgba(6, 182, 212, 0.6)"
-            opacity="0.7"
+            r="3"
+            fill="rgba(255, 0, 0, 0.8)"
+            opacity="0.9"
+            className="red-breathing"
+            style={{
+              filter: 'drop-shadow(0 0 5px rgba(255, 0, 0, 0.8))'
+            }}
           />
         ))}
       </svg>
 
-      {/* Binary code rain effect (subtle) */}
-      <div className="absolute inset-0 opacity-10">
+      {/* Red binary code rain effect */}
+      <div className="absolute inset-0 opacity-15">
         {Array.from({ length: 12 }).map((_, i) => (
           <motion.div
             key={i}
-            className="absolute text-cyan-400 font-mono text-xs"
+            className="absolute text-red-500 font-mono text-xs red-glow-text"
             style={{
               left: `${(i * 8.33) % 100}%`,
               top: '-5%',
@@ -226,9 +234,12 @@ export default function CyberBackground() {
         ))}
       </div>
 
-      {/* Scanning lines */}
+      {/* Red scanning lines */}
       <motion.div
-        className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent"
+        className="absolute inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-red-500/50 to-transparent red-scan-container"
+        style={{
+          boxShadow: '0 0 10px rgba(255, 0, 0, 0.8), 0 0 20px rgba(255, 0, 0, 0.4)'
+        }}
         animate={{
           y: ['0%', '100%'],
         }}
@@ -240,7 +251,10 @@ export default function CyberBackground() {
       />
 
       <motion.div
-        className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent"
+        className="absolute inset-x-0 h-[2px] bg-gradient-to-r from-transparent via-red-600/30 to-transparent"
+        style={{
+          boxShadow: '0 0 8px rgba(255, 0, 0, 0.6)'
+        }}
         animate={{
           y: ['100%', '0%'],
         }}
@@ -251,11 +265,15 @@ export default function CyberBackground() {
         }}
       />
 
-      {/* Corner decorations */}
-      <div className="absolute top-0 left-0 w-32 h-32 border-t-2 border-l-2 border-cyan-500/30 opacity-60" />
-      <div className="absolute top-0 right-0 w-32 h-32 border-t-2 border-r-2 border-cyan-500/30 opacity-60" />
-      <div className="absolute bottom-0 left-0 w-32 h-32 border-b-2 border-l-2 border-cyan-500/30 opacity-60" />
-      <div className="absolute bottom-0 right-0 w-32 h-32 border-b-2 border-r-2 border-cyan-500/30 opacity-60" />
+      {/* Red corner decorations with glow */}
+      <div className="absolute top-0 left-0 w-32 h-32 border-t-2 border-l-2 border-red-500/50 opacity-70 red-corner-accents" 
+        style={{ boxShadow: '0 0 15px rgba(255, 0, 0, 0.3)' }} />
+      <div className="absolute top-0 right-0 w-32 h-32 border-t-2 border-r-2 border-red-500/50 opacity-70" 
+        style={{ boxShadow: '0 0 15px rgba(255, 0, 0, 0.3)' }} />
+      <div className="absolute bottom-0 left-0 w-32 h-32 border-b-2 border-l-2 border-red-500/50 opacity-70" 
+        style={{ boxShadow: '0 0 15px rgba(255, 0, 0, 0.3)' }} />
+      <div className="absolute bottom-0 right-0 w-32 h-32 border-b-2 border-r-2 border-red-500/50 opacity-70" 
+        style={{ boxShadow: '0 0 15px rgba(255, 0, 0, 0.3)' }} />
 
       <style jsx>{`
         @keyframes gridMove {

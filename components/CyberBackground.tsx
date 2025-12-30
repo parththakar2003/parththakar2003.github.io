@@ -15,6 +15,8 @@ export default function CyberBackground() {
   const [scanProgress, setScanProgress] = useState(0);
   const [typingText, setTypingText] = useState('');
   const [exploitChain, setExploitChain] = useState(0);
+  const [lastLogIndex, setLastLogIndex] = useState(-1);
+  const [packetCounter, setPacketCounter] = useState(0);
 
   // Generate particles for background
   const particles = useMemo(() => {
@@ -153,22 +155,29 @@ export default function CyberBackground() {
     return () => clearInterval(typingInterval);
   }, [activeTerminal, terminalCommands]);
 
-  // Add new log entries every 2 seconds
+  // Add new log entries every 2 seconds (avoid consecutive duplicates)
   useEffect(() => {
     const interval = setInterval(() => {
       setLogEntries(prev => {
-        const newEntry = logMessages[Math.floor(Math.random() * logMessages.length)];
+        let newIndex;
+        do {
+          newIndex = Math.floor(Math.random() * logMessages.length);
+        } while (newIndex === lastLogIndex && logMessages.length > 1);
+        
+        setLastLogIndex(newIndex);
+        const newEntry = logMessages[newIndex];
         return [...prev.slice(-4), newEntry];
       });
     }, 2000);
     return () => clearInterval(interval);
-  }, [logMessages]);
+  }, [logMessages, lastLogIndex]);
 
-  // Generate network packets
+  // Generate network packets with unique IDs
   useEffect(() => {
     const interval = setInterval(() => {
+      setPacketCounter(prev => prev + 1);
       const newPacket = {
-        id: Date.now(),
+        id: packetCounter,
         x: Math.random() * 80 + 10,
         y: Math.random() * 80 + 10,
       };

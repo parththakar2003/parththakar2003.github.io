@@ -10,6 +10,11 @@ export default function CyberBackground() {
   const [mounted, setMounted] = useState(false);
   const [time, setTime] = useState(new Date());
   const [activeTerminal, setActiveTerminal] = useState(0);
+  const [logEntries, setLogEntries] = useState<string[]>([]);
+  const [networkPackets, setNetworkPackets] = useState<Array<{id: number, x: number, y: number}>>([]);
+  const [scanProgress, setScanProgress] = useState(0);
+  const [typingText, setTypingText] = useState('');
+  const [exploitChain, setExploitChain] = useState(0);
 
   // Generate particles for background
   const particles = useMemo(() => {
@@ -89,6 +94,31 @@ export default function CyberBackground() {
     }))
   , []);
 
+  // Live log messages for scrolling effect
+  const logMessages = useMemo(() => [
+    '[ALERT] Unauthorized access attempt detected',
+    '[INFO] Firewall rule updated successfully',
+    '[WARN] Unusual outbound traffic on port 8080',
+    '[OK] IDS signature database updated',
+    '[INFO] SSL certificate expires in 30 days',
+    '[CRIT] Multiple failed login attempts from 192.168.1.105',
+    '[OK] Backup completed successfully',
+    '[INFO] New device connected to network',
+    '[WARN] High memory usage detected',
+    '[OK] Vulnerability scan completed',
+    '[ALERT] Potential SQL injection attempt blocked',
+    '[INFO] Service restart scheduled',
+  ], []);
+
+  // Exploit chain steps
+  const exploitSteps = useMemo(() => [
+    'Reconnaissance',
+    'Scanning',
+    'Exploitation',
+    'Post-Exploitation',
+    'Covering Tracks',
+  ], []);
+
   // Update time every second
   useEffect(() => {
     const interval = setInterval(() => {
@@ -97,13 +127,71 @@ export default function CyberBackground() {
     return () => clearInterval(interval);
   }, []);
 
-  // Cycle terminal commands every 3 seconds
+  // Cycle terminal commands every 3 seconds with typing effect
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveTerminal((prev) => (prev + 1) % terminalCommands.length);
-    }, 3000);
+      setTypingText('');
+    }, 4000);
     return () => clearInterval(interval);
   }, [terminalCommands.length]);
+
+  // Typing animation for terminal
+  useEffect(() => {
+    const command = terminalCommands[activeTerminal];
+    let currentIndex = 0;
+    
+    const typingInterval = setInterval(() => {
+      if (currentIndex < command.length) {
+        setTypingText(command.substring(0, currentIndex + 1));
+        currentIndex++;
+      } else {
+        clearInterval(typingInterval);
+      }
+    }, 80);
+
+    return () => clearInterval(typingInterval);
+  }, [activeTerminal, terminalCommands]);
+
+  // Add new log entries every 2 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLogEntries(prev => {
+        const newEntry = logMessages[Math.floor(Math.random() * logMessages.length)];
+        return [...prev.slice(-4), newEntry];
+      });
+    }, 2000);
+    return () => clearInterval(interval);
+  }, [logMessages]);
+
+  // Generate network packets
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const newPacket = {
+        id: Date.now(),
+        x: Math.random() * 80 + 10,
+        y: Math.random() * 80 + 10,
+      };
+      setNetworkPackets(prev => [...prev.slice(-8), newPacket]);
+    }, 800);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Update scan progress
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setScanProgress(prev => (prev + 1) % 101);
+    }, 100);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Cycle exploit chain
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setExploitChain(prev => (prev + 1) % exploitSteps.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [exploitSteps.length]);
 
   // Mouse tracking
   const handleMouseMove = useCallback((e: MouseEvent) => {
@@ -289,66 +377,182 @@ export default function CyberBackground() {
         ))}
       </div>
 
-      {/* Interactive GUI Windows */}
+      {/* Live Scrolling Log Window */}
+      <motion.div
+        className="absolute backdrop-blur-sm bg-black/40 border border-red-500/40 rounded-lg overflow-hidden shadow-lg shadow-red-500/20"
+        style={{
+          left: '15%',
+          top: '20%',
+          width: '240px',
+          height: '120px',
+        }}
+        initial={{ opacity: 0, scale: 0.8, y: 20 }}
+        animate={{ 
+          opacity: [0.7, 0.9, 0.7], 
+          scale: 1,
+          y: [0, -5, 0]
+        }}
+        transition={{
+          opacity: { duration: 3, repeat: Infinity },
+          y: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+        }}
+      >
+        {/* Window Header */}
+        <div className="bg-gradient-to-r from-red-900/50 to-rose-900/50 px-2 py-1 flex items-center justify-between border-b border-red-500/30">
+          <div className="flex items-center gap-1">
+            <div className="w-2 h-2 rounded-full bg-red-500/70 animate-pulse"></div>
+            <div className="w-2 h-2 rounded-full bg-yellow-500/70"></div>
+            <div className="w-2 h-2 rounded-full bg-green-500/70"></div>
+          </div>
+          <span className="text-[10px] text-red-300/80 font-mono">system.log</span>
+        </div>
+        {/* Scrolling Log Content */}
+        <div className="p-2 h-[88px] overflow-hidden">
+          <AnimatePresence initial={false}>
+            {logEntries.slice(-5).map((entry, i) => (
+              <motion.div
+                key={`${entry}-${i}`}
+                className="text-[9px] font-mono text-green-400/70 whitespace-nowrap overflow-hidden"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.3 }}
+              >
+                <span className="text-red-400/60">{'>'}</span> {entry}
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+      </motion.div>
+
+      {/* Live Network Monitor with Scan Progress */}
+      <motion.div
+        className="absolute backdrop-blur-sm bg-black/40 border border-red-500/40 rounded-lg overflow-hidden shadow-lg shadow-red-500/20"
+        style={{
+          left: '70%',
+          top: '15%',
+          width: '220px',
+        }}
+        initial={{ opacity: 0, scale: 0.8, y: 20 }}
+        animate={{ 
+          opacity: [0.7, 0.9, 0.7], 
+          scale: 1,
+          y: [0, -3, 0]
+        }}
+        transition={{
+          opacity: { duration: 3, repeat: Infinity, delay: 0.5 },
+          y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.3 }
+        }}
+      >
+        {/* Window Header */}
+        <div className="bg-gradient-to-r from-red-900/50 to-rose-900/50 px-2 py-1 flex items-center justify-between border-b border-red-500/30">
+          <div className="flex items-center gap-1">
+            <div className="w-2 h-2 rounded-full bg-red-500/70"></div>
+            <div className="w-2 h-2 rounded-full bg-yellow-500/70 animate-pulse"></div>
+            <div className="w-2 h-2 rounded-full bg-green-500/70"></div>
+          </div>
+          <span className="text-[10px] text-red-300/80 font-mono">vuln.scan</span>
+        </div>
+        {/* Scan Progress */}
+        <div className="p-2 space-y-2">
+          <div className="text-[10px] font-mono text-green-400/70">
+            <span className="text-red-400/60">{'>'}</span> Scanning targets...
+          </div>
+          <div className="w-full bg-red-900/20 h-2 rounded-full overflow-hidden">
+            <motion.div
+              className="h-full bg-gradient-to-r from-red-600 to-orange-500"
+              animate={{ width: `${scanProgress}%` }}
+              transition={{ duration: 0.1 }}
+            />
+          </div>
+          <div className="text-[10px] font-mono text-red-400/80">
+            {scanProgress}% complete
+          </div>
+          <div className="text-[9px] font-mono text-green-400/60">
+            Found: {Math.floor(scanProgress / 10)} vulnerabilities
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Exploit Chain Visualizer */}
+      <motion.div
+        className="absolute backdrop-blur-sm bg-black/40 border border-red-500/40 rounded-lg overflow-hidden shadow-lg shadow-red-500/20"
+        style={{
+          left: '20%',
+          top: '65%',
+          width: '200px',
+        }}
+        initial={{ opacity: 0, scale: 0.8, y: 20 }}
+        animate={{ 
+          opacity: [0.7, 0.9, 0.7], 
+          scale: 1,
+          y: [0, -4, 0]
+        }}
+        transition={{
+          opacity: { duration: 3, repeat: Infinity, delay: 1 },
+          y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: 0.6 }
+        }}
+      >
+        {/* Window Header */}
+        <div className="bg-gradient-to-r from-red-900/50 to-rose-900/50 px-2 py-1 flex items-center justify-between border-b border-red-500/30">
+          <div className="flex items-center gap-1">
+            <div className="w-2 h-2 rounded-full bg-red-500/70"></div>
+            <div className="w-2 h-2 rounded-full bg-yellow-500/70"></div>
+            <div className="w-2 h-2 rounded-full bg-green-500/70 animate-pulse"></div>
+          </div>
+          <span className="text-[10px] text-red-300/80 font-mono">exploit.chain</span>
+        </div>
+        {/* Exploit Steps */}
+        <div className="p-2 space-y-1">
+          {exploitSteps.map((step, i) => (
+            <motion.div
+              key={i}
+              className={`text-[10px] font-mono flex items-center gap-2 ${
+                i === exploitChain ? 'text-red-400' : i < exploitChain ? 'text-green-400/70' : 'text-gray-500/50'
+              }`}
+            >
+              <div className={`w-1.5 h-1.5 rounded-full ${
+                i === exploitChain ? 'bg-red-500 animate-pulse' : i < exploitChain ? 'bg-green-500' : 'bg-gray-600'
+              }`} />
+              {step}
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
+
+      {/* Network Packet Visualization */}
       <AnimatePresence>
-        {guiWindows.map((window, idx) => (
+        {networkPackets.map((packet) => (
           <motion.div
-            key={window.id}
-            className="absolute backdrop-blur-sm bg-black/30 border border-red-500/40 rounded-lg overflow-hidden shadow-lg shadow-red-500/20"
+            key={packet.id}
+            className="absolute w-2 h-2 bg-red-500 rounded-full"
             style={{
-              left: `${window.x}%`,
-              top: `${window.y}%`,
-              width: `${window.width}px`,
+              left: `${packet.x}%`,
+              top: `${packet.y}%`,
             }}
-            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            initial={{ opacity: 0, scale: 0 }}
             animate={{ 
-              opacity: [0.6, 0.8, 0.6], 
-              scale: 1,
-              y: [0, -5, 0]
+              opacity: [0, 1, 0],
+              scale: [0, 1.5, 0],
             }}
-            transition={{
-              opacity: { duration: 3, repeat: Infinity, delay: idx * 0.5 },
-              y: { duration: 4, repeat: Infinity, ease: "easeInOut", delay: idx * 0.3 }
-            }}
-          >
-            {/* Window Header */}
-            <div className="bg-gradient-to-r from-red-900/50 to-rose-900/50 px-2 py-1 flex items-center justify-between border-b border-red-500/30">
-              <div className="flex items-center gap-1">
-                <div className="w-2 h-2 rounded-full bg-red-500/70"></div>
-                <div className="w-2 h-2 rounded-full bg-yellow-500/70"></div>
-                <div className="w-2 h-2 rounded-full bg-green-500/70"></div>
-              </div>
-              <span className="text-[10px] text-red-300/80 font-mono">{window.title}</span>
-            </div>
-            {/* Window Content */}
-            <div className="p-2 space-y-1">
-              {window.lines.map((line, i) => (
-                <motion.div
-                  key={i}
-                  className="text-[10px] font-mono text-green-400/70"
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.2 + idx * 0.3 }}
-                >
-                  <span className="text-red-400/60">{'>'}</span> {line}
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+            exit={{ opacity: 0, scale: 0 }}
+            transition={{ duration: 1.5 }}
+          />
         ))}
       </AnimatePresence>
 
-      {/* Floating Terminal Command Display */}
+      {/* Floating Terminal with Typing Effect */}
       <motion.div
-        className="absolute top-[40%] left-[50%] transform -translate-x-1/2 backdrop-blur-md bg-black/40 border border-red-500/30 rounded-lg px-4 py-2 shadow-xl shadow-red-500/20"
+        className="absolute top-[40%] left-[50%] transform -translate-x-1/2 backdrop-blur-md bg-black/50 border border-red-500/40 rounded-lg px-4 py-2 shadow-xl shadow-red-500/20"
         initial={{ opacity: 0 }}
-        animate={{ opacity: [0.5, 0.8, 0.5] }}
+        animate={{ opacity: [0.6, 0.9, 0.6] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></div>
-          <span className="text-xs font-mono text-red-300/80">
-            $ {terminalCommands[activeTerminal]}
+          <span className="text-xs font-mono text-red-300/90">
+            $ {typingText}
+            <span className="animate-pulse">|</span>
           </span>
         </div>
       </motion.div>

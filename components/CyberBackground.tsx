@@ -70,6 +70,21 @@ export default function CyberBackground() {
 
   return (
     <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
+      {/* Wallpaper base layer with circuit pattern */}
+      <div className="absolute inset-0 opacity-[0.15]">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `
+            radial-gradient(circle at 25% 25%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+            radial-gradient(circle at 75% 75%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+            radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.1) 0%, transparent 70%),
+            linear-gradient(45deg, transparent 48%, rgba(6, 182, 212, 0.05) 48%, rgba(6, 182, 212, 0.05) 52%, transparent 52%),
+            linear-gradient(-45deg, transparent 48%, rgba(99, 102, 241, 0.05) 48%, rgba(99, 102, 241, 0.05) 52%, transparent 52%)
+          `,
+          backgroundSize: '100% 100%, 100% 100%, 100% 100%, 120px 120px, 120px 120px',
+          backgroundPosition: '0 0, 0 0, 0 0, 0 0, 0 0'
+        }} />
+      </div>
+      
       {/* Animated grid background */}
       <div className="absolute inset-0 opacity-[0.08]">
         <div className="absolute inset-0" style={{

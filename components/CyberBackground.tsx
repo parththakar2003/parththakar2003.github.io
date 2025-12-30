@@ -88,15 +88,13 @@ export default function CyberBackground() {
           key={particle.id}
           className="absolute rounded-full"
           style={{
-            background: 'radial-gradient(circle, rgba(255, 0, 0, 0.8), rgba(139, 0, 0, 0.4))',
-            boxShadow: '0 0 10px rgba(255, 0, 0, 0.6), 0 0 20px rgba(255, 0, 0, 0.3)'
-          }}
-          style={{
             left: `${particle.x}%`,
             top: `${particle.y}%`,
             width: `${particle.size}px`,
             height: `${particle.size}px`,
             opacity: 0.3,
+            background: 'radial-gradient(circle, rgba(255, 0, 0, 0.8), rgba(139, 0, 0, 0.4))',
+            boxShadow: '0 0 10px rgba(255, 0, 0, 0.6), 0 0 20px rgba(255, 0, 0, 0.3)'
           }}
           animate={{
             y: [0, -40, 0],

@@ -428,6 +428,26 @@ html {
   animation: redShadowPulse 2s ease-in-out infinite;
 }
 
+/* Respect user preferences for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .red-glow-text,
+  .red-neon-border,
+  .red-glitch,
+  .red-glitch-hover:hover,
+  .red-breathing,
+  .red-flicker,
+  .red-shadow-pulse,
+  .red-pulse-dot,
+  .red-gradient-text,
+  .red-scan-container::before {
+    animation: none !important;
+  }
+  
+  .red-digital-noise {
+    background-image: none;
+  }
+}
+
 /* Red loading bar */
 @keyframes redLoadingBar {
   0% {

@@ -14,7 +14,7 @@ export default function Projects() {
 
   // Theme styles
   const theme = {
-    bg: darkMode ? 'bg-gray-900' : 'bg-slate-50',
+    bg: 'bg-transparent',
     text: darkMode ? 'text-gray-100' : 'text-gray-800',
     muted: darkMode ? 'text-gray-400' : 'text-gray-600',
     accent: darkMode ? 'text-cyan-400' : 'text-cyan-600',

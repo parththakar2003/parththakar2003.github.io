@@ -2,7 +2,7 @@
   "projects": [
     {
       "id": "1",
-      "title": "Advance Billing System with QR",
+      "title": "Advanced Billing System with QR",
       "description": "Full Stack application built with Python for advanced billing with QR code integration",
       "type": "Major Project",
       "technologies": ["Python", "Full Stack", "QR Code"],

@@ -9,7 +9,8 @@
       "image": "/assets/images/projects/billing-system.jpg",
       "github": "",
       "demo": "",
-      "featured": true
+      "featured": true,
+      "completionDate": "2024"
     },
     {
       "id": "2",
@@ -32,8 +33,7 @@
       "image": "/assets/images/projects/network-scanner.jpg",
       "github": "",
       "demo": "",
-      "featured": true,
-      "completionDate": "2026"
+      "featured": true
     }
   ]
 }

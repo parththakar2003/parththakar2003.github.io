@@ -694,7 +694,7 @@ export default function Home() {
                       description: "Automated security scanner for network vulnerability assessment and penetration testing.",
                       tags: ["Python", "VAPT", "Network Security", "Scanning"],
                       status: "In Progress",
-                      link: "#"
+                      link: "https://parththakar2003.github.io/"
                     }
                   ].map((project, i) => (
                     <a

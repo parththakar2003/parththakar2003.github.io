@@ -26,14 +26,15 @@
     },
     {
       "id": "3",
-      "title": "Network Security Scanner",
-      "description": "Automated security scanner for network vulnerability assessment and penetration testing",
-      "type": "Minor Project",
-      "technologies": ["Python", "VAPT", "Network Security", "Scanning"],
-      "image": "/assets/images/projects/network-scanner.jpg",
-      "github": "",
-      "demo": "",
-      "featured": true
+      "title": "Portfolio",
+      "description": "Personal portfolio website showcasing cybersecurity projects, skills, and professional journey",
+      "type": "Major Project",
+      "technologies": ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+      "image": "/assets/images/projects/portfolio.jpg",
+      "github": "https://github.com/parththakar2003/parththakar2003.github.io",
+      "demo": "https://parththakar2003.github.io/",
+      "featured": true,
+      "completionDate": "2025"
     }
   ]
 }

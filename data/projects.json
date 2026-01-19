@@ -2,14 +2,15 @@
   "projects": [
     {
       "id": "1",
-      "title": "Advance Billing System with QR",
+      "title": "Advanced Billing System with QR",
       "description": "Full Stack application built with Python for advanced billing with QR code integration",
       "type": "Major Project",
       "technologies": ["Python", "Full Stack", "QR Code"],
       "image": "/assets/images/projects/billing-system.jpg",
       "github": "",
       "demo": "",
-      "featured": true
+      "featured": true,
+      "completionDate": "2024"
     },
     {
       "id": "2",
@@ -20,6 +21,18 @@
       "image": "/assets/images/projects/crypto-tool.jpg",
       "github": "https://github.com/parththakar2003/Secure-CipherStegno-Tool",
       "demo": "",
+      "featured": true,
+      "completionDate": "2025"
+    },
+    {
+      "id": "3",
+      "title": "Portfolio",
+      "description": "Personal portfolio website showcasing cybersecurity projects, skills, and professional journey",
+      "type": "Major Project",
+      "technologies": ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+      "image": "/assets/images/projects/portfolio.jpg",
+      "github": "https://github.com/parththakar2003/parththakar2003.github.io",
+      "demo": "https://parththakar2003.github.io/",
       "featured": true,
       "completionDate": "2025"
     }

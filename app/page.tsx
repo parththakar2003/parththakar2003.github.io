@@ -688,6 +688,13 @@ export default function Home() {
                       tags: ["Python", "Cryptography", "Steganography", "Security"],
                       status: "Completed",
                       link: "https://github.com/parththakar2003/Secure-CipherStegno-Tool"
+                    },
+                    {
+                      name: "Network Security Scanner",
+                      description: "Automated security scanner for network vulnerability assessment and penetration testing.",
+                      tags: ["Python", "VAPT", "Network Security", "Scanning"],
+                      status: "In Progress",
+                      link: "#"
                     }
                   ].map((project, i) => (
                     <a

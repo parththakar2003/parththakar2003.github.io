@@ -22,6 +22,18 @@
       "demo": "",
       "featured": true,
       "completionDate": "2025"
+    },
+    {
+      "id": "3",
+      "title": "Network Security Scanner",
+      "description": "Automated security scanner for network vulnerability assessment and penetration testing",
+      "type": "Minor Project",
+      "technologies": ["Python", "VAPT", "Network Security", "Scanning"],
+      "image": "/assets/images/projects/network-scanner.jpg",
+      "github": "",
+      "demo": "",
+      "featured": true,
+      "completionDate": "2026"
     }
   ]
 }

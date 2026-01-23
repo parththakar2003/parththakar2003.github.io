@@ -28,7 +28,7 @@ export default function Error({
   }, [error]);
 
   const theme = {
-    bg: darkMode ? 'bg-gray-900' : 'bg-slate-50',
+    bg: 'bg-transparent',
     text: darkMode ? 'text-gray-100' : 'text-gray-800',
     muted: darkMode ? 'text-gray-400' : 'text-gray-600',
     card: darkMode ? 'bg-gray-800/70' : 'bg-white/80',

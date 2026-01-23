@@ -268,7 +268,7 @@ export default function RootLayout({
           })}
         </script>
       </head>
-      <body className="min-h-screen flex flex-col bg-gray-100 transition-colors duration-300">
+      <body className="min-h-screen flex flex-col transition-colors duration-300">
         <ThemeProvider>
           <CyberBackground />
           <Navbar />

@@ -51,7 +51,7 @@ export default function Journey() {
       subtitle: "Multiple Platforms",
       icon: <FaTrophy />,
       color: "purple",
-      content: "🎉 Successfully completed TryHackMe – Advent of Cyber 2025 and Advent of Cyber 2025 Side Quest. Selected as a winner and received a 6-month TryHackMe Subscription gift! Also participated in IIT-Roorkee CTF securing 16th position out of 100 teams. Secured 144th rank in Bugcrowd CTF. Participated in TryHackme Hackfinity Battle and AWS × SANS CTF gaining 200th rank. Competed in University CTF 2025: Tinsel Trouble achieving 417th rank out of 1050 universities with team NFSU. These competitions sharpened penetration testing and problem-solving skills.",
+      content: "🎉 Successfully completed TryHackMe – Advent of Cyber 2025 and Advent of Cyber 2025 Side Quest. Selected as a winner and received a 6-month TryHackMe Subscription gift! Also participated in IIT-Roorkee CTF securing 16th position out of 100 teams. Secured 144th rank in Bugcrowd CTF. Participated in TryHackMe Hackfinity Battle and AWS × SANS CTF gaining 200th rank. Competed in University CTF 2025: Tinsel Trouble achieving 417th rank out of 1050 universities with team NFSU. These competitions sharpened penetration testing and problem-solving skills.",
       achievement: "TryHackMe Winner + Multiple CTF achievements",
       featured: true
     },

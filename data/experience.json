@@ -1,4 +1,11 @@
 {
+  "currentPosition": {
+    "company": "TechDefence",
+    "role": "Security Analyst - VAPT",
+    "type": "Full-time",
+    "status": "Current",
+    "description": "Working as a Security Analyst specializing in Vulnerability Assessment and Penetration Testing (VAPT)"
+  },
   "education": [
     {
       "degree": "Master of Digital Forensic and Information Security (DFIS)",

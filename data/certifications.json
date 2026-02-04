@@ -1,6 +1,12 @@
 {
   "certifications": [
     {
+      "name": "Certified Social Engineering Defense Practitioner (CSEDP) certification with Merit",
+      "issuer": "The SecOps Group (Creators of PentestingExams.com)",
+      "date": "",
+      "image": ""
+    },
+    {
       "name": "SysTools Digital Forensic Essentials (SDFE)",
       "issuer": "SysTools",
       "date": "",
@@ -152,6 +158,12 @@
     }
   ],
   "achievements": [
+    {
+      "title": "TryHackMe Advent of Cyber 2025 Winner",
+      "description": "Successfully completed TryHackMe – Advent of Cyber 2025 ✅ and also completed the Advent of Cyber 2025 Side Quest ✅🏆. Selected as a winner and received a 6-month TryHackMe Subscription gift 🎁🔥",
+      "date": "",
+      "icon": "🎉"
+    },
     {
       "title": "IIT-Roorkee CTF Competition",
       "description": "Secured 16th position out of 100 teams in team participation",

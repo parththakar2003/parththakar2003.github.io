@@ -17,12 +17,22 @@ export default function Journey() {
   // Journey timeline data - Parth's Cybersecurity Journey (Reversed: 11 to 1)
   const journeyStages = [
     {
+      id: 12,
+      title: "Security Analyst - VAPT at TechDefence",
+      subtitle: "Current Position",
+      icon: <FaBriefcase />,
+      color: "green",
+      content: "Currently working as a Security Analyst specializing in Vulnerability Assessment and Penetration Testing (VAPT) at TechDefence. Conducting comprehensive security assessments, identifying vulnerabilities, and providing remediation strategies to enhance organizational security posture.",
+      achievement: "Professional Security Analyst",
+      featured: true
+    },
+    {
       id: 11,
       title: "Professional Certifications",
       subtitle: "Ongoing Development",
       icon: <FaCertificate />,
       color: "indigo",
-      content: "Earned 15+ professional certifications including SysTools Digital Forensic Essentials (SDFE), SysTools Incident Response Essentials (SIRE), Digital Forensics Masterclass (DFMC + DIFR), Belkasoft Windows Forensics, OS Forensics Triage (OSFT), CNSP from SecOps, and Harvard CS50's Introduction to Cybersecurity. Completed job simulations with Tata Group and Mastercard.",
+      content: "Earned 15+ professional certifications including Certified Social Engineering Defense Practitioner (CSEDP) with Merit from The SecOps Group, SysTools Digital Forensic Essentials (SDFE), SysTools Incident Response Essentials (SIRE), Digital Forensics Masterclass (DFMC + DIFR), Belkasoft Windows Forensics, OS Forensics Triage (OSFT), CNSP from SecOps, and Harvard CS50's Introduction to Cybersecurity. Completed job simulations with Tata Group and Mastercard.",
       achievement: "15+ industry certifications"
     },
     {
@@ -37,12 +47,12 @@ export default function Journey() {
     },
     {
       id: 9,
-      title: "CTF Competition Success",
+      title: "CTF Competition Success & TryHackMe Achievements",
       subtitle: "Multiple Platforms",
       icon: <FaTrophy />,
       color: "purple",
-      content: "Participated in IIT-Roorkee CTF securing 16th position out of 100 teams. Secured 144th rank in Bugcrowd CTF. Participated in TryHackme Hackfinity Battle and AWS × SANS CTF gaining 200th rank. Competed in University CTF 2025: Tinsel Trouble achieving 417th rank out of 1050 universities with team NFSU. These competitions sharpened penetration testing and problem-solving skills.",
-      achievement: "Multiple CTF achievements",
+      content: "🎉 Successfully completed TryHackMe – Advent of Cyber 2025 and Advent of Cyber 2025 Side Quest. Selected as a winner and received a 6-month TryHackMe Subscription gift! Also participated in IIT-Roorkee CTF securing 16th position out of 100 teams. Secured 144th rank in Bugcrowd CTF. Participated in TryHackme Hackfinity Battle and AWS × SANS CTF gaining 200th rank. Competed in University CTF 2025: Tinsel Trouble achieving 417th rank out of 1050 universities with team NFSU. These competitions sharpened penetration testing and problem-solving skills.",
+      achievement: "TryHackMe Winner + Multiple CTF achievements",
       featured: true
     },
     {

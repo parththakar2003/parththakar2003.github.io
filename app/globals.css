@@ -28,6 +28,34 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+  /* Custom cyber cursor */
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%2306b6d4' d='M3,3 L3,11 L7,9 L10,14 L12,13 L9,8 L13,8 Z'/%3E%3Cpath fill='%23fff' d='M3,3 L3,11 L7,9 L10,14 L12,13 L9,8 L13,8 Z' opacity='0.4'/%3E%3C/svg%3E") 0 0, auto;
+}
+
+/* Wallpaper pattern overlay */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(6, 182, 212, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(6, 182, 212, 0.02) 0%, transparent 50%),
+    repeating-linear-gradient(0deg, rgba(6, 182, 212, 0.02) 0px, transparent 1px, transparent 40px),
+    repeating-linear-gradient(90deg, rgba(6, 182, 212, 0.02) 0px, transparent 1px, transparent 40px);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 40px 40px, 40px 40px;
+  opacity: 0.4;
+}
+
+@media (prefers-color-scheme: dark) {
+  body::before {
+    opacity: 0.6;
+  }
 }
 
 /* Sound wave animation */
@@ -147,6 +175,16 @@ body {
 /* Add smooth scroll behavior */
 html {
   scroll-behavior: smooth;
+}
+
+/* Custom cursor for interactive elements */
+a, button, input[type="submit"], input[type="button"], .cursor-pointer {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%2306b6d4' d='M12,2 L12,12 L22,12 M12,12 L12,22 M12,12 L2,12'/%3E%3Ccircle cx='12' cy='12' r='8' fill='none' stroke='%2306b6d4' stroke-width='2'/%3E%3C/svg%3E") 12 12, pointer;
+}
+
+/* Special cursor for text inputs */
+input[type="text"], input[type="email"], textarea {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cline x1='12' y1='4' x2='12' y2='20' stroke='%2306b6d4' stroke-width='2'/%3E%3Cline x1='8' y1='4' x2='16' y2='4' stroke='%2306b6d4' stroke-width='2'/%3E%3Cline x1='8' y1='20' x2='16' y2='20' stroke='%2306b6d4' stroke-width='2'/%3E%3C/svg%3E") 12 12, text;
 }
 
 /* Cyber Map Animations */

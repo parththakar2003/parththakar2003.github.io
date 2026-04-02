@@ -77,16 +77,16 @@ export default function Navbar() {
     <nav className={`fixed top-0 w-full z-50 transition-all duration-300 ${
       darkMode
         ? (scrolled 
-            ? 'bg-gradient-to-r from-gray-900 via-gray-800 to-slate-900 shadow-lg' 
-            : 'bg-gradient-to-r from-gray-900/90 via-gray-800/90 to-slate-900/90')
+            ? 'bg-gradient-to-r from-gray-900 via-red-950 to-black shadow-lg shadow-red-900/20' 
+            : 'bg-gradient-to-r from-gray-900/90 via-red-950/90 to-black/90')
         : (scrolled 
-            ? 'bg-gradient-to-r from-indigo-900 via-blue-900 to-purple-900 shadow-lg backdrop-blur-sm' 
-            : 'bg-gradient-to-r from-indigo-800/90 via-blue-800/90 to-purple-800/90 backdrop-blur-sm')
-    }`}>
+            ? 'bg-gradient-to-r from-red-900 via-red-800 to-red-950 shadow-lg backdrop-blur-sm' 
+            : 'bg-gradient-to-r from-red-800/90 via-red-700/90 to-red-900/90 backdrop-blur-sm')
+    } red-scanline-overlay`}>
       <div className="flex justify-between items-center max-w-6xl mx-auto p-4">
         <Link href="/" className="text-xl text-white font-bold relative group">
-          <span className="relative z-10">Parth Thakar</span>
-          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300"></span>
+          <span className="relative z-10 red-gradient-text">Parth Thakar</span>
+          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-500 group-hover:w-full transition-all duration-300 shadow-[0_0_10px_rgba(255,0,0,0.5)]"></span>
         </Link>
         
         {/* Desktop Navigation */}
@@ -103,18 +103,18 @@ export default function Navbar() {
                     href={item.path}
                     className={`relative px-1 py-2 font-medium transition-colors group ${
                       isActive 
-                        ? 'text-blue-400' 
-                        : 'text-gray-100 hover:text-white'
+                        ? 'text-red-400 red-glow-text' 
+                        : 'text-gray-100 hover:text-red-300'
                     }`}
                   >
                     <span className="relative z-10">{item.name}</span>
                     {isActive ? (
                       <motion.span
                         layoutId="navbar-underline"
-                        className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-400"
+                        className="absolute bottom-0 left-0 w-full h-0.5 bg-red-500 shadow-[0_0_10px_rgba(255,0,0,0.8)]"
                       />
                     ) : (
-                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300"></span>
+                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-500 group-hover:w-full transition-all duration-300 shadow-[0_0_8px_rgba(255,0,0,0.6)]"></span>
                     )}
                   </Link>
                 </li>
@@ -161,9 +161,9 @@ export default function Navbar() {
             transition={{ duration: 0.3 }}
             className={`md:hidden overflow-hidden ${
               darkMode 
-                ? 'bg-gradient-to-r from-gray-900 via-gray-800 to-slate-900' 
-                : 'bg-gradient-to-r from-indigo-900 via-blue-900 to-purple-900'
-            } backdrop-blur-sm`}
+                ? 'bg-gradient-to-r from-gray-900 via-red-950 to-black' 
+                : 'bg-gradient-to-r from-red-900 via-red-800 to-red-950'
+            } backdrop-blur-sm red-cyber-lines`}
           >
             <ul className="px-4 py-3 space-y-3">
               {navItems.map((item) => {
@@ -179,15 +179,15 @@ export default function Navbar() {
                   >
                     <Link
                       href={item.path}
-                      className={`block py-2 px-3 rounded relative group ${
+                      className={`block py-2 px-3 rounded relative group transition-all duration-300 ${
                         isActive 
-                          ? 'bg-blue-800/40 text-blue-300' 
-                          : 'text-gray-100 hover:bg-indigo-800/40 hover:text-white'
+                          ? 'bg-red-900/40 text-red-300 red-neon-border' 
+                          : 'text-gray-100 hover:bg-red-950/40 hover:text-red-200'
                       }`}
                     >
                       <span className="relative z-10">{item.name}</span>
                       {!isActive && (
-                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 group-hover:w-full transition-all duration-300"></span>
+                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-red-500 group-hover:w-full transition-all duration-300 shadow-[0_0_8px_rgba(255,0,0,0.6)]"></span>
                       )}
                     </Link>
                   </motion.li>

@@ -34,8 +34,9 @@ export default function Home() {
     "class <span class='text-purple-400'>CybersecurityProfessional</span> {",
     "  <span class='text-blue-400'>constructor</span>() {",
     "    this.<span class='text-green-400'>name</span> = <span class='text-yellow-400'>'Parth Thakar'</span>;",
-    "    this.<span class='text-green-400'>role</span> = <span class='text-yellow-400'>'Digital Forensics & InfoSec Specialist | VAPT | Red Teaming'</span>;",
-    "    this.<span class='text-green-400'>specializations</span> = [<span class='text-yellow-400'>'SOC Operations'</span>, <span class='text-yellow-400'>'DFIR'</span>, <span class='text-yellow-400'>'CTF Competitions'</span>, <span class='text-yellow-400'>'Incident Response'</span>, <span class='text-yellow-400'>'Digital Forensics'</span>, <span class='text-yellow-400'>'VAPT'</span>, <span class='text-yellow-400'>'Red Teaming'</span>];",
+    "    this.<span class='text-green-400'>company</span> = <span class='text-cyan-300'>'Founder, Thakar\\'s Security'</span>;",
+    "    this.<span class='text-green-400'>role</span> = <span class='text-yellow-400'>'VAPT Expert | Digital Forensics | Red Teaming'</span>;",
+    "    this.<span class='text-green-400'>specializations</span> = [<span class='text-yellow-400'>'VAPT'</span>, <span class='text-yellow-400'>'DFIR'</span>, <span class='text-yellow-400'>'SOC Operations'</span>, <span class='text-yellow-400'>'Red Teaming'</span>, <span class='text-yellow-400'>'Incident Response'</span>];",
     "  }",
     "}",
   ], []);
@@ -403,9 +404,10 @@ export default function Home() {
 
                   <div>
                     <h2 className="text-base sm:text-lg md:text-xl font-semibold">Parth Thakar</h2>
-                    <p className={`${theme.accent} text-xs sm:text-sm md:text-base`}>Cybersecurity Professional</p>
+                    <p className={`${theme.accent} text-xs sm:text-sm`}>VAPT Intern @ TechDefence</p>
+                    <p className={`${theme.muted} text-[10px] sm:text-xs`}>Founder, Thakar&apos;s Security</p>
 
-                    <div className="flex gap-2 mt-2">
+                    <div className="flex gap-2 mt-2 flex-wrap">
                       <a
                         href="https://github.com/parththakar2003"
                         target="_blank"
@@ -430,6 +432,14 @@ export default function Home() {
                         aria-label="Email"
                       >
                         <FaEnvelope />
+                      </a>
+                      <a
+                        href="/assets/documents/Parth_Thakar_Resume.pdf"
+                        download="Parth_Thakar_Resume.pdf"
+                        className={`px-2 py-1 rounded text-[10px] font-mono font-semibold ${darkMode ? 'bg-cyan-600/20 hover:bg-cyan-600/40 text-cyan-400 border border-cyan-600/40' : 'bg-cyan-50 hover:bg-cyan-100 text-cyan-700 border border-cyan-200'} transition-colors`}
+                        aria-label="Download Resume"
+                      >
+                        CV ↓
                       </a>
                     </div>
                   </div>
@@ -676,25 +686,25 @@ export default function Home() {
                 <div className="space-y-4">
                   {[
                     {
-                      name: "Advanced Billing System with QR",
-                      description: "Full-stack billing system with QR code integration using Python.",
-                      tags: ["Python", "Full-Stack", "QR Integration", "Database"],
-                      status: "Completed",
-                      link: "#"
-                    },
-                    {
-                      name: "Cryptography & Steganography Tool",
-                      description: "Security tool for encryption and data hiding using Python.",
-                      tags: ["Python", "Cryptography", "Steganography", "Security"],
+                      name: "Secure CipherStegno Tool",
+                      description: "Python GUI toolkit — AES-256, RSA-2048, ChaCha20 + image/audio/video LSB steganography. Academic dissertation project.",
+                      tags: ["Python", "Cryptography", "Steganography", "PyCryptodome"],
                       status: "Completed",
                       link: "https://github.com/parththakar2003/Secure-CipherStegno-Tool"
                     },
                     {
-                      name: "Portfolio",
-                      description: "Personal portfolio website showcasing cybersecurity projects, skills, and professional journey.",
-                      tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+                      name: "Advanced Billing System with QR",
+                      description: "Full-stack billing system with QR code integration, automated invoicing, and payment tracking.",
+                      tags: ["Python", "Full-Stack", "QR Integration", "SQLite"],
                       status: "Completed",
-                      link: "https://parththakar2003.github.io/"
+                      link: "#"
+                    },
+                    {
+                      name: "Portfolio — parth2003.in",
+                      description: "Cybersecurity-themed portfolio built with Next.js 15, TypeScript, Tailwind CSS, and Framer Motion.",
+                      tags: ["Next.js", "TypeScript", "Tailwind CSS", "Framer Motion"],
+                      status: "Live",
+                      link: "https://parth2003.in/"
                     }
                   ].map((project, i) => (
                     <a
@@ -779,6 +789,103 @@ export default function Home() {
             </motion.div>
           </div>
         </div>
+
+        {/* Thakar's Security — Company Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
+          className="mb-8"
+        >
+          {/* Section Header */}
+          <div className={`relative rounded-xl overflow-hidden border ${darkMode ? 'border-cyan-500/30 bg-gray-900/80' : 'border-cyan-400/40 bg-white/90'} backdrop-blur-sm p-6 sm:p-8 md:p-10`}>
+            {/* Background glow effects */}
+            <div className="absolute -top-20 -left-20 w-64 h-64 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-32 bg-blue-500/5 rounded-full blur-3xl pointer-events-none"></div>
+
+            {/* Company badge */}
+            <div className="flex items-center gap-3 mb-6 relative z-10">
+              <div className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono border ${darkMode ? 'bg-cyan-500/10 border-cyan-500/40 text-cyan-400' : 'bg-cyan-50 border-cyan-300 text-cyan-700'}`}>
+                <FaShieldAlt className="text-xs" />
+                <span>Security Services</span>
+              </div>
+              <div className={`h-px flex-1 ${darkMode ? 'bg-gradient-to-r from-cyan-500/30 to-transparent' : 'bg-gradient-to-r from-cyan-300/50 to-transparent'}`}></div>
+            </div>
+
+            {/* Company name + tagline */}
+            <div className="relative z-10 mb-8">
+              <h2 className={`text-2xl sm:text-3xl md:text-4xl font-bold mb-3 ${darkMode ? 'text-white' : 'text-gray-900'}`}>
+                <span className={`${darkMode ? 'text-cyan-400' : 'text-cyan-600'}`}>Thakar</span>
+                <span className={darkMode ? 'text-white' : 'text-gray-900'}>&apos;s Security</span>
+              </h2>
+              <p className={`text-sm sm:text-base md:text-lg max-w-2xl ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                Professional cybersecurity services — protecting businesses from evolving threats through rigorous vulnerability assessments, penetration testing, and red team operations.
+              </p>
+            </div>
+
+            {/* Services grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-8 relative z-10">
+              {[
+                { icon: "🌐", title: "Web App VAPT", tag: "OWASP Top 10", color: darkMode ? "border-blue-500/30 hover:border-blue-400/60" : "border-blue-200 hover:border-blue-400" },
+                { icon: "🔌", title: "API Security", tag: "REST / GraphQL", color: darkMode ? "border-purple-500/30 hover:border-purple-400/60" : "border-purple-200 hover:border-purple-400" },
+                { icon: "🖧", title: "Network VAPT", tag: "Internal & External", color: darkMode ? "border-green-500/30 hover:border-green-400/60" : "border-green-200 hover:border-green-400" },
+                { icon: "🤖", title: "Android VAPT", tag: "OWASP Mobile", color: darkMode ? "border-orange-500/30 hover:border-orange-400/60" : "border-orange-200 hover:border-orange-400" },
+                { icon: "🍎", title: "iOS VAPT", tag: "Frida / Objection", color: darkMode ? "border-cyan-500/30 hover:border-cyan-400/60" : "border-cyan-200 hover:border-cyan-400" },
+                { icon: "🖥️", title: "Thick Client VAPT", tag: "Desktop Apps", color: darkMode ? "border-indigo-500/30 hover:border-indigo-400/60" : "border-indigo-200 hover:border-indigo-400" },
+                { icon: "🎯", title: "Red Teaming", tag: "MITRE ATT&CK", color: darkMode ? "border-red-500/30 hover:border-red-400/60" : "border-red-200 hover:border-red-400" },
+                { icon: "🔍", title: "Digital Forensics", tag: "DFIR", color: darkMode ? "border-teal-500/30 hover:border-teal-400/60" : "border-teal-200 hover:border-teal-400" },
+              ].map((service, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: 0.1 * i }}
+                  className={`group relative rounded-lg p-3 sm:p-4 border ${service.color} ${darkMode ? 'bg-gray-800/60' : 'bg-white/70'} backdrop-blur-sm transition-all duration-300 cursor-default`}
+                >
+                  <div className="text-xl sm:text-2xl mb-2">{service.icon}</div>
+                  <h3 className={`font-semibold text-xs sm:text-sm mb-1 ${darkMode ? 'text-white' : 'text-gray-900'}`}>{service.title}</h3>
+                  <div className={`inline-block text-[10px] px-1.5 py-0.5 rounded font-mono ${darkMode ? 'bg-gray-700 text-gray-400' : 'bg-gray-100 text-gray-500'}`}>
+                    {service.tag}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Stats row */}
+            <div className={`grid grid-cols-3 gap-4 mb-8 p-4 rounded-lg relative z-10 ${darkMode ? 'bg-gray-800/40 border border-gray-700/50' : 'bg-gray-50/80 border border-gray-200'}`}>
+              {[
+                { value: "100%", label: "Report Coverage", sub: "CVSS + PoC" },
+                { value: "48h", label: "Initial Report", sub: "Turnaround" },
+                { value: "24/7", label: "IR Support", sub: "Post-engagement" },
+              ].map((stat, i) => (
+                <div key={i} className="text-center">
+                  <div className={`text-xl sm:text-2xl md:text-3xl font-bold font-mono ${darkMode ? 'text-cyan-400' : 'text-cyan-600'}`}>{stat.value}</div>
+                  <div className={`text-xs sm:text-sm font-medium mt-0.5 ${darkMode ? 'text-gray-200' : 'text-gray-700'}`}>{stat.label}</div>
+                  <div className={`text-[10px] ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>{stat.sub}</div>
+                </div>
+              ))}
+            </div>
+
+            {/* CTA buttons */}
+            <div className="flex flex-col sm:flex-row gap-3 relative z-10">
+              <a
+                href="/services"
+                className={`inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-300 ${darkMode ? 'bg-cyan-500 hover:bg-cyan-400 text-gray-900' : 'bg-cyan-600 hover:bg-cyan-500 text-white'} shadow-lg shadow-cyan-500/20`}
+              >
+                <FaShieldAlt />
+                <span>View All Services</span>
+              </a>
+              <a
+                href="/contact"
+                className={`inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-300 border ${darkMode ? 'border-cyan-500/40 text-cyan-400 hover:bg-cyan-500/10' : 'border-cyan-400 text-cyan-700 hover:bg-cyan-50'}`}
+              >
+                <FaEnvelope />
+                <span>Request Security Assessment</span>
+              </a>
+            </div>
+          </div>
+        </motion.div>
 
         {/* Call to Action */}
         <motion.div

@@ -2,22 +2,17 @@
   "projects": [
     {
       "id": "1",
-      "title": "Advanced Billing System with QR",
-      "description": "Full Stack application built with Python for advanced billing with QR code integration",
-      "type": "Major Project",
-      "technologies": ["Python", "Full Stack", "QR Code"],
-      "image": "/assets/images/projects/billing-system.jpg",
-      "github": "",
-      "demo": "",
-      "featured": true,
-      "completionDate": "2024"
-    },
-    {
-      "id": "2",
-      "title": "Cryptography & Steganography Tool",
-      "description": "Security tool developed using Python for cryptography and steganography operations",
-      "type": "Minor Project",
-      "technologies": ["Python", "Cryptography", "Steganography"],
+      "title": "Secure CipherStegno Tool",
+      "description": "A Python GUI desktop security toolkit integrating cryptography and steganography — major academic dissertation project. Implements AES-256, RSA-2048, ChaCha20, and classical ciphers alongside image, audio, and video LSB steganography.",
+      "type": "Major Project (Dissertation)",
+      "technologies": ["Python", "Tkinter", "PyCryptodome", "Pillow", "GitHub Actions"],
+      "features": [
+        "AES-256, RSA-2048, ChaCha20 encryption",
+        "Classical cipher implementations",
+        "Image, audio, and video LSB steganography",
+        "GUI desktop application (Tkinter)",
+        "CI/CD via GitHub Actions"
+      ],
       "image": "/assets/images/projects/crypto-tool.jpg",
       "github": "https://github.com/parththakar2003/Secure-CipherStegno-Tool",
       "demo": "",
@@ -25,14 +20,40 @@
       "completionDate": "2025"
     },
     {
-      "id": "3",
-      "title": "Portfolio",
-      "description": "Personal portfolio website showcasing cybersecurity projects, skills, and professional journey",
+      "id": "2",
+      "title": "Advanced Billing System with QR",
+      "description": "Full-stack billing system with QR code integration for efficient payment processing and invoice management. Streamlines business transactions with automated billing, receipt generation, and secure payment tracking.",
       "type": "Major Project",
-      "technologies": ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+      "technologies": ["Python", "Full Stack", "QR Code", "SQLite/MySQL", "Flask/Django"],
+      "features": [
+        "QR code generation for invoices",
+        "Automated billing calculations",
+        "Customer management system",
+        "Payment tracking and reports",
+        "Receipt generation and printing"
+      ],
+      "image": "/assets/images/projects/billing-system.jpg",
+      "github": "",
+      "demo": "",
+      "featured": true,
+      "completionDate": "2024"
+    },
+    {
+      "id": "3",
+      "title": "Portfolio Website",
+      "description": "Personal portfolio website showcasing cybersecurity projects, skills, and professional journey. Built with Next.js 15, TypeScript, and Tailwind CSS with cyber theme aesthetics and responsive design.",
+      "type": "Personal Project",
+      "technologies": ["Next.js", "React", "TypeScript", "Tailwind CSS", "Framer Motion"],
+      "features": [
+        "Cybersecurity-themed dark/light mode",
+        "Animated terminal hero section",
+        "Responsive design for all devices",
+        "SEO optimized with structured data",
+        "GitHub Pages deployment"
+      ],
       "image": "/assets/images/projects/portfolio.jpg",
       "github": "https://github.com/parththakar2003/parththakar2003.github.io",
-      "demo": "https://parththakar2003.github.io/",
+      "demo": "https://parth2003.in/",
       "featured": true,
       "completionDate": "2025"
     }

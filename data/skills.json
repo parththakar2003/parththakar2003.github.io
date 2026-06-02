@@ -1,73 +1,78 @@
 {
-  "computerSkills": [
-    {
-      "name": "Burp Suite",
-      "category": "Security Testing",
-      "level": "Advanced",
-      "icon": "🔒"
-    },
-    {
-      "name": "Nessus",
-      "category": "Vulnerability Assessment",
-      "level": "Advanced",
-      "icon": "🔍"
-    },
-    {
-      "name": "FTK Imager",
-      "category": "Digital Forensics",
-      "level": "Advanced",
-      "icon": "💾"
-    },
-    {
-      "name": "OS Forensic",
-      "category": "Digital Forensics",
-      "level": "Advanced",
-      "icon": "🖥️"
-    },
-    {
-      "name": "OSINT",
-      "category": "Intelligence Gathering",
-      "level": "Advanced",
-      "icon": "🕵️"
-    },
-    {
-      "name": "Autopsy",
-      "category": "Digital Forensics",
-      "level": "Advanced",
-      "icon": "🔬"
-    }
+  "vapt": [
+    { "name": "Burp Suite Pro", "category": "Web Application Security", "level": "Advanced", "icon": "🔒" },
+    { "name": "Nmap", "category": "Network Scanner", "level": "Advanced", "icon": "🌐" },
+    { "name": "Metasploit", "category": "Exploitation Framework", "level": "Intermediate", "icon": "💥" },
+    { "name": "OWASP ZAP", "category": "Web Security", "level": "Advanced", "icon": "🔍" },
+    { "name": "SQLmap", "category": "SQL Injection", "level": "Advanced", "icon": "🗄️" },
+    { "name": "Nikto", "category": "Web Scanner", "level": "Advanced", "icon": "🔎" },
+    { "name": "Gobuster", "category": "Directory Enumeration", "level": "Advanced", "icon": "📂" },
+    { "name": "Nessus", "category": "Vulnerability Assessment", "level": "Advanced", "icon": "🛡️" }
   ],
-  "softSkills": [
-    {
-      "name": "Communication",
-      "icon": "💬"
-    },
-    {
-      "name": "Teamwork",
-      "icon": "🤝"
-    },
-    {
-      "name": "Time Management",
-      "icon": "⏰"
-    }
+  "forensics": [
+    { "name": "FTK Imager", "category": "Forensic Imaging", "level": "Advanced", "icon": "💾" },
+    { "name": "Autopsy", "category": "Digital Forensics", "level": "Advanced", "icon": "🔬" },
+    { "name": "OS Forensics", "category": "Digital Forensics", "level": "Advanced", "icon": "🖥️" },
+    { "name": "Belkasoft", "category": "Evidence Analysis", "level": "Advanced", "icon": "📋" },
+    { "name": "Volatility", "category": "Memory Forensics", "level": "Intermediate", "icon": "🧠" },
+    { "name": "Wireshark", "category": "Network Analysis", "level": "Advanced", "icon": "📡" },
+    { "name": "OSINT Tools", "category": "Intelligence Gathering", "level": "Advanced", "icon": "🕵️" }
   ],
   "languages": [
-    {
-      "name": "English",
-      "proficiency": "Fluent"
-    },
-    {
-      "name": "Hindi",
-      "proficiency": "Native"
-    },
-    {
-      "name": "Gujarati",
-      "proficiency": "Native"
-    }
+    { "name": "Python", "level": "Advanced", "icon": "🐍" },
+    { "name": "Bash", "level": "Advanced", "icon": "⚡" },
+    { "name": "PowerShell", "level": "Intermediate", "icon": "🪟" },
+    { "name": "JavaScript", "level": "Intermediate", "icon": "🟨" },
+    { "name": "HTML + CSS", "level": "Intermediate", "icon": "🌐" }
   ],
-  "hobbies": [
-    "Skating",
-    "Cricket",
-    "Listening Music"
-  ]
+  "platforms": [
+    { "name": "Kali Linux", "level": "Advanced" },
+    { "name": "Parrot OS", "level": "Advanced" },
+    { "name": "Windows", "level": "Advanced" },
+    { "name": "TryHackMe", "level": "Top 1%" },
+    { "name": "Hack The Box", "level": "Active" }
+  ],
+  "methodologies": [
+    "OWASP Top 10",
+    "PTES",
+    "CVSS 3.1 Scoring",
+    "CWE Classification",
+    "MITRE ATT&CK",
+    "NIST",
+    "ISO 27001 (awareness)",
+    "Bug Bounty"
+  ],
+  "assessmentAreas": [
+    "Web Application",
+    "API Security",
+    "Network",
+    "Active Directory",
+    "Mobile (Android)"
+  ],
+  "cloud": [
+    { "name": "AWS", "level": "Basics" },
+    { "name": "MongoDB", "level": "Intermediate" },
+    { "name": "MySQL", "level": "Intermediate" },
+    { "name": "Firebase", "level": "Basics" }
+  ],
+  "devTools": [
+    "Git",
+    "GitHub Actions",
+    "VS Code",
+    "Telegram Bot API"
+  ],
+  "softSkills": [
+    { "name": "Report Writing", "icon": "📝" },
+    { "name": "Problem Solving", "icon": "🧩" },
+    { "name": "Communication", "icon": "💬" },
+    { "name": "Teamwork", "icon": "🤝" },
+    { "name": "Self-learning", "icon": "📚" },
+    { "name": "Adaptability", "icon": "🔄" }
+  ],
+  "languages_spoken": [
+    { "name": "English", "proficiency": "Fluent" },
+    { "name": "Hindi", "proficiency": "Native" },
+    { "name": "Gujarati", "proficiency": "Native" }
+  ],
+  "hobbies": ["Skating", "Cricket", "Listening Music"]
 }

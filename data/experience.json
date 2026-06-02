@@ -1,26 +1,27 @@
 {
   "currentPosition": {
-    "company": "TechDefence",
-    "role": "Security Analyst - VAPT",
-    "type": "Full-time",
+    "company": "TechDefence Labs (TechD CyberSecurity Ltd.)",
+    "role": "VAPT Intern — Web, API & Network Security",
+    "type": "Internship",
     "status": "Current",
-    "description": "Working as a Security Analyst specializing in Vulnerability Assessment and Penetration Testing (VAPT)"
+    "period": "2026 – Present",
+    "location": "Ahmedabad, On-Site",
+    "description": "Conducting end-to-end VAPT engagements on fintech platforms, broking portals, cooperative bank websites, and internal enterprise web apps. Discovering and documenting critical/high vulnerabilities including SQLi, XSS, IDOR, Broken Access Control, SSRF, and security misconfigurations on live client targets."
   },
   "education": [
     {
-      "degree": "Master of Digital Forensic and Information Security (DFIS)",
-      "institution": "Narnarayan Shastri Institute of Technology",
-      "location": "Jetalpur – Ahmedabad",
-      "affiliated": "NSFU National Forensic Science University - Gandhinagar",
-      "period": "2024-25",
-      "status": "Pursuing Semester - III",
+      "degree": "M.Sc. in Digital Forensics & Information Security (DFIS)",
+      "institution": "NSIT-IFSCS, Ahmedabad",
+      "affiliated": "National Forensic Science University (NFSU), Gandhinagar",
+      "period": "2024 – 2026",
+      "status": "Pursuing — Semester IV",
       "grade": ""
     },
     {
-      "degree": "Bachelor of Science – IT (B.Sc. IT)",
+      "degree": "B.Sc. Information Technology",
       "institution": "Ganpat University",
       "location": "Ahmedabad",
-      "period": "April-June 2024",
+      "period": "2021 – 2024",
       "status": "Completed",
       "grade": "7.20 CGPA"
     },
@@ -28,7 +29,7 @@
       "degree": "HSC",
       "institution": "St. Mary's English Medium School",
       "location": "Gota, Ahmedabad",
-      "period": "May-2021",
+      "period": "May 2021",
       "status": "Completed",
       "grade": "57.60%",
       "board": "Gujarat Secondary & Higher Secondary Education Board"
@@ -36,25 +37,30 @@
   ],
   "internships": [
     {
-      "company": "Awl Agri Business Ltd (Formerly known as ADANI WILMAR LTD.)",
-      "role": "Digital Forensic and Cyber Security Intern",
-      "duration": "2 Months",
+      "company": "TechDefence Labs (TechD CyberSecurity Ltd.)",
+      "role": "VAPT Intern — Web, API & Network Security",
+      "duration": "Present",
+      "period": "2026 – Present",
       "type": "On-site",
-      "description": "Completed 2 Month On-site internship in Digital Forensic and Cyber Security"
+      "location": "Ahmedabad",
+      "description": "Conducted end-to-end VAPT engagements on fintech platforms, broking portals, cooperative bank websites, and internal enterprise web apps. Discovered and documented critical/high vulnerabilities including SQLi, XSS, IDOR, Broken Access Control, SSRF, and security misconfigurations on live client targets."
+    },
+    {
+      "company": "AWL Agri Business Ltd. (Formerly Adani Wilmar Ltd.)",
+      "role": "Cyber Security Intern",
+      "duration": "2 Months",
+      "period": "2025",
+      "type": "On-site",
+      "location": "Ahmedabad",
+      "description": "Performed digital forensics investigations, endpoint security assessments, and incident triage. Conducted OSINT-based threat intelligence gathering and supported SOC monitoring operations."
     },
     {
       "company": "Cyber Secured India",
-      "role": "Digital Forensic and Cyber Security Intern",
-      "duration": "3 Months",
-      "type": "Remote",
-      "description": "Completed Digital Forensic and Cyber security Internship"
-    },
-    {
-      "company": "The Red User Cyber Security",
       "role": "Cyber Security Intern",
-      "duration": "1 Month",
+      "duration": "3 Months",
+      "period": "2025",
       "type": "Remote",
-      "description": "Completed One Month Internship"
+      "description": "Executed vulnerability assessments and delivered findings using structured reporting templates."
     },
     {
       "company": "Shadow Fox Cyber Security",
@@ -62,26 +68,44 @@
       "duration": "1 Month",
       "period": "March 2025",
       "type": "Remote",
-      "description": "Completed One Month Internship"
+      "description": "Participated in red team exercises and assisted with penetration testing engagements."
+    },
+    {
+      "company": "The Red User Cyber Security",
+      "role": "Cyber Security Intern",
+      "duration": "1 Month",
+      "period": "2025",
+      "type": "Remote",
+      "description": "Supported offensive security testing tasks and vulnerability documentation."
     },
     {
       "company": "Brainy Beam Technologies Pvt Ltd",
-      "role": "Full-Stack Development and Python Programmer",
+      "role": "Full-Stack Developer Intern",
       "duration": "2 Months",
-      "period": "Jan 2024 to Feb 2024",
+      "period": "Jan – Feb 2024",
       "type": "On-site",
-      "description": "Full-Stack Development and Python Programmer Internship"
+      "location": "Ahmedabad",
+      "description": "Built full-stack web applications using Python/Django; contributed to secure coding reviews."
+    }
+  ],
+  "talks": [
+    {
+      "title": "Speaker — NULL Ahmedabad Chapter (NewsBytes Segment)",
+      "event": "NULL Community Chapter",
+      "location": "Ahmedabad",
+      "year": "2025",
+      "description": "Delivered a technical session on Top 10 Cybersecurity News Updates covering recent vulnerabilities, zero-days, major breaches, and emerging security trends. Presented complex security updates as actionable insights to an audience of cybersecurity enthusiasts and professionals."
     }
   ],
   "webinarsAndConferences": [
-    "Hibernate Framework",
-    "Workshop on React native",
-    "Workshop for Odoo-ERP function",
-    "Flutter- Build apps for any Screen",
-    "Power BI – Visualization",
+    "IoTSEC Workshop 2025",
     "Cybersecurity: Privacy & Data Protection",
-    "Implementing cybersecurity best Practices",
+    "Implementing Cybersecurity Best Practices",
     "Fraud Investigation Augmented by AI & Technology",
-    "IoTSEC Workshop 2025"
+    "Workshop on React Native",
+    "Flutter – Build Apps for any Screen",
+    "Power BI – Visualization",
+    "Workshop for Odoo-ERP Function",
+    "Hibernate Framework"
   ]
 }

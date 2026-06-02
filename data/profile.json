@@ -1,12 +1,14 @@
 {
   "name": "Parth Thakar",
-  "title": "Security Analyst - VAPT at TechDefence | Digital Forensics & Cybersecurity Specialist",
-  "tagline": "Master's Student in Digital Forensics and Information Security",
+  "title": "Cybersecurity Professional | Founder, Thakar's Security",
+  "tagline": "Master's Student in Digital Forensics & Information Security | VAPT Expert | Red Teaming",
+  "company": "Thakar's Security",
+  "companyTagline": "Securing businesses through expert vulnerability assessment & penetration testing",
   "dob": "2nd August 2003",
   "email": "Parththakar39@gmail.com",
   "linkedin": "https://www.linkedin.com/in/parthmehulkumarthakar/",
   "github": "https://github.com/parththakar2003",
   "location": "Ahmedabad, Gujarat, India",
-  "bio": "Want to succeed in a stimulating and challenging environment that will provide advancement opportunities.",
+  "bio": "Cybersecurity professional and founder of Thakar's Security, specializing in VAPT, digital forensics, SOC operations, and incident response. Driven by a mission to protect businesses from evolving cyber threats through rigorous security assessments and red team operations.",
   "resume": "/assets/documents/Parth_Thakar_Resume.pdf"
 }

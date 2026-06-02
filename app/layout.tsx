@@ -15,14 +15,14 @@ export const viewport = {
 };
 
 export const metadata = {
-  metadataBase: new URL('https://parththakar2003.github.io'),
+  metadataBase: new URL('https://parth2003.in'),
   title: {
     default: "Parth Thakar - Cybersecurity Professional & DFIR Expert",
     template: "%s | Parth Thakar"
   },
   description: "Cybersecurity Professional specializing in Digital Forensics, DFIR, SOC Operations, VAPT, and Red Teaming. Expert in incident response and threat hunting.",
   applicationName: "Parth Thakar Portfolio",
-  authors: [{ name: "Parth Thakar", url: "https://parththakar2003.github.io" }],
+  authors: [{ name: "Parth Thakar", url: "https://parth2003.in" }],
   generator: "Next.js",
   keywords: [
     "Parth Thakar",
@@ -65,7 +65,7 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://parththakar2003.github.io",
+    url: "https://parth2003.in",
     siteName: "Parth Thakar - Cybersecurity Professional Portfolio",
     title: "Parth Thakar - Cybersecurity Professional & DFIR Expert",
     description: "Cybersecurity Professional specializing in Digital Forensics, DFIR, SOC Operations, VAPT, and Red Teaming. Expert in incident response and threat hunting.",
@@ -105,7 +105,7 @@ export const metadata = {
     navigationBarColor: "#1e293b",
   },
   alternates: {
-    canonical: "https://parththakar2003.github.io",
+    canonical: "https://parth2003.in",
   },
   // Security: Referrer policy for privacy
   referrer: 'strict-origin-when-cross-origin',
@@ -175,9 +175,9 @@ export default function RootLayout({
             alternateName: ["parththakar2003", "Parth Mehulkumar Thakar"],
             jobTitle: "Cybersecurity Professional & Digital Forensics Specialist",
             description: "Master's student in Digital Forensics and Information Security with expertise in SOC Operations, DFIR, VAPT, Red Teaming, and CTF competitions. Specializing in incident response, threat hunting, and forensics investigation.",
-            url: "https://parththakar2003.github.io",
+            url: "https://parth2003.in",
             email: "Parththakar39@gmail.com",
-            image: "https://parththakar2003.github.io/images/profile.jpg",
+            image: "https://parth2003.in/images/profile.jpg",
             sameAs: [
               "https://github.com/parththakar2003",
               "https://www.linkedin.com/in/parthmehulkumarthakar/",
@@ -227,7 +227,7 @@ export default function RootLayout({
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebSite",
-            url: "https://parththakar2003.github.io",
+            url: "https://parth2003.in",
             name: "Parth Thakar - Cybersecurity Professional Portfolio",
             description: "Professional portfolio showcasing cybersecurity skills, digital forensics expertise, SOC operations experience, VAPT capabilities, and achievements in the field of information security.",
             author: {
@@ -239,7 +239,7 @@ export default function RootLayout({
               "@type": "SearchAction",
               target: {
                 "@type": "EntryPoint",
-                urlTemplate: "https://parththakar2003.github.io/?q={search_term_string}"
+                urlTemplate: "https://parth2003.in/?q={search_term_string}"
               },
               "query-input": "required name=search_term_string"
             }
@@ -261,7 +261,7 @@ export default function RootLayout({
                   "@type": "ListItem",
                   position: 1,
                   name: "Home",
-                  item: "https://parththakar2003.github.io"
+                  item: "https://parth2003.in"
                 }
               ]
             }

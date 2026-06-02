@@ -1,59 +1,28 @@
 "use client"
-import { useEffect, useState, useMemo, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
 import { useTheme } from '@/context/ThemeContext';
 
+interface Particle {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  size: number;
+  opacity: number;
+}
+
 export default function CyberBackground() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const { darkMode } = useTheme();
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isInteracting, setIsInteracting] = useState(false);
+  const darkModeRef = useRef(darkMode);
+  const animRef = useRef<number>(0);
+  const mouseRef = useRef({ x: -9999, y: -9999 });
+  const particlesRef = useRef<Particle[]>([]);
   const [mounted, setMounted] = useState(false);
 
-  // Generate particles for background
-  const particles = useMemo(() => {
-    return Array.from({ length: 40 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 2 + 0.5,
-      duration: Math.random() * 4 + 3,
-      delay: Math.random() * 3,
-    }));
-  }, []);
-
-  // Generate hexagons
-  const hexagons = useMemo(() => {
-    return Array.from({ length: 12 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 60 + 40,
-      duration: Math.random() * 8 + 6,
-      delay: Math.random() * 3,
-    }));
-  }, []);
-
-  // Generate circuit nodes
-  const circuitNodes = useMemo(() => {
-    return Array.from({ length: 20 }, (_, i) => ({
-      id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-    }));
-  }, []);
-
-  // Mouse tracking
-  const handleMouseMove = useCallback((e: MouseEvent) => {
-    setMousePosition({ 
-      x: (e.clientX / window.innerWidth) * 100, 
-      y: (e.clientY / window.innerHeight) * 100 
-    });
-    setIsInteracting(true);
-    
-    // Reset interaction state after no movement
-    const timeout = setTimeout(() => setIsInteracting(false), 150);
-    return () => clearTimeout(timeout);
-  }, []);
+  useEffect(() => {
+    darkModeRef.current = darkMode;
+  }, [darkMode]);
 
   useEffect(() => {
     setMounted(true);
@@ -61,208 +30,184 @@ export default function CyberBackground() {
 
   useEffect(() => {
     if (!mounted) return;
-    
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [handleMouseMove, mounted]);
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-  if (!mounted || !darkMode) return null; // Only show in dark mode after mounting
+    const PARTICLE_COUNT = 75;
+    const MAX_DIST = 140;
+    const REPEL_RADIUS = 110;
+    const REPEL_FORCE = 0.6;
+    const MAX_SPEED = 1.8;
+
+    const resize = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      // Re-initialise particles on resize
+      particlesRef.current = Array.from({ length: PARTICLE_COUNT }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        vx: (Math.random() - 0.5) * 0.6,
+        vy: (Math.random() - 0.5) * 0.6,
+        size: Math.random() * 1.8 + 0.4,
+        opacity: Math.random() * 0.35 + 0.15,
+      }));
+    };
+
+    resize();
+    window.addEventListener('resize', resize);
+
+    const onMouseMove = (e: MouseEvent) => {
+      mouseRef.current = { x: e.clientX, y: e.clientY };
+    };
+    const onMouseLeave = () => {
+      mouseRef.current = { x: -9999, y: -9999 };
+    };
+    window.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseleave', onMouseLeave);
+
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      const isDark = darkModeRef.current;
+      // Particle/line color: cyan in dark, teal in light
+      const pr = isDark ? 6 : 14;
+      const pg = isDark ? 182 : 165;
+      const pb = isDark ? 212 : 233;
+
+      const particles = particlesRef.current;
+      const mx = mouseRef.current.x;
+      const my = mouseRef.current.y;
+
+      // Update particles
+      for (const p of particles) {
+        const dx = p.x - mx;
+        const dy = p.y - my;
+        const distSq = dx * dx + dy * dy;
+        const repelSq = REPEL_RADIUS * REPEL_RADIUS;
+
+        if (distSq < repelSq && distSq > 0) {
+          const dist = Math.sqrt(distSq);
+          const force = ((REPEL_RADIUS - dist) / REPEL_RADIUS) * REPEL_FORCE;
+          p.vx += (dx / dist) * force;
+          p.vy += (dy / dist) * force;
+        }
+
+        // Speed cap
+        const spd = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+        if (spd > MAX_SPEED) {
+          p.vx = (p.vx / spd) * MAX_SPEED;
+          p.vy = (p.vy / spd) * MAX_SPEED;
+        }
+
+        // Damping
+        p.vx *= 0.97;
+        p.vy *= 0.97;
+
+        p.x += p.vx;
+        p.y += p.vy;
+
+        // Wrap edges
+        if (p.x < 0) p.x = canvas.width;
+        else if (p.x > canvas.width) p.x = 0;
+        if (p.y < 0) p.y = canvas.height;
+        else if (p.y > canvas.height) p.y = 0;
+      }
+
+      // Draw connections
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const distSq = dx * dx + dy * dy;
+
+          if (distSq < MAX_DIST * MAX_DIST) {
+            const dist = Math.sqrt(distSq);
+            const alpha = (1 - dist / MAX_DIST) * (isDark ? 0.25 : 0.15);
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(${pr},${pg},${pb},${alpha})`;
+            ctx.lineWidth = 0.6;
+            ctx.stroke();
+          }
+        }
+      }
+
+      // Draw particles
+      for (const p of particles) {
+        const glowAlpha = p.opacity * (isDark ? 1 : 0.7);
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${pr},${pg},${pb},${glowAlpha})`;
+        ctx.fill();
+
+        // Soft glow
+        if (isDark) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size * 3, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(${pr},${pg},${pb},${p.opacity * 0.04})`;
+          ctx.fill();
+        }
+      }
+
+      // Mouse glow
+      if (mx > -1000) {
+        const gradient = ctx.createRadialGradient(mx, my, 0, mx, my, 180);
+        gradient.addColorStop(0, `rgba(${pr},${pg},${pb},${isDark ? 0.12 : 0.06})`);
+        gradient.addColorStop(1, 'transparent');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(mx - 180, my - 180, 360, 360);
+      }
+
+      animRef.current = requestAnimationFrame(animate);
+    };
+
+    animate();
+
+    return () => {
+      cancelAnimationFrame(animRef.current);
+      window.removeEventListener('resize', resize);
+      window.removeEventListener('mousemove', onMouseMove);
+      document.removeEventListener('mouseleave', onMouseLeave);
+    };
+  }, [mounted]);
+
+  if (!mounted) return null;
 
   return (
-    <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ zIndex: 0 }}>
-      {/* Animated grid background */}
-      <div className="absolute inset-0 opacity-[0.08]">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `
-            linear-gradient(rgba(6, 182, 212, 0.4) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(6, 182, 212, 0.4) 1px, transparent 1px)
-          `,
+    <>
+      {/* Canvas particle network */}
+      <canvas
+        ref={canvasRef}
+        className="fixed inset-0 pointer-events-none"
+        style={{ zIndex: 0, opacity: darkMode ? 1 : 0.5 }}
+      />
+
+      {/* Subtle grid overlay */}
+      <div
+        className="fixed inset-0 pointer-events-none"
+        style={{
+          zIndex: 0,
+          backgroundImage: darkMode
+            ? `linear-gradient(rgba(6,182,212,0.03) 1px, transparent 1px),
+               linear-gradient(90deg, rgba(6,182,212,0.03) 1px, transparent 1px)`
+            : `linear-gradient(rgba(8,145,178,0.04) 1px, transparent 1px),
+               linear-gradient(90deg, rgba(8,145,178,0.04) 1px, transparent 1px)`,
           backgroundSize: '60px 60px',
-          animation: 'gridMove 30s linear infinite'
-        }} />
-      </div>
+        }}
+      />
 
-      {/* Floating particles */}
-      {particles.map((particle) => (
-        <motion.div
-          key={particle.id}
-          className="absolute rounded-full bg-cyan-400"
-          style={{
-            left: `${particle.x}%`,
-            top: `${particle.y}%`,
-            width: `${particle.size}px`,
-            height: `${particle.size}px`,
-            opacity: 0.3,
-          }}
-          animate={{
-            y: [0, -40, 0],
-            opacity: [0.2, 0.5, 0.2],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: particle.duration,
-            repeat: Infinity,
-            delay: particle.delay,
-            ease: "easeInOut",
-          }}
-        />
-      ))}
-
-      {/* Hexagon shapes */}
-      {hexagons.map((hex) => (
-        <motion.div
-          key={hex.id}
-          className="absolute border border-cyan-500/30"
-          style={{
-            left: `${hex.x}%`,
-            top: `${hex.y}%`,
-            width: `${hex.size}px`,
-            height: `${hex.size}px`,
-            clipPath: 'polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%)',
-          }}
-          animate={{
-            rotate: [0, 360],
-            scale: [1, 1.15, 1],
-            opacity: [0.15, 0.35, 0.15],
-          }}
-          transition={{
-            duration: hex.duration,
-            repeat: Infinity,
-            delay: hex.delay,
-            ease: "linear",
-          }}
-        />
-      ))}
-
-      {/* Interactive glow that follows mouse */}
-      {isInteracting && (
-        <motion.div
-          className="absolute w-96 h-96 rounded-full pointer-events-none"
-          style={{
-            left: `${mousePosition.x}%`,
-            top: `${mousePosition.y}%`,
-            background: 'radial-gradient(circle, rgba(6, 182, 212, 0.25) 0%, transparent 70%)',
-            transform: 'translate(-50%, -50%)',
-          }}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-        />
+      {/* Corner brackets */}
+      {darkMode && (
+        <>
+          <div className="fixed top-0 left-0 w-20 h-20 border-t border-l border-cyan-500/20 pointer-events-none" style={{ zIndex: 0 }} />
+          <div className="fixed top-0 right-0 w-20 h-20 border-t border-r border-cyan-500/20 pointer-events-none" style={{ zIndex: 0 }} />
+          <div className="fixed bottom-0 left-0 w-20 h-20 border-b border-l border-cyan-500/20 pointer-events-none" style={{ zIndex: 0 }} />
+          <div className="fixed bottom-0 right-0 w-20 h-20 border-b border-r border-cyan-500/20 pointer-events-none" style={{ zIndex: 0 }} />
+        </>
       )}
-
-      {/* Circuit lines connecting nodes */}
-      <svg className="absolute inset-0 w-full h-full opacity-20">
-        <defs>
-          <linearGradient id="circuitGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="rgba(6, 182, 212, 0)" />
-            <stop offset="50%" stopColor="rgba(6, 182, 212, 0.8)" />
-            <stop offset="100%" stopColor="rgba(6, 182, 212, 0)" />
-          </linearGradient>
-        </defs>
-        {circuitNodes.map((node, i) => {
-          if (i === circuitNodes.length - 1) return null;
-          const nextNode = circuitNodes[i + 1];
-          return (
-            <motion.line
-              key={i}
-              x1={`${node.x}%`}
-              y1={`${node.y}%`}
-              x2={`${nextNode.x}%`}
-              y2={`${nextNode.y}%`}
-              stroke="url(#circuitGradient)"
-              strokeWidth="1"
-              animate={{
-                opacity: [0.2, 0.6, 0.2],
-              }}
-              transition={{
-                duration: Math.random() * 4 + 3,
-                repeat: Infinity,
-                delay: Math.random() * 2,
-              }}
-            />
-          );
-        })}
-        
-        {/* Circuit nodes as dots */}
-        {circuitNodes.map((node) => (
-          <circle
-            key={node.id}
-            cx={`${node.x}%`}
-            cy={`${node.y}%`}
-            r="2"
-            fill="rgba(6, 182, 212, 0.6)"
-            opacity="0.7"
-          />
-        ))}
-      </svg>
-
-      {/* Binary code rain effect (subtle) */}
-      <div className="absolute inset-0 opacity-10">
-        {Array.from({ length: 12 }).map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute text-cyan-400 font-mono text-xs"
-            style={{
-              left: `${(i * 8.33) % 100}%`,
-              top: '-5%',
-            }}
-            animate={{
-              y: ['0vh', '110vh'],
-            }}
-            transition={{
-              duration: Math.random() * 8 + 5,
-              repeat: Infinity,
-              delay: Math.random() * 5,
-              ease: "linear",
-            }}
-          >
-            {Array.from({ length: 15 }).map((_, j) => (
-              <div key={j} className="my-1">
-                {Math.random() > 0.5 ? '1' : '0'}
-              </div>
-            ))}
-          </motion.div>
-        ))}
-      </div>
-
-      {/* Scanning lines */}
-      <motion.div
-        className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent"
-        animate={{
-          y: ['0%', '100%'],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-      />
-
-      <motion.div
-        className="absolute inset-x-0 h-px bg-gradient-to-r from-transparent via-cyan-400/20 to-transparent"
-        animate={{
-          y: ['100%', '0%'],
-        }}
-        transition={{
-          duration: 12,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-      />
-
-      {/* Corner decorations */}
-      <div className="absolute top-0 left-0 w-32 h-32 border-t-2 border-l-2 border-cyan-500/30 opacity-60" />
-      <div className="absolute top-0 right-0 w-32 h-32 border-t-2 border-r-2 border-cyan-500/30 opacity-60" />
-      <div className="absolute bottom-0 left-0 w-32 h-32 border-b-2 border-l-2 border-cyan-500/30 opacity-60" />
-      <div className="absolute bottom-0 right-0 w-32 h-32 border-b-2 border-r-2 border-cyan-500/30 opacity-60" />
-
-      <style jsx>{`
-        @keyframes gridMove {
-          0% { transform: translateY(0) translateX(0); }
-          100% { transform: translateY(60px) translateX(60px); }
-        }
-      `}</style>
-    </div>
+    </>
   );
 }

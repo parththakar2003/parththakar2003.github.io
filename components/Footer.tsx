@@ -50,7 +50,7 @@ export default function Footer() {
           <div className={`text-center ${
             darkMode ? 'text-gray-500' : 'text-gray-400'
           } text-sm`}>
-            <p>©2025 Parth Thakar. All rights reserved.</p>
+            <p>©2026 Parth Thakar. All rights reserved.</p>
           </div>
         </div>
       </footer>
@@ -106,7 +106,7 @@ export default function Footer() {
         <div className={`text-center ${
           darkMode ? 'text-gray-500' : 'text-gray-400'
         } text-sm`}>
-          <p>©2025 Parth Thakar. All rights reserved.</p>
+          <p>©2026 Parth Thakar. All rights reserved.</p>
         </div>
       </div>
     </footer>

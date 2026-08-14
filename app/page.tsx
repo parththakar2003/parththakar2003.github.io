@@ -5,7 +5,7 @@ import { useTheme } from "@/context/ThemeContext";
 import Image from "next/image";
 import {
   FaArrowRight, FaGithub, FaLinkedin, FaEnvelope,
-  FaShieldAlt, FaTrophy, FaExternalLinkAlt
+  FaShieldAlt, FaTrophy, FaExternalLinkAlt, FaBug, FaAward
 } from "react-icons/fa";
 import { SiKalilinux, SiWireshark, SiPython } from "react-icons/si";
 import { TbTerminal2 } from "react-icons/tb";
@@ -99,7 +99,7 @@ export default function Home() {
     audio.addEventListener('loadedmetadata', onMeta);
     audio.load();
     return () => { audio.removeEventListener('timeupdate', onTime); audio.removeEventListener('loadedmetadata', onMeta); };
-  }, [isPlaying]);
+  }, []);
 
   useEffect(() => {
     let raf: number;
@@ -420,6 +420,50 @@ export default function Home() {
                   {'\n'}{'}'}
                 </code>
               </pre>
+            </div>
+          </motion.div>
+
+          {/* Responsible Disclosure & Bug Bounty — full width */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.28 }}
+            className="md:col-span-12 grid grid-cols-1 sm:grid-cols-2 gap-4"
+          >
+            {/* CVE / Responsible Disclosure */}
+            <div className={`${cardBase} ${cardHover} p-6`}>
+              <div className="flex items-center gap-2 mb-3">
+                <FaAward className={`text-base ${darkMode ? 'text-red-400' : 'text-red-500'}`} />
+                <h3 className={`font-bold text-sm ${darkMode ? 'text-white' : 'text-gray-900'}`}>Responsible Disclosure</h3>
+              </div>
+              <div className={`rounded-xl p-4 ${darkMode ? 'bg-gray-800/60' : 'bg-gray-50/80'}`}>
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className={`text-xs font-mono font-bold ${darkMode ? 'text-cyan-400' : 'text-cyan-600'}`}>CVE-2023-23752</span>
+                  <span className={`text-[10px] px-2 py-0.5 rounded-full font-semibold ${darkMode ? 'bg-red-500/15 text-red-400' : 'bg-red-100 text-red-600'}`}>Critical</span>
+                </div>
+                <p className={`text-xs leading-relaxed ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                  Joomla! improper access check on a .gov.in government portal — independently identified and disclosed to CERT-In.
+                </p>
+                <p className={`text-[10px] mt-2 font-mono ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>Acknowledged · Ref: CERTIn-48344726</p>
+              </div>
+            </div>
+
+            {/* Bug Bounty */}
+            <div className={`${cardBase} ${cardHover} p-6`}>
+              <div className="flex items-center gap-2 mb-3">
+                <FaBug className={`text-base ${darkMode ? 'text-green-400' : 'text-green-500'}`} />
+                <h3 className={`font-bold text-sm ${darkMode ? 'text-white' : 'text-gray-900'}`}>Bug Bounty Hunter</h3>
+              </div>
+              <div className={`rounded-xl p-4 ${darkMode ? 'bg-gray-800/60' : 'bg-gray-50/80'}`}>
+                <p className={`text-xs leading-relaxed mb-2 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                  Active on HackerOne &amp; Bugcrowd — OpenSea, Vercel, TomTom, Amazon VRP, Meesho, Epic Games VDP, Urban Company &amp; more.
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {["Vercel — High (CVSS 8.2)", "TomTom — P2"].map((t, j) => (
+                    <span key={j} className={`text-[10px] px-2 py-0.5 rounded-md font-mono ${darkMode ? 'bg-green-500/10 text-green-400' : 'bg-green-50 text-green-600'}`}>{t}</span>
+                  ))}
+                </div>
+              </div>
             </div>
           </motion.div>
 

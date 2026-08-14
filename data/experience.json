@@ -88,6 +88,46 @@
       "description": "Built full-stack web applications using Python/Django; contributed to secure coding reviews."
     }
   ],
+  "responsibleDisclosure": [
+    {
+      "cve": "CVE-2023-23752",
+      "title": "Joomla! Improper Access Check — Government Portal",
+      "description": "Independently identified a critical Joomla! improper access check vulnerability on a .gov.in government portal, allowing unauthorized access to sensitive API endpoints. Responsibly disclosed to CERT-In.",
+      "reference": "CERTIn-48344726",
+      "status": "Acknowledged by CERT-In",
+      "severity": "Critical"
+    }
+  ],
+  "bugBounty": {
+    "status": "Active",
+    "description": "Actively hunting on HackerOne and Bugcrowd private and public programs, focused on web, API, and business-logic vulnerabilities.",
+    "platforms": ["HackerOne", "Bugcrowd"],
+    "programs": [
+      "OpenSea",
+      "Vercel (Open Source)",
+      "TomTom",
+      "Amazon VRP",
+      "Meesho",
+      "Epic Games VDP",
+      "Urban Company",
+      "HackTheBox VDP",
+      "TryHackMe"
+    ],
+    "highlights": [
+      {
+        "program": "Vercel Open Source",
+        "finding": "CLI symlink vulnerability",
+        "severity": "High (CVSS 8.2)",
+        "status": "Submitted"
+      },
+      {
+        "program": "TomTom",
+        "finding": "Missing JWT audience (aud) validation in tomtom-maps-mcp",
+        "severity": "P2 — Medium/High",
+        "status": "Submitted"
+      }
+    ]
+  },
   "talks": [
     {
       "title": "Speaker — NULL Ahmedabad Chapter (NewsBytes Segment)",

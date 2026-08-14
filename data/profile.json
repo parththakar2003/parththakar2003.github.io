@@ -1,7 +1,7 @@
 {
   "name": "Parth Thakar",
-  "title": "Cybersecurity Professional | Founder, Thakar's Security",
-  "tagline": "Master's Student in Digital Forensics & Information Security | VAPT Expert | Red Teaming",
+  "title": "Cybersecurity Analyst — VAPT (Web · API · Network) | SOC | GRC",
+  "tagline": "CERT-In Acknowledged CVE Researcher | Active Bug Bounty Hunter | Founder, Thakar's Security",
   "company": "Thakar's Security",
   "companyTagline": "Securing businesses through expert vulnerability assessment & penetration testing",
   "dob": "2nd August 2003",
@@ -9,6 +9,6 @@
   "linkedin": "https://www.linkedin.com/in/parthmehulkumarthakar/",
   "github": "https://github.com/parththakar2003",
   "location": "Ahmedabad, Gujarat, India",
-  "bio": "Cybersecurity professional and founder of Thakar's Security, specializing in VAPT, digital forensics, SOC operations, and incident response. Driven by a mission to protect businesses from evolving cyber threats through rigorous security assessments and red team operations.",
+  "bio": "VAPT specialist with hands-on web, API, and network penetration testing on live fintech, banking, and enterprise targets, backed by a CERT-In-acknowledged CVE (CVE-2023-23752). Active bug bounty hunter on HackerOne and Bugcrowd, with working exposure to SOC operations and GRC practices including ISO 27001/NIST awareness, CIS Benchmarks, and CVSS-based risk reporting.",
   "resume": "/assets/documents/Parth_Thakar_Resume.pdf"
 }

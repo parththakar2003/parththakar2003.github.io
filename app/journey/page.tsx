@@ -17,6 +17,26 @@ export default function Journey() {
   // Journey timeline data - Parth's Cybersecurity Journey (Reversed: 11 to 1)
   const journeyStages = [
     {
+      id: 14,
+      title: "Active Bug Bounty Hunter",
+      subtitle: "HackerOne & Bugcrowd — Ongoing",
+      icon: <FaShieldAlt />,
+      color: "cyan",
+      content: "Actively hunting on HackerOne and Bugcrowd across programs including OpenSea, Vercel (Open Source), TomTom, Amazon VRP, Meesho, Epic Games VDP, Urban Company, and HackTheBox VDP. Submitted reports include a High severity (CVSS 8.2) CLI symlink vulnerability to Vercel Open Source and a missing JWT audience validation issue (P2) to TomTom.",
+      achievement: "Reports submitted to Vercel & TomTom",
+      featured: true
+    },
+    {
+      id: 13,
+      title: "CERT-In Acknowledged CVE — Responsible Disclosure",
+      subtitle: "CVE-2023-23752",
+      icon: <FaAward />,
+      color: "red",
+      content: "Independently identified a critical Joomla! improper access check vulnerability on a .gov.in government portal, exposing sensitive API endpoints to unauthorized access. Responsibly disclosed the finding to CERT-In and received official acknowledgment (Ref: CERTIn-48344726).",
+      achievement: "CERT-In Acknowledged Vulnerability",
+      featured: true
+    },
+    {
       id: 12,
       title: "Security Analyst - VAPT at TechDefence",
       subtitle: "Current Position",

@@ -150,6 +150,111 @@ export default function Blog() {
           "Digital Forensics Association (DFA)"
         ]
       }
+    },
+    {
+      id: 2,
+      title: "Bug Bounty Hunting 101: From CTFs to HackerOne & Bugcrowd",
+      excerpt: "How competitive CTF practice translates into real-world bug bounty hunting, and what I've learned chasing valid reports on programs like Vercel and TomTom.",
+      author: "Parth Thakar",
+      date: "July 2026",
+      readTime: "9 min read",
+      category: "Bug Bounty",
+      tags: ["Bug Bounty", "HackerOne", "Bugcrowd", "Web Security"],
+      imageUrl: "/images/code_pattern.svg",
+      featured: false,
+      content: {
+        introduction: "CTFs teach you to solve a puzzle someone else built. Bug bounty hunting flips that around — you have to find the puzzle in the first place, inside a live application that was never designed to be broken. Moving from TryHackMe and CTF leaderboards into HackerOne and Bugcrowd programs was one of the more humbling transitions in my security career, and this post is the playbook I wish I'd had starting out.",
+        sections: [
+          {
+            title: "Why CTF Skills Aren't Enough",
+            content: "CTF challenges are scoped and self-contained; production applications are not. Real targets have massive attack surfaces, inconsistent documentation, rate limits, and WAFs actively working against you. The core exploitation skills transfer, but recon discipline, patience, and report-writing are what actually separate a submitted report from a wasted afternoon."
+          },
+          {
+            title: "Building a Recon-First Workflow",
+            bullets: [
+              "**Scope mapping**: Read the program policy line by line before touching anything — in-scope assets, disallowed techniques, and reward tiers",
+              "**Subdomain & asset enumeration**: Cast a wide net first, then narrow down to less-tested endpoints and staging environments",
+              "**Endpoint diffing**: Compare API responses across roles/tenants to spot authorization gaps early",
+              "**Read the source when you can**: Open-source programs (like Vercel's) let you grep for logic flaws instead of guessing blind"
+            ]
+          },
+          {
+            title: "What Actually Gets Rewarded",
+            content: "Impact and reproducibility beat cleverness. A boring but clearly-impactful bug (broken access control, a symlink that escapes a sandbox, a missing JWT audience check) will get triaged faster than an exotic chain that's hard to reproduce. Two of my own submissions — a CLI symlink vulnerability on Vercel's open-source program and a missing JWT `aud` validation issue on TomTom — were both straightforward, single-step findings with an unambiguous proof of concept."
+          },
+          {
+            title: "Writing Reports That Get Triaged Fast",
+            bullets: [
+              "Lead with impact in one sentence, not the exploitation steps",
+              "Give exact, copy-pasteable reproduction steps — assume the triager has zero context",
+              "Attach a minimal PoC, not a fully weaponized exploit",
+              "Suggest a fix, even a rough one — it signals you understand the root cause"
+            ]
+          },
+          {
+            title: "Handling Rejection and Duplicates",
+            content: "Most submissions to mature programs come back as duplicates, informative, or N/A — that's normal, not a sign to quit. I keep a private log of every target I've tested with notes on what I've already ruled out, so each pass gets more efficient than the last."
+          }
+        ],
+        conclusion: "Bug bounty hunting rewards consistency more than raw skill. The hunters who succeed are the ones who keep a tight recon process, read scope carefully, write reports a stranger can act on in five minutes, and treat rejections as data rather than failure. I'm still early in this — actively hunting across programs like OpenSea, Vercel, TomTom, Amazon VRP, Meesho, and Epic Games VDP — but the habits above are what's moved the needle so far.",
+        resources: [
+          "HackerOne Hacktivity",
+          "Bugcrowd University",
+          "OWASP Testing Guide",
+          "PortSwigger Web Security Academy",
+          "PayloadsAllTheThings"
+        ]
+      }
+    },
+    {
+      id: 3,
+      title: "Anatomy of a Responsible Disclosure: The CVE-2023-23752 Story",
+      excerpt: "A walkthrough of how I identified a critical Joomla! improper access check on a government portal, and what responsibly disclosing it to CERT-In actually looked like.",
+      author: "Parth Thakar",
+      date: "March 2025",
+      readTime: "7 min read",
+      category: "Responsible Disclosure",
+      tags: ["CVE", "CERT-In", "Joomla", "Vulnerability Disclosure"],
+      imageUrl: "/images/code_pattern.svg",
+      featured: false,
+      content: {
+        introduction: "CVE-2023-23752 is a well-known Joomla! improper access check affecting the com_fields API, allowing unauthenticated access to sensitive configuration data. Knowing a CVE exists and finding it live on a .gov.in government portal are two very different things. This post walks through the discovery, the decision to disclose responsibly, and the process of working with CERT-In through to acknowledgment.",
+        sections: [
+          {
+            title: "The Discovery",
+            content: "While reviewing a government portal's public-facing endpoints, an unauthenticated request to the Joomla! REST API's webservices route returned data that should have required authentication — a textbook instance of the improper access check described in CVE-2023-23752. Because the target was a .gov.in domain, the priority shifted immediately from 'confirm the bug' to 'handle this correctly.'"
+          },
+          {
+            title: "Why Responsible Disclosure, Not Public Disclosure",
+            bullets: [
+              "The affected system was a live government service, not a bug bounty program with defined rules",
+              "Publicly disclosing details before a fix risked real-world exploitation of citizen data",
+              "CERT-In is the designated national authority for coordinating vulnerability handling on Indian government infrastructure"
+            ]
+          },
+          {
+            title: "The Disclosure Process",
+            bullets: [
+              "**1. Documentation**: Captured a minimal, non-destructive proof of concept and impact summary",
+              "**2. Reporting**: Submitted the finding through CERT-In's official incident reporting channel",
+              "**3. Reference tracking**: Received a case reference (CERTIn-48344726) to track status",
+              "**4. Waiting period**: Withheld any public technical detail until the issue was acknowledged and remediation was underway",
+              "**5. Acknowledgment**: CERT-In formally acknowledged the report"
+            ]
+          },
+          {
+            title: "Lessons for Anyone Finding a Gov/Critical-Infra Bug",
+            content: "The instinct to move fast doesn't apply here. Government and critical infrastructure targets need a slower, more deliberate process than a typical bug bounty program — clear documentation, a defined reporting channel, and patience while the fix works its way through bureaucracy that a private company wouldn't have."
+          }
+        ],
+        conclusion: "Responsible disclosure isn't just an ethical nicety — for government and critical infrastructure targets, it's the only path that doesn't put real people at risk. CVE-2023-23752 was a known vulnerability class, but finding it unpatched in production was a reminder that patch lag in the public sector is a real and ongoing problem. If you find something similar, go through CERT-In (or your national CERT) rather than disclosing publicly.",
+        resources: [
+          "CERT-In Vulnerability Reporting Portal",
+          "NVD — CVE-2023-23752",
+          "Joomla! Security Announcements",
+          "CVE.org"
+        ]
+      }
     }
   ];
 
@@ -244,6 +349,46 @@ export default function Blog() {
                 </div>
               </div>
             ))}
+          </motion.div>
+        )}
+
+        {/* More Articles */}
+        {selectedPost === null && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="mb-12"
+          >
+            <h2 className="text-2xl font-bold mb-6">More Articles</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {blogPosts.filter(post => !post.featured).map((post) => (
+                <div
+                  key={post.id}
+                  className={`${theme.card} rounded-lg overflow-hidden border ${theme.border} backdrop-blur-sm p-6 flex flex-col`}
+                >
+                  <span className={`px-3 py-1 rounded-full text-xs w-fit mb-3 ${getColorClasses()}`}>
+                    {post.category}
+                  </span>
+                  <h3 className="text-lg font-bold mb-2">{post.title}</h3>
+                  <p className={`${theme.muted} text-sm mb-4 flex-1`}>{post.excerpt}</p>
+                  <div className="flex items-center gap-4 text-xs mb-4">
+                    <div className="flex items-center gap-1.5">
+                      <FaClock className={theme.accent} />
+                      <span>{post.readTime}</span>
+                    </div>
+                    <span className={theme.muted}>{post.date}</span>
+                  </div>
+                  <button
+                    onClick={() => setSelectedPost(post.id)}
+                    className={`inline-flex items-center gap-2 text-sm font-medium ${theme.accent} hover:underline w-fit`}
+                  >
+                    <span>Read Article</span>
+                    <FaChevronRight className="text-xs" />
+                  </button>
+                </div>
+              ))}
+            </div>
           </motion.div>
         )}
 

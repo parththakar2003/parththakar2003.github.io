@@ -5,7 +5,7 @@ import { useTheme } from "@/context/ThemeContext";
 import Image from "next/image";
 import {
   FaArrowRight, FaGithub, FaLinkedin, FaEnvelope,
-  FaShieldAlt, FaTrophy, FaExternalLinkAlt, FaBug, FaAward
+  FaShieldAlt, FaTrophy, FaExternalLinkAlt, FaBug, FaAward, FaCertificate
 } from "react-icons/fa";
 import { SiKalilinux, SiWireshark, SiPython } from "react-icons/si";
 import { TbTerminal2 } from "react-icons/tb";
@@ -428,7 +428,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.28 }}
-            className="md:col-span-12 grid grid-cols-1 sm:grid-cols-2 gap-4"
+            className="md:col-span-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
           >
             {/* CVE / Responsible Disclosure */}
             <div className={`${cardBase} ${cardHover} p-6`}>
@@ -463,6 +463,25 @@ export default function Home() {
                     <span key={j} className={`text-[10px] px-2 py-0.5 rounded-md font-mono ${darkMode ? 'bg-green-500/10 text-green-400' : 'bg-green-50 text-green-600'}`}>{t}</span>
                   ))}
                 </div>
+              </div>
+            </div>
+
+            {/* Client Recognitions */}
+            <div className={`${cardBase} ${cardHover} p-6`}>
+              <div className="flex items-center gap-2 mb-3">
+                <FaCertificate className={`text-base ${darkMode ? 'text-amber-400' : 'text-amber-500'}`} />
+                <h3 className={`font-bold text-sm ${darkMode ? 'text-white' : 'text-gray-900'}`}>Client Recognition</h3>
+              </div>
+              <div className={`rounded-xl p-4 space-y-2.5 ${darkMode ? 'bg-gray-800/60' : 'bg-gray-50/80'}`}>
+                {[
+                  { company: "AWL Agri Business (Adani Wilmar)", detail: "Web app vulnerability — internal assessment" },
+                  { company: "Wagh Bakri Tea Group", detail: "Web app vulnerability — VAPT engagement" },
+                ].map((r, i) => (
+                  <div key={i}>
+                    <p className={`text-xs font-semibold ${darkMode ? 'text-gray-200' : 'text-gray-700'}`}>{r.company}</p>
+                    <p className={`text-[10px] ${darkMode ? 'text-gray-500' : 'text-gray-400'}`}>{r.detail}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </motion.div>

@@ -98,6 +98,18 @@
       "severity": "Critical"
     }
   ],
+  "recognitions": [
+    {
+      "company": "AWL Agri Business Ltd. (formerly Adani Wilmar)",
+      "description": "Recognized for identifying and reporting a web application vulnerability during internal security assessment.",
+      "context": "Cyber Security Internship, 2025"
+    },
+    {
+      "company": "Wagh Bakri Tea Group",
+      "description": "Recognized for identifying and reporting a web application vulnerability during a VAPT engagement.",
+      "context": "TechDefence Labs client engagement, 2026"
+    }
+  ],
   "bugBounty": {
     "status": "Active",
     "description": "Actively hunting on HackerOne and Bugcrowd private and public programs, focused on web, API, and business-logic vulnerabilities.",

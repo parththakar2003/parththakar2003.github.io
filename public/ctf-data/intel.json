@@ -1,0 +1,10 @@
+{
+  "service": "telemetry-relay",
+  "version": "1.4.2",
+  "status": "ok",
+  "region": "ap-south-1",
+  "checksum": "9f1c2a7e4b6d8801",
+  "signal": "RkxBR3tuM3R3MHJrX3Q0Yl9uM3Yzcl9sMTNzfQ==",
+  "uptime_s": 481203,
+  "nonce": "b3f9-11ee-affc"
+}
